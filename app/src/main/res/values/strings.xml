@@ -4,4 +4,19 @@
     <string name="username">Username</string>
     <string name="forgot_password"><u>Quên mật khẩu?</u></string>
     <string name="remember_me"><u>Remember me?</u></string>
+    <string name="open">open</string>
+    <string name="close">close</string>
+    <string name="manager_bill">Quản lý phiếu mượn</string>
+    <string name="default_title">PNLib</string>
+    <string name="defaut_title">PNLib</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="manager_book">Quản lý sách</string>
+    <string name="manager_user">Quản lý thành viên</string>
+    <string name="manager_category_book">Quản lý loại sách</string>
+    <string name="profile">Hồ sơ</string>
+    <string name="change_password">Thay đổi mật khẩu\n</string>
+    <string name="create_new_account">Tạo tài khoản mới</string>
+    <string name="top_10_book">"Top 10 sách được mượn "</string>
+    <string name="revenue">Doanh thu</string>
 </resources>

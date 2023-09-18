@@ -6,4 +6,8 @@
     </style>
 
     <style name="Theme.ManagerLibrary" parent="Base.Theme.ManagerLibrary" />
+    <style name="ThemeOverlay.Material3.NavigationView." parent="ThemeOverlay.AppCompat.Light">
+        <item name="colorControlHighlight">@color/circle</item>
+    </style>
+
 </resources>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view"
+    >
+    <item android:title="Quản lý">
+        <menu>
+            <item
+                android:id="@+id/manager_bill"
+                android:icon="@drawable/invoice"
+                android:title="Quản lý phiếu mượn" />
+            <item
+                android:id="@+id/manager_book"
+                android:icon="@drawable/books"
+                android:title="Quản lý sách" />
+            <item
+                android:id="@+id/manager_user"
+                android:icon="@drawable/group"
+                android:title="Quản lý người dùng" />
+            <item
+                android:id="@+id/manager_category"
+                android:icon="@drawable/categorybook"
+                android:title="Quản lý thể loại" />
+        </menu>
+    </item>
+
+    <item android:title="Thống kê">
+        <menu>
+            <item
+                android:id="@+id/top10"
+                android:icon="@drawable/top10"
+                android:title="Top 10 sách mượn nhiều nhất" />
+            <item
+                android:id="@+id/money"
+                android:icon="@drawable/money"
+                android:title="Doanh thu" />
+        </menu>
+    </item>
+
+    <item android:title="Tài khoản">
+        <menu>
+            <item
+                android:id="@+id/user_profile"
+                android:icon="@drawable/user_profile"
+                android:title="Thông tin tài khoản" />
+            <item
+                android:id="@+id/change_password"
+                android:icon="@drawable/changepassword"
+                android:title="Thay đổi mật khẩu" />
+            <item
+                android:id="@+id/add_user"
+                android:icon="@drawable/adduser"
+                android:title="Tạo tài khoản mới" />
+        </menu>
+    </item>
+
+    <item android:title="Đăng xuất">
+        <menu>
+            <item
+                android:id="@+id/logout"
+                android:icon="@drawable/logout"
+                android:title="Đăng xuất" />
+        </menu>
+    </item>
+</menu>

@@ -49,4 +49,5 @@ dependencies {
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.espresso.core)
     implementation("androidx.transition:transition:1.4.1")
+    implementation("de.hdodenhof:circleimageview:3.1.0")
 }
