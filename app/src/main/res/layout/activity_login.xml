@@ -4,23 +4,150 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/gradient"
-    tools:context=".LoginActivity">
-    <FrameLayout
+    android:background="@color/white"
+    tools:context=".UI.LoginActivity">
+
+    <ImageView
+        android:id="@+id/image_banner"
         android:layout_width="match_parent"
-        android:layout_height="250dp">
+        android:layout_height="400dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/banner"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="36dp" />
 
-        <ImageView
-            android:id="@+id/image"
+    <TextView
+        android:id="@+id/txt_welcome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="100dp"
+        android:gravity="center"
+        android:text="Chào mừng bạn đến với ứng dụng"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/txt_welcome_name_app"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/app_name"
+        android:textColor="@color/circle"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txt_welcome" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="5dp"
+        android:text="!"
+        android:textColor="@color/black"
+        android:textSize="30sp"
+        app:layout_constraintStart_toEndOf="@id/txt_welcome_name_app"
+        app:layout_constraintTop_toBottomOf="@id/txt_welcome" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/image_banner">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_username"
             android:layout_width="match_parent"
-            android:layout_height="250dp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/banner" />
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:background="@drawable/edit_text"
+            android:hint="@string/username"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:startIconDrawable="@drawable/user">
 
-        <View
+            <EditText
+                android:id="@+id/edt_username"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autofillHints="username"
+                android:inputType="text" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_password"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/gradient" />
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:background="@drawable/edit_text"
+            android:hint="Password"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/til_username"
+            app:passwordToggleEnabled="true"
+            app:startIconDrawable="@drawable/padlock">
 
-    </FrameLayout>
+            <EditText
+                android:id="@+id/edt_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autofillHints="password"
+                android:inputType="textPassword" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <CheckBox
+            android:id="@+id/cb_remember_me"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:text="@string/remember_me"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toTopOf="@id/btn_login"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/til_password" />
+
+
+        <Button
+            android:id="@+id/btn_login"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="50dp"
+            android:background="@drawable/button"
+            android:backgroundTint="@null"
+            android:text="Login"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/til_password" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <Button
+        android:id="@+id/btn_login_click"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:layout_margin="16dp"
+        android:background="@drawable/button"
+        android:backgroundTint="@null"
+        android:text="Login"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/image_banner" />
 </androidx.constraintlayout.widget.ConstraintLayout>

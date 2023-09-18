@@ -13,13 +13,13 @@
         android:theme="@style/Theme.ManagerLibrary"
         tools:targetApi="31">
         <activity
-            android:name=".LoginActivity"
+            android:name=".UI.LoginActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".UI.MainActivity"
             android:exported="false" />
         <activity
-            android:name=".WelcomeActivity"
+            android:name=".UI.WelcomeActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
