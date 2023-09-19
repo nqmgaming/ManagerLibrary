@@ -1,4 +1,4 @@
-package com.example.managerlibrary.dto
+package com.example.managerlibrary
 
 data class MemberDTO (
     val id: Int,

@@ -1,8 +1,8 @@
-package com.example.managerlibrary.dao
+package com.example.managerlibrary
 
 import android.content.ContentValues
 import android.content.Context
-import com.example.managerlibrary.dto.LibrarianDTO
+import com.example.managerlibrary.LibrarianDTO
 import com.example.managerlibrary.database.ManagerBookDataBase
 import java.sql.SQLDataException
 
@@ -55,5 +55,23 @@ class LibrarianDAO(context: Context) {
         cursor.close()
         dbReadable.close()
         return result
+    }
+
+    //get librarian by id return LibrarianDTO
+    fun getLibrarianByID(id: String): LibrarianDTO {
+        val dbReadable = db.readableDatabase
+        val sql = "SELECT * FROM Librarian WHERE librarianID = ?"
+        val cursor = dbReadable.rawQuery(sql, arrayOf(id))
+        val librarianDTO = LibrarianDTO()
+        if (cursor.count > 0) {
+            cursor.moveToFirst()
+            librarianDTO.id = cursor.getString(0)
+            librarianDTO.name = cursor.getString(1)
+            librarianDTO.password = cursor.getString(2)
+            librarianDTO.role = cursor.getString(3)
+        }
+        cursor.close()
+        dbReadable.close()
+        return librarianDTO
     }
 }

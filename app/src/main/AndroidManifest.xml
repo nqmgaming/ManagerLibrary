@@ -13,10 +13,10 @@
         android:theme="@style/Theme.ManagerLibrary"
         tools:targetApi="31">
         <activity
-            android:name=".ui.LoginActivity"
+            android:name=".LoginActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.MainActivity"
+            android:name=".MainActivity"
             android:exported="false" />
         <activity
             android:name=".ui.WelcomeActivity"

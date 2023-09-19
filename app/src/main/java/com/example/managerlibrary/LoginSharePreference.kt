@@ -1,14 +1,16 @@
-package com.example.managerlibrary.sharepre
+package com.example.managerlibrary
 
 import android.content.Context
 
 class LoginSharePreference(context: Context) {
     private val sharedPreferences = context.getSharedPreferences("Login", Context.MODE_PRIVATE)
 
-    fun saveLogin(id: String, password: String) {
+    fun saveLogin(librarianDTO: LibrarianDTO) {
         val editor = sharedPreferences.edit()
-        editor.putString("id", id)
-        editor.putString("password", password)
+        editor.putString("id", librarianDTO.id)
+        editor.putString("password", librarianDTO.password)
+        editor.putString("name", librarianDTO.name)
+        editor.putString("role", librarianDTO.role)
         editor.apply()
     }
 
@@ -28,6 +30,10 @@ class LoginSharePreference(context: Context) {
 
     fun getPassword(): String? {
         return sharedPreferences.getString("password", "")
+    }
+
+    fun getName(): String? {
+        return sharedPreferences.getString("name", "")
     }
 
     fun clearLogin() {

@@ -1,12 +1,14 @@
-package com.example.managerlibrary.ui
+package com.example.managerlibrary
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
 import android.view.MenuItem
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
-import com.example.managerlibrary.R
 import com.example.managerlibrary.databinding.ActivityMainBinding
 import com.example.managerlibrary.fragment.account.AddNewUserFragment
 import com.example.managerlibrary.fragment.account.ChangePasswordFragment
@@ -17,13 +19,15 @@ import com.example.managerlibrary.fragment.manager.ManagerCategoryBooksFragment
 import com.example.managerlibrary.fragment.manager.ManagerMembersFragment
 import com.example.managerlibrary.fragment.statistical.RevenueFragment
 import com.example.managerlibrary.fragment.statistical.Top10Fragment
-import com.example.managerlibrary.sharepre.LoginSharePreference
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var toggle: ActionBarDrawerToggle
     private lateinit var binding: ActivityMainBinding
     private lateinit var loginSharePreference: LoginSharePreference
+    private lateinit var librarianDAO: LibrarianDAO
+    private var doubleBackToExitPressedOnce = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -48,6 +52,24 @@ class MainActivity : AppCompatActivity() {
 
             fragmentTransaction.commit()
         }
+
+
+        //get username and user full name by share preference
+        loginSharePreference = LoginSharePreference(this)
+        val username = loginSharePreference.getID()
+        val fullname = loginSharePreference.getName()
+
+        //set username and user full name to navigation header
+        val headerView = binding.navView.getHeaderView(0)
+        val userNameTextView = headerView.findViewById<TextView>(R.id.user_name)
+        val userFullNameTextView = headerView.findViewById<TextView>(R.id.user_full_name)
+
+        // Update the views with your data
+        Toast.makeText(this, "Welcome $fullname", Toast.LENGTH_SHORT).show()
+        userNameTextView.text = username
+        userFullNameTextView.text = fullname
+
+
         binding.navView.setNavigationItemSelectedListener { menuItem ->
 
             val fragmentManager = supportFragmentManager
@@ -143,7 +165,10 @@ class MainActivity : AppCompatActivity() {
                         //clear share preference
                         loginSharePreference = LoginSharePreference(this)
                         loginSharePreference.clearLogin()
-                        finish()
+                        Intent(this, LoginActivity::class.java).also {
+                            startActivity(it)
+                            finish()
+                        }
                         Toast.makeText(this, "Logout", Toast.LENGTH_SHORT).show()
                     }
                     builder.setNegativeButton("No") { _, _ ->
@@ -169,5 +194,29 @@ class MainActivity : AppCompatActivity() {
             return true
         }
         return true
+    }
+
+    override fun onBackPressed() {
+        val checkSaveLogin = loginSharePreference.getRemember()
+        if (binding.drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            // Close the navigation drawer if it's open
+            binding.drawerLayout.closeDrawer(GravityCompat.START)
+        } else {
+            if (doubleBackToExitPressedOnce) {
+                // If the back button is pressed twice in quick succession, exit the app
+                if (checkSaveLogin == false) {
+                    loginSharePreference = LoginSharePreference(this)
+                    loginSharePreference.clearLogin()
+                    super.onBackPressed()
+                }
+                return
+            }
+
+            this.doubleBackToExitPressedOnce = true
+            Toast.makeText(this, "Press back again to exit", Toast.LENGTH_SHORT).show()
+
+            // Reset the flag after a short delay (2 seconds) if the back button is not pressed again
+            Handler().postDelayed({ doubleBackToExitPressedOnce = false }, 2000)
+        }
     }
 }

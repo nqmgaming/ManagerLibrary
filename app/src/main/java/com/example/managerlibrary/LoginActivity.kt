@@ -1,10 +1,8 @@
-package com.example.managerlibrary.ui
+package com.example.managerlibrary
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.managerlibrary.dao.LibrarianDAO
-import com.example.managerlibrary.sharepre.LoginSharePreference
 import com.example.managerlibrary.databinding.ActivityLoginBinding
 
 class LoginActivity : AppCompatActivity() {
@@ -62,7 +60,9 @@ class LoginActivity : AppCompatActivity() {
             }
 
             if (binding.cbRememberMe.isChecked) {
-                loginSharePreference.saveLogin(username, password)
+                librarianDAO = LibrarianDAO(this)
+                val librarian = librarianDAO.getLibrarianByID(username)
+                loginSharePreference.saveLogin(librarian)
                 loginSharePreference.isRemember(true)
             } else {
                 loginSharePreference.isRemember(false)

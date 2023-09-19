@@ -80,6 +80,7 @@ class ManagerBookDataBase(context: Context) : SQLiteOpenHelper(
                 "memberID INTEGER NOT NULL," +
                 " bookID INTEGER NOT NULL," +
                 " loanDate TEXT NOT NULL," +
+                "status INTEGER NOT NULL," +
                 "FOREIGN KEY (librarianID) REFERENCES Librarian(librarianID)," +
                 "FOREIGN KEY (memberID) REFERENCES Member(memberID)," +
                 "FOREIGN KEY (bookID) REFERENCES Book(bookID)" +
@@ -87,9 +88,9 @@ class ManagerBookDataBase(context: Context) : SQLiteOpenHelper(
         db?.execSQL(libraryLoanSlip)
 
         //create 3 data for loan slip
-        db?.execSQL("INSERT INTO LibraryLoanSlip VALUES(1,'admin',1,1,'2020-12-12')")
-        db?.execSQL("INSERT INTO LibraryLoanSlip VALUES(2,'admin',2,2,'2020-12-12')")
-        db?.execSQL("INSERT INTO LibraryLoanSlip VALUES(3,'admin',3,3,'2020-12-12')")
+        db?.execSQL("INSERT INTO LibraryLoanSlip VALUES(1,'admin',1,1,'2020-12-12', 1)")
+        db?.execSQL("INSERT INTO LibraryLoanSlip VALUES(2,'admin',2,2,'2020-12-12', 0)")
+        db?.execSQL("INSERT INTO LibraryLoanSlip VALUES(3,'admin',3,3,'2020-12-12', 1)")
 
     }
 
