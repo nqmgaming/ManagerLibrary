@@ -3,7 +3,9 @@ package com.example.managerlibrary
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AlertDialog
 import com.example.managerlibrary.databinding.ActivityLoginBinding
+import com.example.managerlibrary.databinding.DialogLoginSuccessBinding
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
@@ -67,11 +69,31 @@ class LoginActivity : AppCompatActivity() {
             } else {
                 loginSharePreference.isRemember(false)
             }
-            //intent to main activity
-            Intent(this, MainActivity::class.java).also {
-                startActivity(it)
-                finish()
-            }
+            val builder = AlertDialog.Builder(this,  R.style.CustomDialog)
+            val inflater = layoutInflater
+            builder.setView(inflater.inflate(R.layout.dialog_proccessing, null))
+            builder.setCancelable(false) // if you want the user to wait until the process finishes
+            val dialog = builder.create()
+
+            dialog.show()
+
+            android.os.Handler().postDelayed({
+                dialog.dismiss()
+                val builderDialog = AlertDialog.Builder(this,  R.style.CustomDialog)
+                val bindingDialog = DialogLoginSuccessBinding.inflate(layoutInflater)
+                builderDialog.setView(bindingDialog.root)
+                val dialogLogin = builderDialog.create()
+                bindingDialog.btnLoginSuccess.setOnClickListener {
+                    dialogLogin.dismiss()
+                    //intent to main activity
+                    Intent(this, MainActivity::class.java).also {
+                        startActivity(it)
+                        finish()
+                    }
+                }
+                dialogLogin.show()
+            }, 1500)
+
         }
 
     }

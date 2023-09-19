@@ -9,5 +9,10 @@
     <style name="ThemeOverlay.Material3.NavigationView." parent="ThemeOverlay.AppCompat.Light">
         <item name="colorControlHighlight">@color/circle</item>
     </style>
+    <style name="CustomDialog" parent="@style/Theme.AppCompat.Dialog">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:windowNoTitle">true</item>
+    </style>
 
 </resources>

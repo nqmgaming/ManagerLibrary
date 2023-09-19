@@ -18,6 +18,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             app:cardCornerRadius="@dimen/cardview_compat_inset_shadow"
+            android:outlineSpotShadowColor="@color/circle"
             app:circularflow_defaultRadius="@dimen/cardview_compat_inset_shadow"
             app:circularflow_radiusInDP="10dp"
             app:layout_constraintCircleRadius="@dimen/cardview_compat_inset_shadow"
@@ -97,6 +98,7 @@
             app:cardCornerRadius="@dimen/cardview_compat_inset_shadow"
             app:circularflow_defaultRadius="@dimen/cardview_compat_inset_shadow"
             app:circularflow_radiusInDP="10dp"
+            android:outlineSpotShadowColor="@color/circle"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/card_base_infor">
