@@ -3,6 +3,7 @@ package com.example.managerlibrary
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
 import androidx.appcompat.app.AlertDialog
 import com.example.managerlibrary.databinding.ActivityLoginBinding
 import com.example.managerlibrary.databinding.DialogLoginSuccessBinding
@@ -77,7 +78,7 @@ class LoginActivity : AppCompatActivity() {
 
             dialog.show()
 
-            android.os.Handler().postDelayed({
+            Handler().postDelayed({
                 dialog.dismiss()
                 val builderDialog = AlertDialog.Builder(this,  R.style.CustomDialog)
                 val bindingDialog = DialogLoginSuccessBinding.inflate(layoutInflater)

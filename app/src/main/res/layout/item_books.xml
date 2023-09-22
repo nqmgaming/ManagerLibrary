@@ -4,114 +4,91 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="10dp"
-    app:cardCornerRadius="15dp"
-    app:circularflow_radiusInDP="15dp">
+    app:cardCornerRadius="15dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/card_base_infor"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            app:cardCornerRadius="@dimen/cardview_compat_inset_shadow"
-            android:outlineSpotShadowColor="@color/circle"
-            app:circularflow_defaultRadius="@dimen/cardview_compat_inset_shadow"
-            app:circularflow_radiusInDP="10dp"
-            app:layout_constraintCircleRadius="@dimen/cardview_compat_inset_shadow"
+            android:id="@+id/card_base_book"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/base_infor"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                android:paddingBottom="10dp">
 
                 <ImageView
-                    android:id="@+id/img_books"
+                    android:id="@+id/img_book_manager"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingEnd="10dp"
-                    android:src="@drawable/book_bill"
+                    android:src="@drawable/book_category"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/txt_name_book"
+                    android:id="@+id/txt_book_id_manager"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Sách văn học"
-                    android:textColor="@color/black"
-                    android:textSize="18sp"
+                    android:layout_marginStart="10dp"
+                    android:text="Mã sách: 1"
                     android:textStyle="bold"
-                    app:layout_constraintStart_toEndOf="@id/img_books"
+                    app:layout_constraintStart_toEndOf="@id/img_book_manager"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/txt_name_member"
+                    android:id="@+id/txt_book_name_manager"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Nguyen Quang Minh"
-                    android:textColor="@color/black"
-                    app:layout_constraintStart_toEndOf="@id/img_books"
-                    app:layout_constraintTop_toBottomOf="@id/txt_name_book" />
+                    android:layout_marginStart="10dp"
+                    android:text="Tên sách: Đấu phá thương khung"
+                    android:textStyle="italic"
+                    app:layout_constraintStart_toEndOf="@id/img_book_manager"
+                    app:layout_constraintTop_toBottomOf="@id/txt_book_id_manager" />
 
                 <TextView
-                    android:id="@+id/txt_date"
+                    android:id="@+id/txt_category_name_manager"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="20/10/2020"
-                    android:textColor="@color/black"
-                    app:layout_constraintStart_toEndOf="@id/img_books"
-                    app:layout_constraintTop_toBottomOf="@id/txt_name_member" />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="10.000d"
-                    android:textColor="@color/black"
-                    app:layout_constraintStart_toEndOf="@id/img_books"
-                    app:layout_constraintTop_toBottomOf="@id/txt_date" />
-
+                    android:layout_marginStart="10dp"
+                    android:text="Thể loại: Tiểu thuyết"
+                    android:textStyle="italic"
+                    app:layout_constraintStart_toEndOf="@id/img_book_manager"
+                    app:layout_constraintTop_toBottomOf="@id/txt_book_name_manager" />
 
                 <TextView
-                    android:id="@+id/txt_status"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="20dp"
-                    android:text="Đã trả"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
+                    android:layout_marginStart="10dp"
+                    android:text="Giá thuê: 10000"
+                    android:textStyle="italic"
+                    app:layout_constraintStart_toEndOf="@id/img_book_manager"
+                    app:layout_constraintTop_toBottomOf="@id/txt_category_name_manager" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
-
-
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/card_image_button"
+            android:id="@+id/card_image_button_book"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:outlineSpotShadowColor="@color/circle"
             android:visibility="gone"
             app:cardCornerRadius="@dimen/cardview_compat_inset_shadow"
             app:circularflow_defaultRadius="@dimen/cardview_compat_inset_shadow"
             app:circularflow_radiusInDP="10dp"
-            android:outlineSpotShadowColor="@color/circle"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/card_base_infor">
+            app:layout_constraintTop_toBottomOf="@id/card_base_book">
 
             <LinearLayout
-                android:id="@+id/linear_image_button"
+                android:id="@+id/linear_image_button_books"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -119,37 +96,16 @@
                 android:gravity="center"
                 android:orientation="horizontal">
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <ImageButton
-                        android:id="@+id/btn_info"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginHorizontal="40dp"
-                        android:background="@null"
-                        android:padding="5dp"
-                        android:src="@drawable/information" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Chi tiết"
-                        android:textColor="@color/circle"
-                        android:textSize="12sp" />
-                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="40dp"
                     android:gravity="center"
                     android:orientation="vertical">
 
                     <ImageButton
-                        android:id="@+id/btn_delete"
+                        android:id="@+id/btn_delete_book"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="@null"
@@ -171,7 +127,7 @@
                     android:orientation="vertical">
 
                     <ImageButton
-                        android:id="@+id/btn_edit"
+                        android:id="@+id/btn_edit_book"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="40dp"
@@ -189,4 +145,6 @@
             </LinearLayout>
         </androidx.cardview.widget.CardView>
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 </androidx.cardview.widget.CardView>

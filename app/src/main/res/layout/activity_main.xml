@@ -20,7 +20,10 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:navigationIcon="@drawable/menu" />
+            app:navigationIcon="@drawable/menu"
+            app:subtitle="PNLib"
+            app:title="PNLib"
+            app:titleTextColor="@color/white" />
 
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/nav_host_fragment"
