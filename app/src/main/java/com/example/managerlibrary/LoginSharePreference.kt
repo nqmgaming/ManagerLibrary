@@ -42,4 +42,8 @@ class LoginSharePreference(context: Context) {
         editor.apply()
     }
 
+    fun getRole(): String {
+        return sharedPreferences.getString("role", "").toString()
+    }
+
 }

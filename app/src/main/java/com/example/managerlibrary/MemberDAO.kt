@@ -26,4 +26,26 @@ class MemberDAO(context: Context) {
         dbReadable.close()
         return MemberDTO(-1, "", "")
     }
+
+   //get all member
+    fun getAllMember(): ArrayList<MemberDTO> {
+        val dbReadable = db.readableDatabase
+        val sql = "SELECT * FROM Member"
+        val cursor = dbReadable.rawQuery(sql, null)
+        val listMember = ArrayList<MemberDTO>()
+        if (cursor.count > 0) {
+            cursor.moveToFirst()
+            while (!cursor.isAfterLast) {
+                val idMember = cursor.getInt(0)
+                val name = cursor.getString(1)
+                val birthYear = cursor.getString(2)
+                val memberDTO = MemberDTO(idMember, name, birthYear)
+                listMember.add(memberDTO)
+                cursor.moveToNext()
+            }
+        }
+        cursor.close()
+        dbReadable.close()
+        return listMember
+    }
 }

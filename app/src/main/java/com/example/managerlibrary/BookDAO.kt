@@ -15,15 +15,38 @@ class BookDAO (context: Context){
             cursor.moveToFirst()
             val idBook = cursor.getInt(0)
             val name = cursor.getString(1)
-            val rentalFee = cursor.getDouble(2)
+            val rentalFee = cursor.getInt(2)
             val category = cursor.getString(3)
-            val bookDTO = BookDTO(idBook, name, rentalFee, category)
+            val bookDTO = BookDTO(idBook, name, rentalFee, category, 0)
             cursor.close()
             dbReadable.close()
             return bookDTO
         }
         cursor.close()
         dbReadable.close()
-        return BookDTO(-1, "", -1.0, "")
+        return BookDTO(-1, "", -1, "", 0)
+    }
+
+  //get all book
+    fun getAllBook(): ArrayList<BookDTO> {
+        val dbReadable = db.readableDatabase
+        val sql = "SELECT * FROM Book"
+        val cursor = dbReadable.rawQuery(sql, null)
+        val listBook = ArrayList<BookDTO>()
+        if (cursor.count > 0) {
+            cursor.moveToFirst()
+            while (!cursor.isAfterLast) {
+                val idBook = cursor.getInt(0)
+                val name = cursor.getString(1)
+                val rentalFee = cursor.getInt(2)
+                val category = cursor.getString(3)
+                val bookDTO = BookDTO(idBook, name, rentalFee, category)
+                listBook.add(bookDTO)
+                cursor.moveToNext()
+            }
+        }
+        cursor.close()
+        dbReadable.close()
+        return listBook
     }
 }

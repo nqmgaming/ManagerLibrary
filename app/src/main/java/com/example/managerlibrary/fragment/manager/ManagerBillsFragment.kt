@@ -15,7 +15,7 @@ import com.example.managerlibrary.LibraryLoanSlipDTO
 class ManagerBillsFragment : Fragment() {
     private lateinit var libraryLoanSlipDAO: LibraryLoanSlipDAO
     private lateinit var listLoanSlip: ArrayList<LibraryLoanSlipDTO>
-     lateinit var adapter: BillsAdapter
+    lateinit var adapter: BillsAdapter
 
     private var _binding: FragmentManagerBillsBinding? = null
 
@@ -37,19 +37,16 @@ class ManagerBillsFragment : Fragment() {
         binding.managerBillsRecyclerView.layoutManager = LinearLayoutManager(context)
         libraryLoanSlipDAO = LibraryLoanSlipDAO(requireContext())
 
-// Get all loan slips
         listLoanSlip = libraryLoanSlipDAO.getAllLoanSlip()
 
-// Check if list is empty
         if (listLoanSlip.isEmpty()) {
             Toast.makeText(requireContext(), "List is empty", Toast.LENGTH_SHORT).show()
         } else {
-            // If list is not empty, do something with it...
+            adapter = BillsAdapter(requireContext(), listLoanSlip)
+            binding.managerBillsRecyclerView.adapter = adapter
+            adapter.notifyDataSetChanged()
         }
 
-        adapter = BillsAdapter(requireContext(), listLoanSlip)
-        binding.managerBillsRecyclerView.adapter = adapter
-        adapter.notifyDataSetChanged()
 
 
 

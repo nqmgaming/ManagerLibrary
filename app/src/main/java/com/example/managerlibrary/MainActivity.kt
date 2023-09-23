@@ -58,16 +58,19 @@ class MainActivity : AppCompatActivity() {
         loginSharePreference = LoginSharePreference(this)
         val username = loginSharePreference.getID()
         val fullname = loginSharePreference.getName()
+        val role = loginSharePreference.getRole()
 
         //set username and user full name to navigation header
         val headerView = binding.navView.getHeaderView(0)
         val userNameTextView = headerView.findViewById<TextView>(R.id.user_name)
         val userFullNameTextView = headerView.findViewById<TextView>(R.id.user_full_name)
+        val userRole = headerView.findViewById<TextView>(R.id.txt_role)
 
         // Update the views with your data
         Toast.makeText(this, "Welcome $fullname", Toast.LENGTH_SHORT).show()
         userNameTextView.text = username
         userFullNameTextView.text = fullname
+        userRole.text = role
 
 
         binding.navView.setNavigationItemSelectedListener { menuItem ->

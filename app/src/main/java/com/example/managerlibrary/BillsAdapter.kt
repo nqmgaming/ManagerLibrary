@@ -29,12 +29,13 @@ class BillsAdapter(
         ) {
             //get name of book by id
             val bookDTO: BookDTO = bookDAO.getBookByID(libraryLoanSlipDTO.idBook)
-            binding.txtNameBook.text = bookDTO.name
+            binding.txtNameBook.text ="Tên sách: " +  bookDTO.name
 
             val memberDTO: MemberDTO = memberDAO.getMemberDTOById(libraryLoanSlipDTO.idMember)
-            binding.txtNameMember.text = memberDTO.name
+            binding.txtNameMember.text = "Người mượn: " +  memberDTO.name
 
-            binding.txtDate.text = libraryLoanSlipDTO.dateLoan
+            binding.txtDate.text = "Ngày mượn: " +  libraryLoanSlipDTO.dateLoan
+            binding.txtPrice.text = "Giá thuê: " +  bookDTO.rentalFee.toString() + " VND"
             if (libraryLoanSlipDTO.status == 0) {
                 binding.txtStatus.text = "Chưa trả"
             } else {
@@ -67,7 +68,8 @@ class BillsAdapter(
 
                     //load lại danh sách phiếu mượn bằng cách refresh lại fragment
                     val fragment = ManagerBillsFragment()
-                    val fragmentManager = (binding.root.context as MainActivity).supportFragmentManager
+                    val fragmentManager =
+                        (binding.root.context as MainActivity).supportFragmentManager
                     fragmentManager.beginTransaction().apply {
                         replace(R.id.nav_host_fragment, fragment)
                         commit()

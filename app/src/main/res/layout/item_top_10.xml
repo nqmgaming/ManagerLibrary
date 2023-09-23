@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    app:cardCornerRadius="15dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/img_book_manager_top_10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/book_category"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/txt_book_id_manager_top_10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:text="Mã sách: 1"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@id/img_book_manager_top_10"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/txt_book_name_manager_top_10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:text="Tên sách: Đấu phá thương khung"
+            android:textStyle="italic"
+            app:layout_constraintStart_toEndOf="@id/img_book_manager_top_10"
+            app:layout_constraintTop_toBottomOf="@id/txt_book_id_manager_top_10" />
+
+        <TextView
+            android:id="@+id/txt_category_name_manager_top_10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:text="Thể loại: Tiểu thuyết"
+            android:textStyle="italic"
+            app:layout_constraintStart_toEndOf="@id/img_book_manager_top_10"
+            app:layout_constraintTop_toBottomOf="@id/txt_book_name_manager_top_10" />
+
+        <TextView
+            android:id="@+id/txt_rent_price_manager"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:text="Giá thuê: 10000"
+            android:textStyle="italic"
+            app:layout_constraintStart_toEndOf="@id/img_book_manager_top_10"
+            app:layout_constraintTop_toBottomOf="@id/txt_category_name_manager_top_10" />
+
+        <TextView
+            android:id="@+id/txt_times_rented"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:text="Số lần thuê: 10"
+            android:textStyle="italic"
+            app:layout_constraintStart_toEndOf="@id/img_book_manager_top_10"
+            app:layout_constraintTop_toBottomOf="@id/txt_rent_price_manager" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.cardview.widget.CardView>
