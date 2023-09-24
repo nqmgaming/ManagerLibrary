@@ -72,6 +72,11 @@ class MainActivity : AppCompatActivity() {
         userFullNameTextView.text = fullname
         userRole.text = role
 
+        //hide item menu add user if user is not admin
+        if (role != "admin") {
+            binding.navView.menu.findItem(R.id.add_user).isVisible = false
+        }
+
 
         binding.navView.setNavigationItemSelectedListener { menuItem ->
 
@@ -198,28 +203,5 @@ class MainActivity : AppCompatActivity() {
         }
         return true
     }
-
-    override fun onBackPressed() {
-        val checkSaveLogin = loginSharePreference.getRemember()
-        if (binding.drawerLayout.isDrawerOpen(GravityCompat.START)) {
-            // Close the navigation drawer if it's open
-            binding.drawerLayout.closeDrawer(GravityCompat.START)
-        } else {
-            if (doubleBackToExitPressedOnce) {
-                // If the back button is pressed twice in quick succession, exit the app
-                if (checkSaveLogin == false) {
-                    loginSharePreference = LoginSharePreference(this)
-                    loginSharePreference.clearLogin()
-                    super.onBackPressed()
-                }
-                return
-            }
-
-            this.doubleBackToExitPressedOnce = true
-            Toast.makeText(this, "Press back again to exit", Toast.LENGTH_SHORT).show()
-
-            // Reset the flag after a short delay (2 seconds) if the back button is not pressed again
-            Handler().postDelayed({ doubleBackToExitPressedOnce = false }, 2000)
-        }
-    }
+    
 }

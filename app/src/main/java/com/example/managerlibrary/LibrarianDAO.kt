@@ -74,4 +74,57 @@ class LibrarianDAO(context: Context) {
         dbReadable.close()
         return librarianDTO
     }
+
+    //edit librarian truyền vào là librarianDTO
+    fun editLibrarian(librarianDTO: LibrarianDTO): Long {
+        val values = ContentValues()
+        values.put("librarianID", librarianDTO.id)
+        values.put("librarianName", librarianDTO.name)
+        values.put("password", librarianDTO.password)
+        values.put("role", librarianDTO.role)
+        var result: Long = -1L
+        val dbWritable = db.writableDatabase
+        try {
+            result = dbWritable.update("Librarian", values, "librarianID = ?", arrayOf(librarianDTO.id)).toLong()
+        } catch (e: SQLDataException) {
+            e.printStackTrace()
+        } finally {
+            dbWritable.close()
+        }
+        return result
+    }
+
+    //check if username is exist return true if exist else return false
+    fun checkUsernameExist(id: String): Boolean {
+        val dbReadable = db.readableDatabase
+        val sql = "SELECT * FROM Librarian WHERE librarianID = ?"
+        val cursor = dbReadable.rawQuery(sql, arrayOf(id))
+        if (cursor.count > 0) {
+            cursor.close()
+            dbReadable.close()
+            return true
+        }
+        cursor.close()
+        dbReadable.close()
+        return false
+    }
+
+    //insert librarian
+    fun insertLibrarian(librarianDTO: LibrarianDTO): Long {
+        val values = ContentValues()
+        values.put("librarianID", librarianDTO.id)
+        values.put("librarianName", librarianDTO.name)
+        values.put("password", librarianDTO.password)
+        values.put("role", librarianDTO.role)
+        var result: Long = -1L
+        val dbWritable = db.writableDatabase
+        try {
+            result = dbWritable.insert("Librarian", null, values)
+        } catch (e: SQLDataException) {
+            e.printStackTrace()
+        } finally {
+            dbWritable.close()
+        }
+        return result
+    }
 }

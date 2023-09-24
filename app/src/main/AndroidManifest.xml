@@ -13,6 +13,9 @@
         android:theme="@style/Theme.ManagerLibrary"
         tools:targetApi="31">
         <activity
+            android:name=".ui.account.EditAccountActivity"
+            android:exported="false" />
+        <activity
             android:name=".EditUserActivity"
             android:exported="false" />
         <activity

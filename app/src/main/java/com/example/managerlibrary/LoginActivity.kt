@@ -61,16 +61,16 @@ class LoginActivity : AppCompatActivity() {
                 binding.edtPassword.error = "Mật khẩu sai"
                 return@setOnClickListener
             }
-
+            librarianDAO = LibrarianDAO(this)
+            val librarian = librarianDAO.getLibrarianByID(username)
+            loginSharePreference.saveLogin(librarian)
             if (binding.cbRememberMe.isChecked) {
-                librarianDAO = LibrarianDAO(this)
-                val librarian = librarianDAO.getLibrarianByID(username)
-                loginSharePreference.saveLogin(librarian)
+
                 loginSharePreference.isRemember(true)
             } else {
                 loginSharePreference.isRemember(false)
             }
-            val builder = AlertDialog.Builder(this,  R.style.CustomDialog)
+            val builder = AlertDialog.Builder(this, R.style.CustomDialog)
             val inflater = layoutInflater
             builder.setView(inflater.inflate(R.layout.dialog_proccessing, null))
             builder.setCancelable(false) // if you want the user to wait until the process finishes
@@ -80,7 +80,7 @@ class LoginActivity : AppCompatActivity() {
 
             Handler().postDelayed({
                 dialog.dismiss()
-                val builderDialog = AlertDialog.Builder(this,  R.style.CustomDialog)
+                val builderDialog = AlertDialog.Builder(this, R.style.CustomDialog)
                 val bindingDialog = DialogLoginSuccessBinding.inflate(layoutInflater)
                 builderDialog.setView(bindingDialog.root)
                 val dialogLogin = builderDialog.create()
