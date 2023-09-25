@@ -1,8 +1,8 @@
-package com.example.managerlibrary
+package com.example.managerlibrary.dao
 
 import android.content.Context
 import com.example.managerlibrary.database.ManagerBookDataBase
-import com.example.managerlibrary.MemberDTO
+import com.example.managerlibrary.dto.MemberDTO
 
 class MemberDAO(context: Context) {
     private val db: ManagerBookDataBase = ManagerBookDataBase(context)

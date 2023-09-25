@@ -1,8 +1,8 @@
-package com.example.managerlibrary
+package com.example.managerlibrary.dao
 
 import android.content.ContentValues
 import android.content.Context
-import com.example.managerlibrary.LibrarianDTO
+import com.example.managerlibrary.dto.LibrarianDTO
 import com.example.managerlibrary.database.ManagerBookDataBase
 import java.sql.SQLDataException
 

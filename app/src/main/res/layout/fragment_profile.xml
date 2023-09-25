@@ -6,78 +6,82 @@
     android:layout_height="match_parent"
     tools:context=".fragment.account.ProfileFragment">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
-        <ImageView
-            android:id="@+id/img_banner_profile"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="250dp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/banner"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_height="match_parent">
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/img_profile"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:src="@drawable/user_profile"
-            app:layout_constraintBottom_toBottomOf="@+id/img_banner_profile"
-            app:layout_constraintEnd_toEndOf="@+id/img_banner_profile"
-            app:layout_constraintStart_toStartOf="@+id/img_banner_profile"
-            app:layout_constraintTop_toTopOf="@+id/img_banner_profile" />
+            <ImageView
+                android:id="@+id/img_banner_profile"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/banner"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/tv_role_profile"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="admin"
-            android:textColor="@color/black"
-            android:textSize="18sp"
-            android:textStyle="italic"
-            app:layout_constraintEnd_toEndOf="@id/img_profile"
-            app:layout_constraintStart_toStartOf="@id/img_profile"
-            app:layout_constraintTop_toBottomOf="@id/img_profile" />
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/img_profile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:src="@drawable/user_profile"
+                app:layout_constraintBottom_toBottomOf="@+id/img_banner_profile"
+                app:layout_constraintEnd_toEndOf="@+id/img_banner_profile"
+                app:layout_constraintStart_toStartOf="@+id/img_banner_profile"
+                app:layout_constraintTop_toTopOf="@+id/img_banner_profile" />
 
-        <TextView
-            android:id="@+id/tv_name_profile"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Nguyễn Quang Minh"
-            android:textColor="@color/black"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="@id/img_profile"
-            app:layout_constraintStart_toStartOf="@id/img_profile"
-            app:layout_constraintTop_toBottomOf="@id/tv_role_profile" />
+            <TextView
+                android:id="@+id/tv_username_profile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="admin"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="italic"
+                app:layout_constraintEnd_toEndOf="@id/img_profile"
+                app:layout_constraintStart_toStartOf="@id/img_profile"
+                app:layout_constraintTop_toBottomOf="@id/img_profile" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Phiếu mượn đã tạo: 10"
-            android:textColor="@color/circle"
-            android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="@id/img_profile"
-            app:layout_constraintStart_toStartOf="@id/img_profile"
-            app:layout_constraintTop_toBottomOf="@id/tv_name_profile" />
+            <TextView
+                android:id="@+id/tv_name_profile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nguyễn Quang Minh"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@id/img_profile"
+                app:layout_constraintStart_toStartOf="@id/img_profile"
+                app:layout_constraintTop_toBottomOf="@id/tv_username_profile" />
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/card_feature"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="16dp"
-            android:layout_marginTop="20dp"
-            app:cardCornerRadius="15dp"
-            app:cardElevation="5dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/img_banner_profile">
+            <TextView
+                android:id="@+id/tv_total_borrowed_profile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Phiếu mượn đã tạo: 10"
+                android:textColor="@color/circle"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="@id/img_profile"
+                app:layout_constraintStart_toStartOf="@id/img_profile"
+                app:layout_constraintTop_toBottomOf="@id/tv_name_profile" />
 
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card_feature"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="20dp"
+                app:cardCornerRadius="15dp"
+                app:cardElevation="5dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/img_banner_profile">
 
 
                 <TextView
@@ -91,35 +95,53 @@
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
-        </androidx.cardview.widget.CardView>
+            </androidx.cardview.widget.CardView>
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/card_edit_profile"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="16dp"
-            android:layout_marginTop="20dp"
-            app:cardCornerRadius="15dp"
-            app:cardElevation="5dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/card_feature">
-
-
-
-            <TextView
-                android:id="@+id/tv_change_profile"
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card_edit_profile"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:drawableStart="@drawable/user"
-                android:drawablePadding="10dp"
-                android:padding="15dp"
-                android:text="Chỉnh sửa thông tin cá nhân"
-                android:textSize="18sp"
-                android:textStyle="bold" />
-
-        </androidx.cardview.widget.CardView>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="20dp"
+                app:cardCornerRadius="15dp"
+                app:cardElevation="5dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/card_feature">
 
 
+                <TextView
+                    android:id="@+id/tv_change_profile"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableStart="@drawable/user"
+                    android:drawablePadding="10dp"
+                    android:padding="15dp"
+                    android:text="Chỉnh sửa thông tin cá nhân"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+            </androidx.cardview.widget.CardView>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_margin="50dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/card_edit_profile">
+                <TextView
+                    android:id="@+id/tv_role_profile"
+                    android:textStyle="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Người dùng: admin"
+                    android:textColor="@color/circle"
+                    android:textSize="18sp" />
+            </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </ScrollView>
 </FrameLayout>

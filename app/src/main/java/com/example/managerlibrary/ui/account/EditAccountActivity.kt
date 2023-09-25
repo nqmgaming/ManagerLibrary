@@ -4,9 +4,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
-import com.example.managerlibrary.LibrarianDAO
-import com.example.managerlibrary.LibrarianDTO
-import com.example.managerlibrary.LoginSharePreference
+import com.example.managerlibrary.dao.LibrarianDAO
+import com.example.managerlibrary.dto.LibrarianDTO
+import com.example.managerlibrary.sharepre.LoginSharePreference
 import com.example.managerlibrary.databinding.ActivityEditUserBinding
 
 class EditAccountActivity : AppCompatActivity() {
@@ -31,15 +31,15 @@ class EditAccountActivity : AppCompatActivity() {
         binding.edtUsernameProfile.setText(librarianDTO.id)
         binding.edtFullnameProfile.setText(librarianDTO.name)
 
-        binding.edtUsernameProfile.setOnClickListener(){
+        binding.edtUsernameProfile.setOnClickListener() {
             Toast.makeText(this, "Can't edit username", Toast.LENGTH_SHORT).show()
         }
 
-        binding.btnCancelEditUser.setOnClickListener(){
+        binding.btnCancelEditUser.setOnClickListener() {
             finish()
         }
 
-        binding.btnSaveEditUser.setOnClickListener(){
+        binding.btnSaveEditUser.setOnClickListener() {
             Log.d("EditProfile", "Starting EditUserActivity")
             val username = binding.edtUsernameProfile.text.toString().trim()
             val fullname = binding.edtFullnameProfile.text.toString().trim()
@@ -53,11 +53,13 @@ class EditAccountActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
             librarianDAO = LibrarianDAO(this)
-            librarianDTO = LibrarianDTO(username, fullname, librarianDTO.password, librarianDTO.role)
+            librarianDTO =
+                LibrarianDTO(username, fullname, librarianDTO.password, librarianDTO.role)
             val result = librarianDAO.editLibrarian(librarianDTO)
-           if (result > 0) {
+            if (result > 0) {
                 userSharePreference.saveLogin(librarianDTO)
                 finish()
+
             } else {
                 Toast.makeText(this, "Edit failed" + result, Toast.LENGTH_SHORT).show()
                 binding.edtUsernameProfile.error = "Username is exist"

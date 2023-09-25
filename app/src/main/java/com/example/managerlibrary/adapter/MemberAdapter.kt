@@ -1,9 +1,11 @@
-package com.example.managerlibrary
+package com.example.managerlibrary.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.managerlibrary.dao.MemberDAO
+import com.example.managerlibrary.dto.MemberDTO
 import com.example.managerlibrary.databinding.ItemMemberBinding
 
 class MemberAdapter(
@@ -43,7 +45,7 @@ class MemberAdapter(
         return MemberViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: MemberAdapter.MemberViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: MemberViewHolder, position: Int) {
         val memberDTO = listMembers[position]
         // Bind data to the view holder
         holder.bind(memberDTO, memberDAO, listMembers)

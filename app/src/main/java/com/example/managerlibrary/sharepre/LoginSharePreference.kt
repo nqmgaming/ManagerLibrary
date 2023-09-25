@@ -1,6 +1,7 @@
-package com.example.managerlibrary
+package com.example.managerlibrary.sharepre
 
 import android.content.Context
+import com.example.managerlibrary.dto.LibrarianDTO
 
 class LoginSharePreference(context: Context) {
     private val sharedPreferences = context.getSharedPreferences("Login", Context.MODE_PRIVATE)

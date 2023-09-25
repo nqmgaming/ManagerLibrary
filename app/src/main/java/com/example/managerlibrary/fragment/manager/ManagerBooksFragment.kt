@@ -7,10 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.managerlibrary.BookDAO
-import com.example.managerlibrary.BookDTO
-import com.example.managerlibrary.BooksAdapter
-import com.example.managerlibrary.R
+import com.example.managerlibrary.dao.BookDAO
+import com.example.managerlibrary.dto.BookDTO
+import com.example.managerlibrary.adapter.BooksAdapter
 import com.example.managerlibrary.databinding.FragmentManagerBooksBinding
 
 private const val ARG_PARAM1 = "param1"

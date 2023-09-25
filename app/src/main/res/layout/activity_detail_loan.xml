@@ -4,6 +4,146 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DetailLoanActivity">
+    tools:context=".ui.manager.DetailLoanActivity">
 
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbarDetailLoan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/circle"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintTop_toTopOf="parent"
+        app:navigationIcon="@drawable/arrow"
+        app:title="Chi tiết hóa đơn"
+        app:titleTextColor="@color/white" />
+
+    <ImageView
+        android:id="@+id/img_book_detail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/book_bill"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbarDetailLoan" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_detail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        app:cardCornerRadius="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/img_book_detail">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginVertical="15dp"
+            android:orientation="vertical">
+            <!--            Mã hóa đơn-->
+            <TextView
+                android:id="@+id/tv_id_bill_detail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:text="Mã hóa đơn"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:textSize="18sp" />
+            <!--      Tên sách-->
+            <TextView
+                android:id="@+id/tv_name_book_detail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:text="Tên sách"
+                android:textColor="@color/black"
+                android:textSize="18sp" />
+            <!--      Thể loại-->
+            <TextView
+                android:id="@+id/tv_category_book_detail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:text="Thể loại"
+                android:textColor="@color/black"
+                android:textSize="18sp" />
+            <!--    Giá thuê-->
+            <TextView
+                android:id="@+id/tv_price_book_detail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:text="Giá thuê"
+                android:textColor="@color/black"
+                android:textSize="18sp" />
+            <!--    Ngày cho mượn-->
+            <TextView
+                android:id="@+id/tv_date_loan_detail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:text="Ngày cho mượn"
+                android:textColor="@color/black"
+                android:textSize="18sp" />
+            <!--    Người cho mượn-->
+            <TextView
+                android:id="@+id/tv_name_user_detail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:text="Người cho mượn"
+                android:textColor="@color/black"
+                android:textSize="18sp" />
+            <!--    Người mượn-->
+            <TextView
+                android:id="@+id/tv_name_user_borrow_detail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:text="Người mượn"
+                android:textColor="@color/black"
+                android:textSize="18sp" />
+
+            <!--            Trạng thái-->
+            <TextView
+                android:id="@+id/tv_status_detail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:text="Trạng thái"
+                android:textColor="@color/black"
+                android:textSize="18sp" />
+
+        </LinearLayout>
+
+
+    </androidx.cardview.widget.CardView>
+
+    <Button
+        android:id="@+id/btn_ok_detail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/button"
+        android:text="OK"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/card_detail" />
 </androidx.constraintlayout.widget.ConstraintLayout>

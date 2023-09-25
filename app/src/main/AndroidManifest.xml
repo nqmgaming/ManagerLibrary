@@ -13,25 +13,23 @@
         android:theme="@style/Theme.ManagerLibrary"
         tools:targetApi="31">
         <activity
+            android:name=".ui.manager.AddLoanActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.account.EditAccountActivity"
             android:exported="false" />
         <activity
-            android:name=".EditUserActivity"
+            android:name=".ui.manager.EditLoanActivity"
             android:exported="false" />
         <activity
-            android:name=".EditLoanActivity"
+            android:name=".ui.manager.DetailLoanActivity"
             android:exported="false" />
         <activity
-            android:name=".AddLoanActivity"
+            android:name=".ui.account.LoginActivity"
             android:exported="false" />
         <activity
-            android:name=".DetailLoanActivity"
-            android:exported="false" />
-        <activity
-            android:name=".LoginActivity"
-            android:exported="false" />
-        <activity
-            android:name=".MainActivity"
+            android:name=".ui.MainActivity"
+            android:windowSoftInputMode="adjustNothing"
             android:exported="false" />
         <activity
             android:name=".ui.WelcomeActivity"

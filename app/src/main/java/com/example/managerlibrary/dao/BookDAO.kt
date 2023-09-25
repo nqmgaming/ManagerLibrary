@@ -1,6 +1,7 @@
-package com.example.managerlibrary
+package com.example.managerlibrary.dao
 
 import android.content.Context
+import com.example.managerlibrary.dto.BookDTO
 import com.example.managerlibrary.database.ManagerBookDataBase
 
 class BookDAO (context: Context){

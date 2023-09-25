@@ -1,12 +1,13 @@
-package com.example.managerlibrary
+package com.example.managerlibrary.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.managerlibrary.dao.BookDAO
 import com.example.managerlibrary.dao.CategoryBookDAO
 import com.example.managerlibrary.databinding.ItemBooksBinding
-import com.example.managerlibrary.databinding.ItemCategoryBinding
+import com.example.managerlibrary.dto.BookDTO
 
 class BooksAdapter(
     context: Context,

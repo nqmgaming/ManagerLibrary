@@ -1,8 +1,10 @@
-package com.example.managerlibrary
+package com.example.managerlibrary.dao
 
 import android.content.Context
 import android.util.Log
+import com.example.managerlibrary.dto.LibraryLoanSlipDTO
 import com.example.managerlibrary.database.ManagerBookDataBase
+import com.example.managerlibrary.dto.BookDTO
 
 class LibraryLoanSlipDAO(context: Context) {
     private val db: ManagerBookDataBase = ManagerBookDataBase(context)
@@ -17,7 +19,7 @@ class LibraryLoanSlipDAO(context: Context) {
             cursor.moveToFirst()
             while (!cursor.isAfterLast) {
                 val idLoanSlip = cursor.getInt(0)
-                val idLibrarian = cursor.getInt(1)
+                val idLibrarian = cursor.getString(1)
                 val idMember = cursor.getInt(2)
                 val idBook = cursor.getInt(3)
                 val dateLoan = cursor.getString(4)
@@ -119,4 +121,48 @@ class LibraryLoanSlipDAO(context: Context) {
         Log.d("getRevenueByDate", "Revenue from $startDate to $endDate is: $revenue")
         return revenue
     }
+
+    //lấy số lượng hóa đơn theo id của thủ thư
+    fun getNumberOfLoanSlipByID(id: String): Int {
+        val dbReadable = db.readableDatabase
+        val sql = "SELECT COUNT(loanSlipID) FROM LibraryLoanSlip WHERE librarianID = ?"
+        val cursor = dbReadable.rawQuery(sql, arrayOf(id.toString()))
+        var count = 0
+        if (cursor.count > 0) {
+            cursor.moveToFirst()
+            count = cursor.getInt(0)
+        }
+        cursor.close()
+        dbReadable.close()
+        return count
+    }
+
+    //get list loan slip by id(int) return loan slip dto
+    fun getLoanSlipByID(id: Int): LibraryLoanSlipDTO {
+        val dbReadable = db.readableDatabase
+        val sql = "SELECT * FROM LibraryLoanSlip WHERE loanSlipID = ?"
+        val cursor = dbReadable.rawQuery(sql, arrayOf(id.toString()))
+        var libraryLoanSlipDTO = LibraryLoanSlipDTO(-1, -1, "", -1, "", -1)
+        if (cursor.count > 0) {
+            cursor.moveToFirst()
+            val idLoanSlip = cursor.getInt(0)
+            val idLibrarian = cursor.getString(1)
+            val idMember = cursor.getInt(2)
+            val idBook = cursor.getInt(3)
+            val dateLoan = cursor.getString(4)
+            val status = cursor.getInt(5)
+            libraryLoanSlipDTO = LibraryLoanSlipDTO(
+                idLoanSlip,
+                idBook,
+                idLibrarian,
+                idMember,
+                dateLoan,
+                status
+            )
+        }
+        cursor.close()
+        dbReadable.close()
+        return libraryLoanSlipDTO
+    }
+
 }

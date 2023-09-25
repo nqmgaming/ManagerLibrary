@@ -1,9 +1,18 @@
-package com.example.managerlibrary
+package com.example.managerlibrary.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.managerlibrary.dao.BookDAO
+import com.example.managerlibrary.dto.BookDTO
+import com.example.managerlibrary.ui.manager.DetailLoanActivity
+import com.example.managerlibrary.dao.LibraryLoanSlipDAO
+import com.example.managerlibrary.dto.LibraryLoanSlipDTO
+import com.example.managerlibrary.ui.MainActivity
+import com.example.managerlibrary.dao.MemberDAO
+import com.example.managerlibrary.dto.MemberDTO
+import com.example.managerlibrary.R
 import com.example.managerlibrary.databinding.ItemBillBinding
 import com.example.managerlibrary.fragment.manager.ManagerBillsFragment
 
@@ -29,13 +38,13 @@ class BillsAdapter(
         ) {
             //get name of book by id
             val bookDTO: BookDTO = bookDAO.getBookByID(libraryLoanSlipDTO.idBook)
-            binding.txtNameBook.text ="Tên sách: " +  bookDTO.name
+            binding.txtNameBook.text = "Tên sách: " + bookDTO.name
 
             val memberDTO: MemberDTO = memberDAO.getMemberDTOById(libraryLoanSlipDTO.idMember)
-            binding.txtNameMember.text = "Người mượn: " +  memberDTO.name
+            binding.txtNameMember.text = "Người mượn: " + memberDTO.name
 
-            binding.txtDate.text = "Ngày mượn: " +  libraryLoanSlipDTO.dateLoan
-            binding.txtPrice.text = "Giá thuê: " +  bookDTO.rentalFee.toString() + " VND"
+            binding.txtDate.text = "Ngày mượn: " + libraryLoanSlipDTO.dateLoan
+            binding.txtPrice.text = "Giá thuê: " + bookDTO.rentalFee.toString() + " VND"
             if (libraryLoanSlipDTO.status == 0) {
                 binding.txtStatus.text = "Chưa trả"
             } else {
@@ -80,6 +89,14 @@ class BillsAdapter(
                     dialog.dismiss()
                 }
                 builder.show()
+            }
+
+            binding.btnInfo.setOnClickListener() {
+                //intent id to detail loan activity
+                val intent = android.content.Intent(binding.root.context, DetailLoanActivity::class.java)
+                intent.putExtra("idLoanSlip", libraryLoanSlipDTO.id.toString())
+                binding.root.context.startActivity(intent)
+
             }
         }
 

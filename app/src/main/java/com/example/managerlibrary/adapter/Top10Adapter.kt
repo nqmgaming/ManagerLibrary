@@ -1,10 +1,12 @@
-package com.example.managerlibrary
+package com.example.managerlibrary.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.managerlibrary.dao.BookDAO
 import com.example.managerlibrary.databinding.ItemTop10Binding
+import com.example.managerlibrary.dto.BookDTO
 
 class Top10Adapter(
     private val context: Context,
@@ -44,4 +46,5 @@ class Top10Adapter(
     override fun getItemCount(): Int {
         return listTop10.size
     }
+
 }

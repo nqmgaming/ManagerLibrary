@@ -7,10 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.managerlibrary.MemberAdapter
-import com.example.managerlibrary.MemberDAO
-import com.example.managerlibrary.MemberDTO
-import com.example.managerlibrary.R
+import com.example.managerlibrary.adapter.MemberAdapter
+import com.example.managerlibrary.dao.MemberDAO
+import com.example.managerlibrary.dto.MemberDTO
 import com.example.managerlibrary.databinding.FragmentManagerMembersBinding
 
 

@@ -1,7 +1,8 @@
+package com.example.managerlibrary.adapter
+
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.managerlibrary.dao.CategoryBookDAO
 import com.example.managerlibrary.databinding.ItemCategoryBinding

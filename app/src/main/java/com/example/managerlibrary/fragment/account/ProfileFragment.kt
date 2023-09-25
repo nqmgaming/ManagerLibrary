@@ -7,6 +7,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.example.managerlibrary.dao.LibraryLoanSlipDAO
+import com.example.managerlibrary.sharepre.LoginSharePreference
 import com.example.managerlibrary.R
 import com.example.managerlibrary.databinding.FragmentProfileBinding
 import com.example.managerlibrary.ui.account.EditAccountActivity
@@ -21,7 +23,9 @@ class ProfileFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+    lateinit var userSharePreference: LoginSharePreference
     private var _binding: FragmentProfileBinding? = null
+    lateinit var libraryLoanSlipDAO: LibraryLoanSlipDAO
     private val binding get() = _binding!!
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -48,6 +52,23 @@ class ProfileFragment : Fragment() {
                 Log.d("ProfileFragment", "Starting EditUserActivity")
                 startActivity(it)
             }
+        }
+
+
+        userSharePreference = LoginSharePreference(requireContext())
+        val username = userSharePreference.getID()
+        val role = userSharePreference.getRole()
+        val fullname = userSharePreference.getName()
+
+        libraryLoanSlipDAO = LibraryLoanSlipDAO(requireContext())
+
+        binding.tvUsernameProfile.text = username
+        binding.tvNameProfile.text = fullname
+        binding.tvRoleProfile.text = "Người dùng: " +  role
+        binding.tvTotalBorrowedProfile.text = "Phiếu mượn đã tạo: " + username?.let {
+            libraryLoanSlipDAO.getNumberOfLoanSlipByID(
+                it
+            ).toString()
         }
 
         binding.cardFeature.setOnClickListener(){

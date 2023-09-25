@@ -47,4 +47,24 @@ class CategoryBookDAO(context: Context) {
         return nameCategory
     }
 
+    //get category by id
+    fun getCategoryBookById(id: String): CategoryBookDTO {
+        val dbReadable = db.readableDatabase
+        val sql = "SELECT * FROM CategoryBook WHERE categoryID = $id"
+        val cursor = dbReadable.rawQuery(sql, null)
+        var category: CategoryBookDTO = CategoryBookDTO(1, "")
+        if (cursor.count > 0) {
+            cursor.moveToFirst()
+            while (!cursor.isAfterLast) {
+                val idCategory = cursor.getInt(0)
+                val nameCategory = cursor.getString(1)
+                category = CategoryBookDTO(idCategory, nameCategory)
+                cursor.moveToNext()
+            }
+        }
+        cursor.close()
+        dbReadable.close()
+        return category
+    }
+
 }

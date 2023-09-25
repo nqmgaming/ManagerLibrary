@@ -1,13 +1,12 @@
 package com.example.managerlibrary.fragment.manager
 
-import CategoryBooksAdapter
+import com.example.managerlibrary.adapter.CategoryBooksAdapter
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.managerlibrary.R
 import com.example.managerlibrary.dao.CategoryBookDAO
 import com.example.managerlibrary.databinding.FragmentManagerCategoryBooksBinding
 import com.example.managerlibrary.dto.CategoryBookDTO

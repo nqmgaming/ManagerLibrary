@@ -36,6 +36,7 @@ android {
     }
     buildFeatures {
         viewBinding = true
+        buildConfig = true
     }
 }
 
@@ -49,4 +50,7 @@ dependencies {
     androidTestImplementation(libs.espresso.core)
     implementation("androidx.transition:transition:1.4.1")
     implementation("de.hdodenhof:circleimageview:3.1.0")
+    implementation("com.github.chivorns:smartmaterialspinner:1.5.0")
+    implementation ("androidx.lifecycle:lifecycle-livedata-ktx:2.3.1")
+    implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0")
 }

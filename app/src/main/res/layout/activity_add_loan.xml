@@ -4,5 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AddLoanActivity">
+    tools:context=".ui.manager.AddLoanActivity">
+
+
+    <com.chivorn.smartmaterialspinner.SmartMaterialSpinner
+        android:id="@+id/spinner1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:smsp_isSearchable="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:smsp_searchHeaderText="Tìm kiếm sách"
+        app:smsp_itemListBackgroundColor="@color/circle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:smsp_enableDismissSearch="true" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

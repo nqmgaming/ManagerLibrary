@@ -1,4 +1,4 @@
-package com.example.managerlibrary
+package com.example.managerlibrary.dto
 
 data class BookDTO(
     val idBook: Int,

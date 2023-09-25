@@ -1,5 +1,6 @@
 package com.example.managerlibrary.fragment.manager
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -7,10 +8,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.managerlibrary.BillsAdapter
-import com.example.managerlibrary.LibraryLoanSlipDAO
+import com.example.managerlibrary.ui.manager.AddLoanActivity
+import com.example.managerlibrary.adapter.BillsAdapter
+import com.example.managerlibrary.dao.LibraryLoanSlipDAO
 import com.example.managerlibrary.databinding.FragmentManagerBillsBinding // Import the correct binding class
-import com.example.managerlibrary.LibraryLoanSlipDTO
+import com.example.managerlibrary.dto.LibraryLoanSlipDTO
 
 class ManagerBillsFragment : Fragment() {
     private lateinit var libraryLoanSlipDAO: LibraryLoanSlipDAO
@@ -47,8 +49,12 @@ class ManagerBillsFragment : Fragment() {
             adapter.notifyDataSetChanged()
         }
 
-
-
+        binding.fabAddBill.setOnClickListener(){
+            //intent to add bill
+            Intent(requireContext(), AddLoanActivity::class.java).also {
+                startActivity(it)
+            }
+        }
 
     }
 

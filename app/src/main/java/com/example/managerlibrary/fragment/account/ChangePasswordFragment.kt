@@ -1,6 +1,5 @@
 package com.example.managerlibrary.fragment.account
 
-import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import androidx.fragment.app.Fragment
@@ -8,10 +7,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
-import com.example.managerlibrary.LibrarianDAO
-import com.example.managerlibrary.LibrarianDTO
-import com.example.managerlibrary.LoginSharePreference
-import com.example.managerlibrary.MainActivity
+import com.example.managerlibrary.dao.LibrarianDAO
+import com.example.managerlibrary.dto.LibrarianDTO
+import com.example.managerlibrary.sharepre.LoginSharePreference
 import com.example.managerlibrary.R
 import com.example.managerlibrary.databinding.DialogLoginSuccessBinding
 import com.example.managerlibrary.databinding.DialogProccessingBinding
@@ -125,6 +123,9 @@ class ChangePasswordFragment : Fragment() {
                             binding.linearlayoutChangePassword.visibility = View.GONE
                             binding.btnConfirmChangePassword.visibility = View.VISIBLE
                             binding.tvChangePassword.text = "Đổi mật khẩu"
+                            binding.edtOldPassword.setText("")
+                            binding.edtNewPassword.setText("")
+                            binding.edtConfirmNewPassword.setText("")
                             binding.imgLock.setImageResource(R.drawable.ok)
                         }
                         dialogLogin.dismiss()

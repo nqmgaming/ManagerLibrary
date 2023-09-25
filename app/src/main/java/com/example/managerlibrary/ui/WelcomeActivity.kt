@@ -3,7 +3,7 @@ package com.example.managerlibrary.ui
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.managerlibrary.LoginActivity
+import com.example.managerlibrary.ui.account.LoginActivity
 import com.example.managerlibrary.databinding.ActivityWelcomeBinding
 
 class WelcomeActivity : AppCompatActivity() {

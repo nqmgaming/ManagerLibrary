@@ -6,12 +6,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
 import android.widget.Toast
-import com.example.managerlibrary.LibraryLoanSlipDAO
-import com.example.managerlibrary.R
+import com.example.managerlibrary.dao.LibraryLoanSlipDAO
 import com.example.managerlibrary.databinding.FragmentRevenueBinding
-import java.util.Calendar
 
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
