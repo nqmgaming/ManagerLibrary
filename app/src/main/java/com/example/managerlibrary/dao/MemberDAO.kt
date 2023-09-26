@@ -1,5 +1,6 @@
 package com.example.managerlibrary.dao
 
+import android.content.ContentValues
 import android.content.Context
 import com.example.managerlibrary.database.ManagerBookDataBase
 import com.example.managerlibrary.dto.MemberDTO
@@ -27,7 +28,7 @@ class MemberDAO(context: Context) {
         return MemberDTO(-1, "", "")
     }
 
-   //get all member
+    //get all member
     fun getAllMember(): ArrayList<MemberDTO> {
         val dbReadable = db.readableDatabase
         val sql = "SELECT * FROM Member"
@@ -48,4 +49,41 @@ class MemberDAO(context: Context) {
         dbReadable.close()
         return listMember
     }
+
+    //insert member
+    fun insertMember(memberDTO: MemberDTO): Long {
+        var result = -1L
+        val dbWritable = db.writableDatabase
+        val values = ContentValues()
+        values.put("memberName", memberDTO.name)
+        values.put("birthYear", memberDTO.birthYear)
+        try {
+            result = dbWritable.insert("Member", null, values)
+        } catch (e: Exception) {
+            return result.toLong()
+        }
+        dbWritable.close()
+        return result
+    }
+
+    //delete member
+    fun deleteMember(id: Int): Boolean {
+        val dbWritable = db.writableDatabase
+        val sql = "DELETE FROM Member WHERE memberID = ?"
+        val result = dbWritable.delete("Member", "memberID = ?", arrayOf(id.toString()))
+        dbWritable.close()
+        return result > 0
+    }
+
+    //update member
+    fun updateMember(memberDTO: MemberDTO): Int {
+        val dbWritable = db.writableDatabase
+        val values = ContentValues()
+        values.put("memberName", memberDTO.name)
+        values.put("birthYear", memberDTO.birthYear)
+        val result = dbWritable.update("Member", values, "memberID = ?", arrayOf(memberDTO.id.toString()))
+        dbWritable.close()
+        return result
+    }
+
 }

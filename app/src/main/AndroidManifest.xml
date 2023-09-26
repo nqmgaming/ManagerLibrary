@@ -13,6 +13,24 @@
         android:theme="@style/Theme.ManagerLibrary"
         tools:targetApi="31">
         <activity
+            android:name=".ui.manager.EditBookActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.manager.AddBookActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.manager.EditMemberActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.manager.AddMemberActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.manager.EditCategoryBookActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.manager.AddCategoryBooksActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.manager.AddLoanActivity"
             android:exported="false" />
         <activity
@@ -29,8 +47,8 @@
             android:exported="false" />
         <activity
             android:name=".ui.MainActivity"
-            android:windowSoftInputMode="adjustNothing"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="adjustNothing" />
         <activity
             android:name=".ui.WelcomeActivity"
             android:exported="true">

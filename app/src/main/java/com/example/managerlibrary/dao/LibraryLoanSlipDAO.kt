@@ -77,7 +77,7 @@ class LibraryLoanSlipDAO(context: Context) {
                 val count = cursor.getInt(1)
                 val name = cursor.getString(2)
                 val rentalFee = cursor.getInt(3)
-                val bookDTO = BookDTO(idBook, name, rentalFee, "", count )
+                val bookDTO = BookDTO(idBook, name, rentalFee, -1, count )
                 list.add(bookDTO)
                 cursor.moveToNext()
             }
@@ -243,6 +243,36 @@ class LibraryLoanSlipDAO(context: Context) {
             dbWritable.close()
             return false
         }
+    }
+
+    //check loan slip exits by id member
+    fun checkLoanSlipExitsByIDMember(id: Int): Boolean {
+        val dbReadable = db.readableDatabase
+        val sql = "SELECT * FROM LibraryLoanSlip WHERE memberID = ?"
+        val cursor = dbReadable.rawQuery(sql, arrayOf(id.toString()))
+        if (cursor.count > 0) {
+            cursor.close()
+            dbReadable.close()
+            return true
+        }
+        cursor.close()
+        dbReadable.close()
+        return false
+    }
+
+    //check loan slip exits by id book
+    fun checkLoanSlipExitsByIDBook(id: Int): Boolean {
+        val dbReadable = db.readableDatabase
+        val sql = "SELECT * FROM LibraryLoanSlip WHERE bookID = ?"
+        val cursor = dbReadable.rawQuery(sql, arrayOf(id.toString()))
+        if (cursor.count > 0) {
+            cursor.close()
+            dbReadable.close()
+            return true
+        }
+        cursor.close()
+        dbReadable.close()
+        return false
     }
 
 }

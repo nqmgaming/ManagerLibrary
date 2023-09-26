@@ -65,10 +65,41 @@ class MainActivity : AppCompatActivity() {
 
         //get intent from add loan activity
         val data = intent.getStringExtra("ok")
+      
         if (data == "ok") {
             var fragment = ManagerBillsFragment()
             val bundle = Bundle()
             bundle.putString("ok", "ok")
+            fragment.arguments = bundle
+
+            supportFragmentManager
+                .beginTransaction()
+                .replace(R.id.nav_host_fragment, fragment)
+                .commit()
+        } else if (data == "category") {
+            var fragment = ManagerCategoryBooksFragment()
+            val bundle = Bundle()
+            bundle.putString("ok", data)
+            fragment.arguments = bundle
+
+            supportFragmentManager
+                .beginTransaction()
+                .replace(R.id.nav_host_fragment, fragment)
+                .commit()
+        } else if (data == "member") {
+            var fragment = ManagerMembersFragment()
+            val bundle = Bundle()
+            bundle.putString("ok", data)
+            fragment.arguments = bundle
+
+            supportFragmentManager
+                .beginTransaction()
+                .replace(R.id.nav_host_fragment, fragment)
+                .commit()
+        } else if (data == "bookOK") {
+            var fragment = ManagerBooksFragment()
+            val bundle = Bundle()
+            bundle.putString("ok", data)
             fragment.arguments = bundle
 
             supportFragmentManager

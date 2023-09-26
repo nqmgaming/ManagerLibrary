@@ -1,5 +1,6 @@
 package com.example.managerlibrary.fragment.manager
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -14,6 +15,8 @@ import com.example.managerlibrary.dto.BookDTO
 import com.example.managerlibrary.adapter.BooksAdapter
 import com.example.managerlibrary.adapter.Top10Adapter
 import com.example.managerlibrary.databinding.FragmentManagerBooksBinding
+import com.example.managerlibrary.ui.manager.AddBookActivity
+import com.example.managerlibrary.ui.manager.AddCategoryBooksActivity
 import com.example.managerlibrary.viewmodel.SharedViewModel
 
 private const val ARG_PARAM1 = "param1"
@@ -51,17 +54,26 @@ class ManagerBooksFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         binding.managerBooksRecyclerView.setHasFixedSize(true)
         binding.managerBooksRecyclerView.layoutManager = LinearLayoutManager(context)
         bookDAO = BookDAO(requireContext())
-
         listBook = bookDAO.getAllBook()
 
         if (!listBook.isEmpty()) {
             adapter = BooksAdapter(requireContext(), listBook)
             binding.managerBooksRecyclerView.adapter = adapter
+            binding.managerBooksRecyclerView.visibility = View.VISIBLE
             adapter.notifyDataSetChanged()
+        }else{
+            Toast.makeText(requireContext(), "Không có sách nào", Toast.LENGTH_SHORT).show()
         }
+
+        val data = arguments?.getString("ok")
+        if (data.equals("bookOK")) {
+            refreshList()
+        }
+
         sharedViewModel = ViewModelProvider(requireActivity()).get(SharedViewModel::class.java)
 
         sharedViewModel.searchText.observe(viewLifecycleOwner, Observer { newText ->
@@ -78,7 +90,15 @@ class ManagerBooksFragment : Fragment() {
             adapter.notifyDataSetChanged()
 
         })
+
+        binding.fabAddBooks.setOnClickListener() {
+            Intent(requireContext(), AddBookActivity::class.java).also {
+                startActivity(it)
+            }
+        }
+
     }
+
 
     companion object {
         @JvmStatic
@@ -90,4 +110,11 @@ class ManagerBooksFragment : Fragment() {
                 }
             }
     }
+    private fun refreshList() {
+        listBook.clear()
+        listBook = bookDAO.getAllBook()
+        binding.managerBooksRecyclerView.adapter = BooksAdapter(requireContext(), listBook)
+        adapter.notifyDataSetChanged()
+    }
+
 }

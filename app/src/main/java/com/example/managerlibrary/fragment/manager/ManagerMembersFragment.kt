@@ -1,5 +1,6 @@
 package com.example.managerlibrary.fragment.manager
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -15,6 +16,8 @@ import com.example.managerlibrary.dao.MemberDAO
 import com.example.managerlibrary.dto.MemberDTO
 import com.example.managerlibrary.databinding.FragmentManagerMembersBinding
 import com.example.managerlibrary.dto.BookDTO
+import com.example.managerlibrary.ui.manager.AddCategoryBooksActivity
+import com.example.managerlibrary.ui.manager.AddMemberActivity
 import com.example.managerlibrary.viewmodel.SharedViewModel
 
 
@@ -64,6 +67,10 @@ class ManagerMembersFragment : Fragment() {
             binding.managerMembersRecyclerView.adapter = adapter
             adapter.notifyDataSetChanged()
         }
+        val data = arguments?.getString("ok")
+        if (data.equals("member")) {
+            refresh()
+        }
         sharedViewModel = ViewModelProvider(requireActivity()).get(SharedViewModel::class.java)
 
         sharedViewModel.searchText.observe(viewLifecycleOwner, Observer { newText ->
@@ -80,6 +87,12 @@ class ManagerMembersFragment : Fragment() {
             adapter.notifyDataSetChanged()
 
         })
+
+        binding.fabMembersBill.setOnClickListener(){
+            Intent(requireContext(), AddMemberActivity::class.java).also {
+                startActivity(it)
+            }
+        }
     }
 
     companion object {
@@ -92,5 +105,10 @@ class ManagerMembersFragment : Fragment() {
                     putString(ARG_PARAM2, param2)
                 }
             }
+    }
+    fun refresh(){
+        listMember.clear()
+        listMember.addAll(memberDAO.getAllMember())
+        adapter.notifyDataSetChanged()
     }
 }

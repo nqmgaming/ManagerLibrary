@@ -152,7 +152,18 @@ class ChangePasswordFragment : Fragment() {
             }
         }
 
-
+        binding.btnConfirmCancel.setOnClickListener() {
+            if (binding.linearlayoutOldPassword.visibility == View.GONE) {
+                binding.linearlayoutOldPassword.visibility = View.VISIBLE
+                binding.linearlayoutChangePassword.visibility = View.GONE
+                binding.btnConfirmChangePassword.visibility = View.VISIBLE
+                binding.tvChangePassword.text = "Đổi mật khẩu"
+                binding.edtOldPassword.setText("")
+                binding.edtNewPassword.setText("")
+                binding.edtConfirmNewPassword.setText("")
+                binding.imgLock.setImageResource(R.drawable.ok)
+            }
+        }
     }
 
     companion object {

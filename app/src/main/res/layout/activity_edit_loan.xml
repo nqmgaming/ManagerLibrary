@@ -205,7 +205,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="40dp"
                 android:background="@drawable/button"
-                android:text="Cancel"
+                android:text="Hủy"
                 android:textColor="@color/white"
                 android:textSize="18sp"
                 android:textStyle="bold" />
@@ -215,7 +215,7 @@
                 android:layout_width="120dp"
                 android:layout_height="wrap_content"
                 android:background="@drawable/button"
-                android:text="Save"
+                android:text="Lưu"
                 android:textColor="@color/white"
                 android:textSize="18sp"
                 android:textStyle="bold" />

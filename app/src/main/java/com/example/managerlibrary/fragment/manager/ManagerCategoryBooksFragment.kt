@@ -1,5 +1,6 @@
 package com.example.managerlibrary.fragment.manager
 
+import android.content.Intent
 import com.example.managerlibrary.adapter.CategoryBooksAdapter
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -14,6 +15,7 @@ import com.example.managerlibrary.dao.CategoryBookDAO
 import com.example.managerlibrary.databinding.FragmentManagerCategoryBooksBinding
 import com.example.managerlibrary.dto.BookDTO
 import com.example.managerlibrary.dto.CategoryBookDTO
+import com.example.managerlibrary.ui.manager.AddCategoryBooksActivity
 import com.example.managerlibrary.viewmodel.SharedViewModel
 
 private const val ARG_PARAM1 = "param1"
@@ -50,16 +52,22 @@ class ManagerCategoryBooksFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         binding.managerCategoryRecyclerView.setHasFixedSize(true)
         binding.managerCategoryRecyclerView.layoutManager = LinearLayoutManager(context)
         categoryBookDAO = CategoryBookDAO(requireContext())
         listCategoryBooks = categoryBookDAO.getAllCategoryBooks()
 
-        if (!listCategoryBooks.isEmpty()){
+        if (!listCategoryBooks.isEmpty()) {
             adapter = CategoryBooksAdapter(requireContext(), listCategoryBooks)
             binding.managerCategoryRecyclerView.adapter = adapter
             binding.managerCategoryRecyclerView.visibility = View.VISIBLE
             adapter.notifyDataSetChanged()
+        }
+
+        val data = arguments?.getString("ok")
+        if (data.equals("category")) {
+            refreshList()
         }
         sharedViewModel = ViewModelProvider(requireActivity()).get(SharedViewModel::class.java)
 
@@ -73,10 +81,17 @@ class ManagerCategoryBooksFragment : Fragment() {
             }
 
             //update to adapter
-            binding.managerCategoryRecyclerView.adapter = CategoryBooksAdapter(requireContext(), filterList)
+            binding.managerCategoryRecyclerView.adapter =
+                CategoryBooksAdapter(requireContext(), filterList)
             adapter.notifyDataSetChanged()
 
         })
+
+        binding.fabAddCategory.setOnClickListener() {
+            Intent(requireContext(), AddCategoryBooksActivity::class.java).also {
+                startActivity(it)
+            }
+        }
 
     }
 
@@ -95,5 +110,11 @@ class ManagerCategoryBooksFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    fun refreshList() {
+        listCategoryBooks.clear()
+        listCategoryBooks = categoryBookDAO.getAllCategoryBooks()
+        adapter.notifyDataSetChanged()
     }
 }
