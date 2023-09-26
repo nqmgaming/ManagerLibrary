@@ -219,4 +219,30 @@ class LibraryLoanSlipDAO(context: Context) {
         }
     }
 
+    //up date loan slip
+    fun updateLoanSlip(libraryLoanSlipDTO: LibraryLoanSlipDTO): Boolean {
+        val dbWritable = db.writableDatabase
+        val sql =
+            "UPDATE LibraryLoanSlip SET librarianID = ?, memberID = ?, bookID = ?, loanDate = ?, status = ? WHERE loanSlipID = ?"
+        try {
+            dbWritable.execSQL(
+                sql,
+                arrayOf(
+                    libraryLoanSlipDTO.idLibrarian,
+                    libraryLoanSlipDTO.idMember.toString(),
+                    libraryLoanSlipDTO.idBook.toString(),
+                    libraryLoanSlipDTO.dateLoan,
+                    libraryLoanSlipDTO.status.toString(),
+                    libraryLoanSlipDTO.id.toString()
+                )
+            )
+            dbWritable.close()
+            return true
+        } catch (e: Exception) {
+            e.printStackTrace()
+            dbWritable.close()
+            return false
+        }
+    }
+
 }

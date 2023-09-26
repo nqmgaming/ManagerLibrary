@@ -117,7 +117,6 @@ class MainActivity : AppCompatActivity() {
                     currentFragment = fragment
                     fragmentTransaction.replace(R.id.nav_host_fragment, fragment)
                     supportActionBar?.title = resources.getString(R.string.manager_bill)
-                    Toast.makeText(this, "Manager Bill", Toast.LENGTH_SHORT).show()
                 }
 
                 //Manager Book
@@ -126,7 +125,6 @@ class MainActivity : AppCompatActivity() {
                     currentFragment = fragment
                     fragmentTransaction.replace(R.id.nav_host_fragment, fragment)
                     supportActionBar?.title = resources.getString(R.string.manager_book)
-                    Toast.makeText(this, "Manager Book", Toast.LENGTH_SHORT).show()
                 }
 
                 //Manager User
@@ -135,7 +133,6 @@ class MainActivity : AppCompatActivity() {
                     currentFragment = fragment
                     fragmentTransaction.replace(R.id.nav_host_fragment, fragment)
                     supportActionBar?.title = resources.getString(R.string.manager_user)
-                    Toast.makeText(this, "Manager User", Toast.LENGTH_SHORT).show()
                 }
 
                 //Manager Category Book
@@ -144,7 +141,6 @@ class MainActivity : AppCompatActivity() {
                     currentFragment = fragment
                     fragmentTransaction.replace(R.id.nav_host_fragment, fragment)
                     supportActionBar?.title = resources.getString(R.string.manager_category_book)
-                    Toast.makeText(this, "Manager Category Book", Toast.LENGTH_SHORT).show()
                 }
 
                 //Profile
@@ -153,7 +149,6 @@ class MainActivity : AppCompatActivity() {
                     currentFragment = fragment
                     fragmentTransaction.replace(R.id.nav_host_fragment, fragment)
                     supportActionBar?.title = resources.getString(R.string.profile)
-                    Toast.makeText(this, "Profile", Toast.LENGTH_SHORT).show()
                 }
 
                 //Change Password
@@ -162,7 +157,6 @@ class MainActivity : AppCompatActivity() {
                     currentFragment = fragment
                     fragmentTransaction.replace(R.id.nav_host_fragment, fragment)
                     supportActionBar?.title = resources.getString(R.string.change_password)
-                    Toast.makeText(this, "Change Password", Toast.LENGTH_SHORT).show()
                 }
 
                 //Create new account
@@ -171,7 +165,6 @@ class MainActivity : AppCompatActivity() {
                     currentFragment = fragment
                     fragmentTransaction.replace(R.id.nav_host_fragment, fragment)
                     supportActionBar?.title = resources.getString(R.string.create_new_account)
-                    Toast.makeText(this, "Create New Account", Toast.LENGTH_SHORT).show()
                 }
 
                 //Top 10 book
@@ -180,7 +173,6 @@ class MainActivity : AppCompatActivity() {
                     currentFragment = fragment
                     fragmentTransaction.replace(R.id.nav_host_fragment, fragment)
                     supportActionBar?.title = resources.getString(R.string.top_10_book)
-                    Toast.makeText(this, "Top 10 Book", Toast.LENGTH_SHORT).show()
                 }
 
                 //Revenue
@@ -189,7 +181,6 @@ class MainActivity : AppCompatActivity() {
                     currentFragment = fragment
                     fragmentTransaction.replace(R.id.nav_host_fragment, fragment)
                     supportActionBar?.title = resources.getString(R.string.revenue)
-                    Toast.makeText(this, "Revenue", Toast.LENGTH_SHORT).show()
                 }
 
                 //Logout
@@ -207,10 +198,8 @@ class MainActivity : AppCompatActivity() {
                             startActivity(it)
                             finish()
                         }
-                        Toast.makeText(this, "Logout", Toast.LENGTH_SHORT).show()
                     }
                     builder.setNegativeButton("No") { _, _ ->
-                        Toast.makeText(this, "Cancel", Toast.LENGTH_SHORT).show()
                     }
                     builder.show()
 

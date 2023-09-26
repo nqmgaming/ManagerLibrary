@@ -127,4 +127,27 @@ class LibrarianDAO(context: Context) {
         }
         return result
     }
+
+    //get all librarian
+    fun getAllLibrarian(): ArrayList<LibrarianDTO> {
+        val listLibrarian = ArrayList<LibrarianDTO>()
+        val dbReadable = db.readableDatabase
+        val sql = "SELECT * FROM Librarian"
+        val cursor = dbReadable.rawQuery(sql, null)
+        if (cursor.count > 0) {
+            cursor.moveToFirst()
+            while (!cursor.isAfterLast) {
+                val librarianDTO = LibrarianDTO()
+                librarianDTO.id = cursor.getString(0)
+                librarianDTO.name = cursor.getString(1)
+                librarianDTO.password = cursor.getString(2)
+                librarianDTO.role = cursor.getString(3)
+                listLibrarian.add(librarianDTO)
+                cursor.moveToNext()
+            }
+        }
+        cursor.close()
+        dbReadable.close()
+        return listLibrarian
+    }
 }

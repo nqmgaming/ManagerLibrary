@@ -15,14 +15,13 @@ import com.example.managerlibrary.databinding.DialogLoginSuccessBinding
 import com.example.managerlibrary.databinding.DialogProccessingBinding
 import com.example.managerlibrary.databinding.FragmentChangePasswordBinding
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
 
 class ChangePasswordFragment : Fragment() {
-    // TODO: Rename and change types of parameters
+
     private var param1: String? = null
     private var param2: String? = null
 
@@ -79,7 +78,7 @@ class ChangePasswordFragment : Fragment() {
 
         librarianDAO = LibrarianDAO(requireContext())
         librarianDTO = username?.let { librarianDAO.getLibrarianByID(it) }!!
-        binding.btnConfirm.setOnClickListener(){
+        binding.btnConfirm.setOnClickListener() {
             val newPassword = binding.edtNewPassword.text.toString().trim()
             val confirmPassword = binding.edtConfirmNewPassword.text.toString().trim()
             if (newPassword.isEmpty()) {
@@ -118,7 +117,7 @@ class ChangePasswordFragment : Fragment() {
                     val dialogLogin = builderDialog.create()
                     bindingDialog.txtLoginSuccess.text = "Đổi mật khẩu thành công"
                     bindingDialog.btnLoginSuccess.setOnClickListener {
-                        if(binding.linearlayoutOldPassword.visibility == View.GONE){
+                        if (binding.linearlayoutOldPassword.visibility == View.GONE) {
                             binding.linearlayoutOldPassword.visibility = View.VISIBLE
                             binding.linearlayoutChangePassword.visibility = View.GONE
                             binding.btnConfirmChangePassword.visibility = View.VISIBLE
@@ -146,13 +145,12 @@ class ChangePasswordFragment : Fragment() {
                 bindingDialog.imgSuccess.setImageResource(R.drawable.error)
                 bindingDialog.btnLoginSuccess.setOnClickListener {
                     dialogLogin.dismiss()
-                    //intent to main activity
+
                 }
 
                 binding.edtNewPassword.error = "Edit failed"
             }
         }
-
 
 
     }

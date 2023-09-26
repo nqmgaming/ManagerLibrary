@@ -15,6 +15,7 @@ import com.example.managerlibrary.dto.MemberDTO
 import com.example.managerlibrary.R
 import com.example.managerlibrary.databinding.ItemBillBinding
 import com.example.managerlibrary.fragment.manager.ManagerBillsFragment
+import com.example.managerlibrary.ui.manager.EditLoanActivity
 
 class BillsAdapter(
     context: Context,
@@ -97,6 +98,13 @@ class BillsAdapter(
                 intent.putExtra("idLoanSlip", libraryLoanSlipDTO.id.toString())
                 binding.root.context.startActivity(intent)
 
+            }
+
+            binding.btnEdit.setOnClickListener(){
+                //intent id to edit loan activity
+                val intent = android.content.Intent(binding.root.context, EditLoanActivity::class.java)
+                intent.putExtra("idLoanSlip", libraryLoanSlipDTO.id.toString())
+                binding.root.context.startActivity(intent)
             }
         }
 

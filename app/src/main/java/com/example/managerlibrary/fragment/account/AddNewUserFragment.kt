@@ -23,7 +23,7 @@ private const val ARG_PARAM2 = "param2"
 
 
 class AddNewUserFragment : Fragment() {
-    // TODO: Rename and change types of parameters
+
     private var param1: String? = null
     private var param2: String? = null
     private var _binding: FragmentAddNewUserBinding? = null
@@ -157,7 +157,7 @@ class AddNewUserFragment : Fragment() {
                 librarianDTO!!.name = nameNew
                 librarianDTO!!.password = passwordNew
                 librarianDTO!!.role = role
-                if (roleUser !== "admin") {
+                if (roleUser.equals("librarian")) {
                     Toast.makeText(
                         requireContext(),
                         "Bạn không có quyền thêm người dùng",

@@ -51,9 +51,7 @@ class ManagerBillsFragment : Fragment() {
 
         listLoanSlip = libraryLoanSlipDAO.getAllLoanSlip()
 
-        if (listLoanSlip.isEmpty()) {
-            Toast.makeText(requireContext(), "List is empty", Toast.LENGTH_SHORT).show()
-        } else {
+        if (!listLoanSlip.isEmpty()){
             adapter = BillsAdapter(requireContext(), listLoanSlip)
             binding.managerBillsRecyclerView.adapter = adapter
             adapter.notifyDataSetChanged()

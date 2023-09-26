@@ -14,7 +14,7 @@ private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
 class RevenueFragment : Fragment() {
-    // TODO: Rename and change types of parameters
+
     private var param1: String? = null
     private var param2: String? = null
 
@@ -53,9 +53,7 @@ class RevenueFragment : Fragment() {
             val datePickerDialog = DatePickerDialog(requireContext())
             datePickerDialog.setOnDateSetListener { view, year, month, dayOfMonth ->
                 startDate = String.format("%04d-%02d-%02d", year, month + 1, dayOfMonth)
-                if (startDate == "") {
-                    Toast.makeText(requireContext(), "Chưa chọn ngày", Toast.LENGTH_SHORT).show()
-                } else {
+                if (!startDate.equals("")) {
                     binding.edtFromDate.setText(startDate)
                 }
             }
@@ -67,9 +65,7 @@ class RevenueFragment : Fragment() {
             val datePickerDialog = DatePickerDialog(requireContext())
             datePickerDialog.setOnDateSetListener { view, year, month, dayOfMonth ->
                 endDate = String.format("%04d-%02d-%02d", year, month + 1, dayOfMonth)
-                if (endDate == "") {
-                    Toast.makeText(requireContext(), "Chưa chọn ngày", Toast.LENGTH_SHORT).show()
-                } else {
+                if (!endDate.equals("")) {
                     binding.edtToDate.setText(endDate)
                 }
             }

@@ -59,9 +59,7 @@ class ManagerMembersFragment : Fragment() {
 
         listMember = memberDAO.getAllMember()
 
-        if (listMember.isEmpty()) {
-            Toast.makeText(requireContext(), "List is empty", Toast.LENGTH_SHORT).show()
-        } else {
+        if (!listMember.isEmpty()) {
             adapter = MemberAdapter(requireContext(), listMember)
             binding.managerMembersRecyclerView.adapter = adapter
             adapter.notifyDataSetChanged()

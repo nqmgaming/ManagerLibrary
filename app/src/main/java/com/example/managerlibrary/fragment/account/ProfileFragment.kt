@@ -13,15 +13,13 @@ import com.example.managerlibrary.R
 import com.example.managerlibrary.databinding.FragmentProfileBinding
 import com.example.managerlibrary.ui.account.EditAccountActivity
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
 
 class ProfileFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
+    var param1: String? = null
     private var param2: String? = null
     lateinit var userSharePreference: LoginSharePreference
     private var _binding: FragmentProfileBinding? = null
@@ -47,9 +45,8 @@ class ProfileFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.cardEditProfile.setOnClickListener(){
+        binding.cardEditProfile.setOnClickListener() {
             Intent(requireContext(), EditAccountActivity::class.java).also {
-                Log.d("ProfileFragment", "Starting EditUserActivity")
                 startActivity(it)
             }
         }
@@ -64,14 +61,14 @@ class ProfileFragment : Fragment() {
 
         binding.tvUsernameProfile.text = username
         binding.tvNameProfile.text = fullname
-        binding.tvRoleProfile.text = "Người dùng: " +  role
+        binding.tvRoleProfile.text = "Người dùng: " + role
         binding.tvTotalBorrowedProfile.text = "Phiếu mượn đã tạo: " + username?.let {
             libraryLoanSlipDAO.getNumberOfLoanSlipByID(
                 it
             ).toString()
         }
 
-        binding.cardFeature.setOnClickListener(){
+        binding.cardFeature.setOnClickListener() {
             //intent to fragment change password
             val changePasswordFragment = ChangePasswordFragment()
             val fragmentManager = requireActivity().supportFragmentManager
@@ -82,6 +79,7 @@ class ProfileFragment : Fragment() {
 
         }
     }
+
     companion object {
 
         @JvmStatic

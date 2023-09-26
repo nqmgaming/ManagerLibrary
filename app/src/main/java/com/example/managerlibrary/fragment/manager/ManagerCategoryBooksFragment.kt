@@ -21,7 +21,6 @@ private const val ARG_PARAM2 = "param2"
 
 
 class ManagerCategoryBooksFragment : Fragment() {
-    // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
 
@@ -56,9 +55,7 @@ class ManagerCategoryBooksFragment : Fragment() {
         categoryBookDAO = CategoryBookDAO(requireContext())
         listCategoryBooks = categoryBookDAO.getAllCategoryBooks()
 
-        if (listCategoryBooks.isEmpty()) {
-            binding.managerCategoryRecyclerView.visibility = View.GONE
-        } else {
+        if (!listCategoryBooks.isEmpty()){
             adapter = CategoryBooksAdapter(requireContext(), listCategoryBooks)
             binding.managerCategoryRecyclerView.adapter = adapter
             binding.managerCategoryRecyclerView.visibility = View.VISIBLE

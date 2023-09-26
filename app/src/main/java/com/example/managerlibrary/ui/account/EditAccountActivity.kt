@@ -3,6 +3,7 @@ package com.example.managerlibrary.ui.account
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.MenuItem
 import android.widget.Toast
 import com.example.managerlibrary.dao.LibrarianDAO
 import com.example.managerlibrary.dto.LibrarianDTO
@@ -19,6 +20,11 @@ class EditAccountActivity : AppCompatActivity() {
         binding = ActivityEditUserBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
+
+        setSupportActionBar(binding.toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayShowHomeEnabled(true)
+
         userSharePreference = LoginSharePreference(this)
 
         //get information of user by id
@@ -65,5 +71,12 @@ class EditAccountActivity : AppCompatActivity() {
                 binding.edtUsernameProfile.error = "Username is exist"
             }
         }
+    }
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == android.R.id.home) {
+            finish()
+            return true
+        }
+        return super.onOptionsItemSelected(item)
     }
 }

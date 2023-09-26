@@ -55,11 +55,9 @@ class ManagerBooksFragment : Fragment() {
         binding.managerBooksRecyclerView.layoutManager = LinearLayoutManager(context)
         bookDAO = BookDAO(requireContext())
 
-        listBook   = bookDAO.getAllBook()
+        listBook = bookDAO.getAllBook()
 
-        if (listBook.isEmpty()) {
-            Toast.makeText(requireContext(), "List is empty", Toast.LENGTH_SHORT).show()
-        } else {
+        if (!listBook.isEmpty()) {
             adapter = BooksAdapter(requireContext(), listBook)
             binding.managerBooksRecyclerView.adapter = adapter
             adapter.notifyDataSetChanged()
@@ -81,6 +79,7 @@ class ManagerBooksFragment : Fragment() {
 
         })
     }
+
     companion object {
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
