@@ -285,13 +285,10 @@ class MainActivity : AppCompatActivity() {
         return true
     }
 
-
-    interface SearchListener {
-        fun onQueryTextSubmit(query: String)
-        fun onQueryTextChange(newText: String)
+    override fun onBackPressed() {
+        if (loginSharePreference.getRemember() == false) {
+            loginSharePreference.clearLogin()
+        }
     }
-
-    val searchListener: SearchListener? = null
-
 
 }

@@ -65,11 +65,14 @@ class LoginActivity : AppCompatActivity() {
                 binding.edtPassword.error = "Mật khẩu sai"
                 return@setOnClickListener
             }
+
+            //save full informatio of librarian
             librarianDAO = LibrarianDAO(this)
             val librarian = librarianDAO.getLibrarianByID(username)
             loginSharePreference.saveLogin(librarian)
-            if (binding.cbRememberMe.isChecked) {
 
+
+            if (binding.cbRememberMe.isChecked) {
                 loginSharePreference.isRemember(true)
             } else {
                 loginSharePreference.isRemember(false)

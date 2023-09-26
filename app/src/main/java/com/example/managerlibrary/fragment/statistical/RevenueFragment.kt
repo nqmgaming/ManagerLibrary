@@ -46,7 +46,7 @@ class RevenueFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         loanSlipDAO = LibraryLoanSlipDAO(requireContext())
         revenue = loanSlipDAO.getRevenue()
-        binding.tvTotalRevenue.text = revenue.toString() + "vnđ"
+        binding.tvTotalRevenue.text = revenue.toString() + " vnđ"
 
         binding.edtFromDate.setOnClickListener() {
             // Show the date picker dialog

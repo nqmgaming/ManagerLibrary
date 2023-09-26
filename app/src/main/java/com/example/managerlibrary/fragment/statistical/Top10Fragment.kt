@@ -23,7 +23,7 @@ private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
 
-class Top10Fragment : Fragment(), MainActivity.SearchListener {
+class Top10Fragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -99,30 +99,4 @@ class Top10Fragment : Fragment(), MainActivity.SearchListener {
     }
 
 
-    override fun onQueryTextSubmit(query: String) {
-        var filterList = ArrayList<BookDTO>()
-        for (book in listBook) {
-            if (book.name.contains(query, ignoreCase = true)) {
-                filterList.add(book)
-            }
-        }
-
-        //update to adapter
-        binding.reTopRecyclerView.adapter = Top10Adapter(requireContext(), filterList)
-        adapter.notifyDataSetChanged()
-
-    }
-
-    override fun onQueryTextChange(newText: String) {
-        var filterList = ArrayList<BookDTO>()
-        for (book in listBook) {
-            if (book.name.contains(newText, ignoreCase = true)) {
-                filterList.add(book)
-            }
-        }
-
-        //update to adapter
-        binding.reTopRecyclerView.adapter = Top10Adapter(requireContext(), filterList)
-        adapter.notifyDataSetChanged()
-    }
 }

@@ -15,14 +15,14 @@ class LoginSharePreference(context: Context) {
         editor.apply()
     }
 
-    fun isRemember(login:Boolean){
+    fun isRemember(login: Boolean) {
         val editor = sharedPreferences.edit()
-        editor.putBoolean("login",login)
+        editor.putBoolean("login", login)
         editor.apply()
     }
 
-    fun getRemember():Boolean{
-        return sharedPreferences.getBoolean("login",false)
+    fun getRemember(): Boolean {
+        return sharedPreferences.getBoolean("login", false)
     }
 
     fun getID(): String? {
@@ -45,6 +45,16 @@ class LoginSharePreference(context: Context) {
 
     fun getRole(): String {
         return sharedPreferences.getString("role", "").toString()
+    }
+
+    //clear all data librarian
+    fun clearLibrarian() {
+        val editor = sharedPreferences.edit()
+        editor.remove("id")
+        editor.remove("password")
+        editor.remove("name")
+        editor.remove("role")
+        editor.apply()
     }
 
 }

@@ -5,6 +5,7 @@ import android.util.Log
 import com.example.managerlibrary.dto.LibraryLoanSlipDTO
 import com.example.managerlibrary.database.ManagerBookDataBase
 import com.example.managerlibrary.dto.BookDTO
+import com.example.managerlibrary.dto.LibrarianDTO
 
 class LibraryLoanSlipDAO(context: Context) {
     private val db: ManagerBookDataBase = ManagerBookDataBase(context)
@@ -164,5 +165,34 @@ class LibraryLoanSlipDAO(context: Context) {
         dbReadable.close()
         return libraryLoanSlipDTO
     }
+
+    //get librian by id book(int) return librarianDTO
+    fun getLibrarianByIDBook(id:Int) : LibraryLoanSlipDTO {
+        val dbReadable = db.readableDatabase
+        val sql = "SELECT * FROM LibraryLoanSlip WHERE bookID = ?"
+        val cursor = dbReadable.rawQuery(sql, arrayOf(id.toString()))
+        var librarianDTO = LibraryLoanSlipDTO(-1, -1, "", -1, "", -1)
+        if (cursor.count > 0) {
+            cursor.moveToFirst()
+            val idLoanSlip = cursor.getInt(0)
+            val idLibrarian = cursor.getString(1)
+            val idMember = cursor.getInt(2)
+            val idBook = cursor.getInt(3)
+            val dateLoan = cursor.getString(4)
+            val status = cursor.getInt(5)
+            librarianDTO = LibraryLoanSlipDTO(
+                idLoanSlip,
+                idBook,
+                idLibrarian,
+                idMember,
+                dateLoan,
+                status
+            )
+        }
+        cursor.close()
+        dbReadable.close()
+        return librarianDTO
+    }
+
 
 }

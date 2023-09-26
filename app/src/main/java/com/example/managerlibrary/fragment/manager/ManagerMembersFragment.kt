@@ -6,11 +6,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.managerlibrary.adapter.MemberAdapter
+import com.example.managerlibrary.adapter.Top10Adapter
 import com.example.managerlibrary.dao.MemberDAO
 import com.example.managerlibrary.dto.MemberDTO
 import com.example.managerlibrary.databinding.FragmentManagerMembersBinding
+import com.example.managerlibrary.dto.BookDTO
+import com.example.managerlibrary.viewmodel.SharedViewModel
 
 
 private const val ARG_PARAM1 = "param1"
@@ -23,6 +28,8 @@ class ManagerMembersFragment : Fragment() {
     lateinit var adapter: MemberAdapter
     lateinit var listMember: ArrayList<MemberDTO>
     lateinit var memberDAO: MemberDAO
+
+    private lateinit var sharedViewModel: SharedViewModel
 
     private var _binding: FragmentManagerMembersBinding? = null
     private val binding get() = _binding!!
@@ -59,6 +66,22 @@ class ManagerMembersFragment : Fragment() {
             binding.managerMembersRecyclerView.adapter = adapter
             adapter.notifyDataSetChanged()
         }
+        sharedViewModel = ViewModelProvider(requireActivity()).get(SharedViewModel::class.java)
+
+        sharedViewModel.searchText.observe(viewLifecycleOwner, Observer { newText ->
+            // Cập nhật giao diện hoặc thực hiện tìm kiếm với `newText`
+            var filterList = ArrayList<MemberDTO>()
+            for (member in listMember) {
+                if (member.name.contains(newText, ignoreCase = true)) {
+                    filterList.add(member)
+                }
+            }
+
+            //update to adapter
+            binding.managerMembersRecyclerView.adapter = MemberAdapter(requireContext(), filterList)
+            adapter.notifyDataSetChanged()
+
+        })
     }
 
     companion object {

@@ -156,7 +156,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
                         android:layout_marginTop="20dp"
-                        android:text="1000.000vnd"
+                        android:text="0 vnd"
                         android:textColor="@color/circle"
                         android:textSize="20sp"
                         android:textStyle="bold" />

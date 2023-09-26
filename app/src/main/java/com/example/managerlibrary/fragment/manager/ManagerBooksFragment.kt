@@ -6,11 +6,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.managerlibrary.dao.BookDAO
 import com.example.managerlibrary.dto.BookDTO
 import com.example.managerlibrary.adapter.BooksAdapter
+import com.example.managerlibrary.adapter.Top10Adapter
 import com.example.managerlibrary.databinding.FragmentManagerBooksBinding
+import com.example.managerlibrary.viewmodel.SharedViewModel
 
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
@@ -24,6 +28,7 @@ class ManagerBooksFragment : Fragment() {
     lateinit var bookDAO: BookDAO
     lateinit var listBook: ArrayList<BookDTO>
     lateinit var adapter: BooksAdapter
+    private lateinit var sharedViewModel: SharedViewModel
 
     private var _binding: FragmentManagerBooksBinding? = null
     private val binding get() = _binding!!
@@ -59,6 +64,22 @@ class ManagerBooksFragment : Fragment() {
             binding.managerBooksRecyclerView.adapter = adapter
             adapter.notifyDataSetChanged()
         }
+        sharedViewModel = ViewModelProvider(requireActivity()).get(SharedViewModel::class.java)
+
+        sharedViewModel.searchText.observe(viewLifecycleOwner, Observer { newText ->
+            // Cập nhật giao diện hoặc thực hiện tìm kiếm với `newText`
+            var filterList = ArrayList<BookDTO>()
+            for (book in listBook) {
+                if (book.name.contains(newText, ignoreCase = true)) {
+                    filterList.add(book)
+                }
+            }
+
+            //update to adapter
+            binding.managerBooksRecyclerView.adapter = BooksAdapter(requireContext(), filterList)
+            adapter.notifyDataSetChanged()
+
+        })
     }
     companion object {
         @JvmStatic
