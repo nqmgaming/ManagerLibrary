@@ -6,4 +6,9 @@ data class BookDTO(
     val rentalFee: Int,
     val category: String,
     val timeRental: Int = 0,
-)
+){
+    override fun toString(): String {
+        //return id + tên + phí thuê
+        return "$idBook - $name - $rentalFee - $category"
+    }
+}

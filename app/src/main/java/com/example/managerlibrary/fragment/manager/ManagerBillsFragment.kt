@@ -1,5 +1,6 @@
 package com.example.managerlibrary.fragment.manager
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -12,7 +13,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.managerlibrary.ui.manager.AddLoanActivity
 import com.example.managerlibrary.adapter.BillsAdapter
-import com.example.managerlibrary.adapter.Top10Adapter
 import com.example.managerlibrary.dao.BookDAO
 import com.example.managerlibrary.dao.LibraryLoanSlipDAO
 import com.example.managerlibrary.databinding.FragmentManagerBillsBinding // Import the correct binding class
@@ -59,6 +59,10 @@ class ManagerBillsFragment : Fragment() {
             adapter.notifyDataSetChanged()
         }
 
+        val data = arguments?.getString("ok")
+        if (data.equals("ok")){
+            refreshList()
+        }
 
         //get all book name from database
         val listBookName = ArrayList<Int>()
@@ -106,16 +110,25 @@ class ManagerBillsFragment : Fragment() {
             }
         }
 
+
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
+
     fun updateData(newList: ArrayList<LibraryLoanSlipDTO>) {
         // Assuming your data list in the adapter is named `dataList`
         listLoanSlip.clear()
         listLoanSlip.addAll(newList)
     }
+    fun refreshList() {
+        listLoanSlip.clear()
+        listLoanSlip.addAll(libraryLoanSlipDAO.getAllLoanSlip())
+        adapter.notifyDataSetChanged()
+    }
+
+
 
 }

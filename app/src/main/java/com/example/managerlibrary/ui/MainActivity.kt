@@ -63,6 +63,20 @@ class MainActivity : AppCompatActivity() {
             invalidateOptionsMenu()
         }
 
+        //get intent from add loan activity
+        val data = intent.getStringExtra("ok")
+        if (data == "ok") {
+            var fragment = ManagerBillsFragment()
+            val bundle = Bundle()
+            bundle.putString("ok", "ok")
+            fragment.arguments = bundle
+
+            supportFragmentManager
+                .beginTransaction()
+                .replace(R.id.nav_host_fragment, fragment)
+                .commit()
+        }
+
 
         //get username and user full name by share preference
         loginSharePreference = LoginSharePreference(this)
@@ -77,7 +91,6 @@ class MainActivity : AppCompatActivity() {
         val userRole = headerView.findViewById<TextView>(R.id.txt_role)
 
         // Update the views with your data
-        Toast.makeText(this, "Welcome $fullname", Toast.LENGTH_SHORT).show()
         userNameTextView.text = username
         userFullNameTextView.text = fullname
         userRole.text = role

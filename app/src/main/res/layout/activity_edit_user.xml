@@ -13,7 +13,7 @@
         android:background="@color/circle"
         app:title="Chỉnh sửa thông tin"
         app:titleTextColor="@color/white"
-        app:navigationIcon="@drawable/user"
+        app:navigationIcon="@drawable/arrow"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

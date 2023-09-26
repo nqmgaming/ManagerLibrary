@@ -194,5 +194,29 @@ class LibraryLoanSlipDAO(context: Context) {
         return librarianDTO
     }
 
+    //insert loan slip
+    fun insertLoanSlip(libraryLoanSlipDTO: LibraryLoanSlipDTO): Boolean {
+        val dbWritable = db.writableDatabase
+        val sql =
+            "INSERT INTO LibraryLoanSlip(librarianID, memberID, bookID, loanDate, status) VALUES(?,?,?,?,?)"
+        try {
+            dbWritable.execSQL(
+                sql,
+                arrayOf(
+                    libraryLoanSlipDTO.idLibrarian,
+                    libraryLoanSlipDTO.idMember.toString(),
+                    libraryLoanSlipDTO.idBook.toString(),
+                    libraryLoanSlipDTO.dateLoan,
+                    libraryLoanSlipDTO.status.toString()
+                )
+            )
+            dbWritable.close()
+            return true
+        } catch (e: Exception) {
+            e.printStackTrace()
+            dbWritable.close()
+            return false
+        }
+    }
 
 }
