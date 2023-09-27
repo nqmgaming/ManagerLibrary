@@ -59,7 +59,7 @@ class ProfileFragment : Fragment() {
 
         libraryLoanSlipDAO = LibraryLoanSlipDAO(requireContext())
 
-        binding.tvUsernameProfile.text = username
+        binding.tvUsernameProfile.text = "@" + username
         binding.tvNameProfile.text = fullname
         binding.tvRoleProfile.text = "Người dùng: " + role
         binding.tvTotalBorrowedProfile.text = "Phiếu mượn đã tạo: " + username?.let {
@@ -100,7 +100,7 @@ class ProfileFragment : Fragment() {
 
         libraryLoanSlipDAO = LibraryLoanSlipDAO(requireContext())
 
-        binding.tvUsernameProfile.text = username
+        binding.tvUsernameProfile.text = "@" + username
         binding.tvNameProfile.text = fullname
         binding.tvRoleProfile.text = "Người dùng: " + role
         binding.tvTotalBorrowedProfile.text = "Phiếu mượn đã tạo: " + username?.let {

@@ -121,7 +121,7 @@ class MainActivity : AppCompatActivity() {
         val userRole = headerView.findViewById<TextView>(R.id.txt_role)
 
         // Update the views with your data
-        userNameTextView.text = username
+        userNameTextView.text = "@" + username
         userFullNameTextView.text = fullname
         userRole.text = role
 
@@ -265,7 +265,7 @@ class MainActivity : AppCompatActivity() {
         val userFullNameTextView = headerView.findViewById<TextView>(R.id.user_full_name)
         val userRole = headerView.findViewById<TextView>(R.id.txt_role)
 
-        userNameTextView.text = username
+        userNameTextView.text = "@" + username
         userFullNameTextView.text = fullname
         userRole.text = role
     }
