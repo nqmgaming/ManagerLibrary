@@ -92,6 +92,7 @@ class ManagerBookDataBase(context: Context) : SQLiteOpenHelper(
                 db?.execSQL("INSERT INTO LibraryLoanSlip VALUES(2,'admin',2,2,'2020-12-12', 0)")
                 db?.execSQL("INSERT INTO LibraryLoanSlip VALUES(3,'admin',3,3,'2020-12-12', 1)")*/
 
+
     }
 
     override fun onUpgrade(
