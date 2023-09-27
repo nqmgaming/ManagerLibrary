@@ -32,7 +32,7 @@
                 android:title="Top 10 sách mượn nhiều nhất" />
             <item
                 android:id="@+id/money"
-                android:icon="@drawable/money"
+                android:icon="@drawable/rebt"
                 android:title="Doanh thu" />
         </menu>
     </item>

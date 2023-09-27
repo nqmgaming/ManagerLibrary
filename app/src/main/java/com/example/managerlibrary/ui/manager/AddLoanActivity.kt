@@ -8,6 +8,7 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.AdapterView
 import android.widget.Toast
+import com.example.managerlibrary.R
 import com.example.managerlibrary.adapter.BillsAdapter
 import com.example.managerlibrary.adapter.BookLoanAdapter
 import com.example.managerlibrary.adapter.MemberLoanAdapter
@@ -108,7 +109,7 @@ class AddLoanActivity : AppCompatActivity() {
                 binding.spinnerAddLoanNameBook.setErrorText("Please choose book")
                 Toast.makeText(this, "Please choose book", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
-            }else{
+            } else {
                 binding.spinnerAddLoanNameBook.setErrorText("")
             }
 
@@ -117,7 +118,7 @@ class AddLoanActivity : AppCompatActivity() {
                 binding.spinnerAddLoanNameMember.setErrorText("Please choose member")
                 Toast.makeText(this, "Please choose member", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
-            }else{
+            } else {
                 binding.spinnerAddLoanNameMember.setErrorText("")
             }
 
@@ -153,17 +154,31 @@ class AddLoanActivity : AppCompatActivity() {
             val result = libraryLoanSlipDAO.insertLoanSlip(libraryLoanSlipDTO)
 
             if (result) {
-               //inent data to main activity
-                val intent = Intent(this, MainActivity::class.java)
-                intent.putExtra("ok", "ok")
-                startActivity(intent)
+                val builderSuccess =
+                    androidx.appcompat.app.AlertDialog.Builder(this, R.style.CustomDialog)
+                val bindingSuccess =
+                    com.example.managerlibrary.databinding.DialogLoginSuccessBinding.inflate(
+                        layoutInflater
+                    )
+                builderSuccess.setView(bindingSuccess.root)
+                val dialogSuccess = builderSuccess.create()
+                dialogSuccess.show()
+                dialogSuccess.setCancelable(false)
+                bindingSuccess.txtLoginSuccess.text = "Thêm thành công phiếu mượn!"
+                bindingSuccess.btnLoginSuccess.setOnClickListener() {
+                    //inent data to main activity
+                    val intent = Intent(this, MainActivity::class.java)
+                    intent.putExtra("ok", "ok")
+                    startActivity(intent)
 
-                finish()
+                    finish()
+                }
             } else {
                 Toast.makeText(this, "Add loan slip fail", Toast.LENGTH_SHORT).show()
             }
         }
     }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == android.R.id.home) {
             finish()

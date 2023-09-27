@@ -115,6 +115,7 @@ class ManagerCategoryBooksFragment : Fragment() {
     fun refreshList() {
         listCategoryBooks.clear()
         listCategoryBooks = categoryBookDAO.getAllCategoryBooks()
+        binding.managerCategoryRecyclerView.adapter = CategoryBooksAdapter(requireContext(), listCategoryBooks)
         adapter.notifyDataSetChanged()
     }
 }

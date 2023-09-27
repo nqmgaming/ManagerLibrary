@@ -3,7 +3,7 @@
     <string name="pnlibrary">PNLibrary</string>
     <string name="username">Username</string>
     <string name="forgot_password"><u>Quên mật khẩu?</u></string>
-    <string name="remember_me"><u>Remember me?</u></string>
+    <string name="remember_me"><u>Ghi nhớ đăng nhập?</u></string>
     <string name="open">open</string>
     <string name="close">close</string>
     <string name="manager_bill">Quản lý phiếu mượn</string>

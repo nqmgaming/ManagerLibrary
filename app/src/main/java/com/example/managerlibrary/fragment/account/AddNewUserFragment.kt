@@ -67,13 +67,6 @@ class AddNewUserFragment : Fragment() {
             binding.imgAddUser.setImageResource(R.drawable.changepasswordlock)
             binding.txtAddUser.text = "Nhập mật khẩu để xác thực"
             binding.btnVerify.setOnClickListener() {
-                Log.d("AAA", "onViewCreated: " + binding.edtPassword.text.toString().trim())
-                Toast.makeText(requireContext(), password, Toast.LENGTH_SHORT).show()
-                Toast.makeText(
-                    requireContext(),
-                    binding.edtPassword.text.toString().trim(),
-                    Toast.LENGTH_SHORT
-                ).show()
                 if (binding.edtPasswordVerify.text.toString().trim() == password) {
                     binding.linearlayoutAddUser.visibility = View.VISIBLE
                     binding.linearVerify.visibility = View.GONE
@@ -87,16 +80,13 @@ class AddNewUserFragment : Fragment() {
                 }
             }
             binding.radioGroup.setOnCheckedChangeListener() { group, checkedId ->
-                Toast.makeText(requireContext(), checkedId.toString(), Toast.LENGTH_SHORT).show()
                 when (checkedId) {
                     R.id.radio_admin -> {
                         role = "admin"
-                        Toast.makeText(requireContext(), role, Toast.LENGTH_SHORT).show()
                     }
 
-                    R.id.radio_group -> {
+                    R.id.radio_librarian -> {
                         role = "librarian"
-                        Toast.makeText(requireContext(), role, Toast.LENGTH_SHORT).show()
                     }
                 }
             }

@@ -1,5 +1,6 @@
 package com.example.managerlibrary.adapter
 
+import android.app.AlertDialog
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -13,6 +14,8 @@ import com.example.managerlibrary.ui.MainActivity
 import com.example.managerlibrary.dao.MemberDAO
 import com.example.managerlibrary.dto.MemberDTO
 import com.example.managerlibrary.R
+import com.example.managerlibrary.databinding.DialogConfirmBinding
+import com.example.managerlibrary.databinding.DialogLoginSuccessBinding
 import com.example.managerlibrary.databinding.ItemBillBinding
 import com.example.managerlibrary.fragment.manager.ManagerBillsFragment
 import com.example.managerlibrary.ui.manager.EditLoanActivity
@@ -69,10 +72,17 @@ class BillsAdapter(
 
             binding.btnDelete.setOnClickListener() {
                 //aleart
-                val builder = android.app.AlertDialog.Builder(binding.root.context)
-                builder.setTitle("Xóa phiếu mượn")
-                builder.setMessage("Bạn có chắc chắn muốn xóa phiếu mượn này không?")
-                builder.setPositiveButton("Có") { dialog, which ->
+                val builderConfirm = AlertDialog.Builder(binding.root.context)
+                val bindingCofirm =
+                    DialogConfirmBinding.inflate(LayoutInflater.from(binding.root.context))
+                builderConfirm.setView(bindingCofirm.root)
+                val dialogConfirm = builderConfirm.create()
+                bindingCofirm.txtLoginSuccess.text =
+                    "Bạn có chắc chắn muốn xóa phiếu \n mượn này không?"
+                bindingCofirm.btnNo.setOnClickListener() {
+                    dialogConfirm.dismiss()
+                }
+                bindingCofirm.btnYes.setOnClickListener() {
                     libraryLoanSlipDAO.deleteLoanSlip(libraryLoanSlipDTO.id)
                     listBills.remove(libraryLoanSlipDTO)
 
@@ -84,12 +94,22 @@ class BillsAdapter(
                         replace(R.id.nav_host_fragment, fragment)
                         commit()
                     }
+                    dialogConfirm.dismiss()
+                    val builderSuccess = AlertDialog.Builder(binding.root.context)
+                    val bindingSuccess =
+                        DialogLoginSuccessBinding.inflate(LayoutInflater.from(binding.root.context))
+                    builderSuccess.setView(bindingSuccess.root)
+                    val dialogSuccess = builderSuccess.create()
+                    bindingSuccess.txtLoginSuccess.text =
+                        "Xóa phiếu mượn thành công"
+                    bindingSuccess.btnLoginSuccess.setOnClickListener {
+                        dialogSuccess.dismiss()
+                    }
+                    dialogSuccess.show()
 
                 }
-                builder.setNegativeButton("Không") { dialog, which ->
-                    dialog.dismiss()
-                }
-                builder.show()
+                dialogConfirm.show()
+
             }
 
             binding.btnInfo.setOnClickListener() {

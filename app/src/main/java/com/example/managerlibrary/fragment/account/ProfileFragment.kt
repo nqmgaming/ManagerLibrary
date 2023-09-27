@@ -91,4 +91,29 @@ class ProfileFragment : Fragment() {
                 }
             }
     }
+
+    fun updateData() {
+        userSharePreference = LoginSharePreference(requireContext())
+        val username = userSharePreference.getID()
+        val role = userSharePreference.getRole()
+        val fullname = userSharePreference.getName()
+
+        libraryLoanSlipDAO = LibraryLoanSlipDAO(requireContext())
+
+        binding.tvUsernameProfile.text = username
+        binding.tvNameProfile.text = fullname
+        binding.tvRoleProfile.text = "Người dùng: " + role
+        binding.tvTotalBorrowedProfile.text = "Phiếu mượn đã tạo: " + username?.let {
+            libraryLoanSlipDAO.getNumberOfLoanSlipByID(
+                it
+            ).toString()
+        }
+        }
+
+
+    //on resume update data
+    override fun onResume() {
+        super.onResume()
+        updateData()
+    }
 }

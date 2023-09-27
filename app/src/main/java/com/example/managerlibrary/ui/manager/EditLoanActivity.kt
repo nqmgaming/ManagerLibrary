@@ -224,13 +224,26 @@ class EditLoanActivity : AppCompatActivity() {
             val result = loanSlipDAO.updateLoanSlip(loanSlipDTO)
 
             if (result) {
-                //inent data to main activity
-                val intent = Intent(this, MainActivity::class.java)
-                intent.putExtra("ok", "ok")
-                startActivity(intent)
+                val builderSuccess =
+                    androidx.appcompat.app.AlertDialog.Builder(this, R.style.CustomDialog)
+                val bindingSuccess =
+                    com.example.managerlibrary.databinding.DialogLoginSuccessBinding.inflate(
+                        layoutInflater
+                    )
+                builderSuccess.setView(bindingSuccess.root)
+                val dialogSuccess = builderSuccess.create()
+                dialogSuccess.show()
+                dialogSuccess.setCancelable(false)
+                bindingSuccess.txtLoginSuccess.text = "Sửa thành công phiếu mượn!"
+                bindingSuccess.btnLoginSuccess.setOnClickListener() {
+                    //inent data to main activity
+                    val intent = Intent(this, MainActivity::class.java)
+                    intent.putExtra("ok", "ok")
+                    startActivity(intent)
 
-                Toast.makeText(this, "Edit success", Toast.LENGTH_SHORT).show()
-                finish()
+                    Toast.makeText(this, "Edit success", Toast.LENGTH_SHORT).show()
+                    finish()
+                }
             } else {
                 Toast.makeText(this, "Edit failed", Toast.LENGTH_SHORT).show()
             }

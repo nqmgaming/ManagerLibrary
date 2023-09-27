@@ -64,7 +64,9 @@ class LibraryLoanSlipDAO(context: Context) {
             "SELECT LibraryLoanSlip.bookID," +
                     " COUNT(LibraryLoanSlip.bookID) AS count, " +
                     "Book.bookName," +
-                    " Book.rentalFee FROM LibraryLoanSlip " +
+                    " Book.rentalFee," +
+                    " Book.categoryID " + // Lấy trường categoryID từ bảng Book
+                    "FROM LibraryLoanSlip " +
                     "INNER JOIN Book ON LibraryLoanSlip.bookID = Book.bookID" +
                     " GROUP BY LibraryLoanSlip.bookID " +
                     "ORDER BY count DESC LIMIT 10"
@@ -77,7 +79,8 @@ class LibraryLoanSlipDAO(context: Context) {
                 val count = cursor.getInt(1)
                 val name = cursor.getString(2)
                 val rentalFee = cursor.getInt(3)
-                val bookDTO = BookDTO(idBook, name, rentalFee, -1, count )
+                val category = cursor.getInt(4)
+                val bookDTO = BookDTO(idBook, name, rentalFee, category, count )
                 list.add(bookDTO)
                 cursor.moveToNext()
             }
