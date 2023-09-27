@@ -38,7 +38,7 @@ class EditAccountActivity : AppCompatActivity() {
         binding.edtFullnameProfile.setText(librarianDTO.name)
 
         binding.edtUsernameProfile.setOnClickListener() {
-            Toast.makeText(this, "Can't edit username", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Không thể sửa", Toast.LENGTH_SHORT).show()
         }
 
         binding.btnCancelEditUser.setOnClickListener() {
@@ -46,16 +46,15 @@ class EditAccountActivity : AppCompatActivity() {
         }
 
         binding.btnSaveEditUser.setOnClickListener() {
-            Log.d("EditProfile", "Starting EditUserActivity")
             val username = binding.edtUsernameProfile.text.toString().trim()
             val fullname = binding.edtFullnameProfile.text.toString().trim()
 
             if (username.isEmpty()) {
-                binding.edtUsernameProfile.error = "Username is empty"
+                binding.edtUsernameProfile.error = "Tên người dùng trống"
                 return@setOnClickListener
             }
             if (fullname.isEmpty()) {
-                binding.edtFullnameProfile.error = "Fullname is empty"
+                binding.edtFullnameProfile.error = "Tên đầy đủ trống"
                 return@setOnClickListener
             }
             librarianDAO = LibrarianDAO(this)
@@ -68,7 +67,6 @@ class EditAccountActivity : AppCompatActivity() {
 
             } else {
                 Toast.makeText(this, "Edit failed" + result, Toast.LENGTH_SHORT).show()
-                binding.edtUsernameProfile.error = "Username is exist"
             }
         }
     }

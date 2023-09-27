@@ -73,7 +73,6 @@ class RevenueFragment : Fragment() {
         }
 
         binding.btnStatistical.setOnClickListener() {
-            Toast.makeText(requireContext(), startDate + endDate, Toast.LENGTH_SHORT).show()
 
             if (startDate == "") {
                 binding.tvErrorDate.visibility = View.VISIBLE

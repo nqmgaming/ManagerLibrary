@@ -240,12 +240,10 @@ class EditLoanActivity : AppCompatActivity() {
                     val intent = Intent(this, MainActivity::class.java)
                     intent.putExtra("ok", "ok")
                     startActivity(intent)
-
-                    Toast.makeText(this, "Edit success", Toast.LENGTH_SHORT).show()
                     finish()
                 }
             } else {
-                Toast.makeText(this, "Edit failed", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Sửa lỗi", Toast.LENGTH_SHORT).show()
             }
 
         }

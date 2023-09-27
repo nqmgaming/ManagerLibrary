@@ -46,7 +46,6 @@ class DetailLoanActivity : AppCompatActivity() {
 //        get data from database
         loanSlipDAO = LibraryLoanSlipDAO(this)
         val idLoanSlip = intent.getStringExtra("idLoanSlip")
-        Toast.makeText(this, idLoanSlip + "", Toast.LENGTH_SHORT).show()
 
         if (idLoanSlip != null) {
             loanSlipDTO = loanSlipDAO.getLoanSlipByID(idLoanSlip.toInt())

@@ -174,7 +174,7 @@ class AddLoanActivity : AppCompatActivity() {
                     finish()
                 }
             } else {
-                Toast.makeText(this, "Add loan slip fail", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Thêm phiếu mượn lỗi", Toast.LENGTH_SHORT).show()
             }
         }
     }
