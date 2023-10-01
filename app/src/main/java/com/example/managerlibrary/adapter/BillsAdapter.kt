@@ -29,7 +29,6 @@ class BillsAdapter(
     private val memberDAO: MemberDAO = MemberDAO(context)
     private val libraryLoanSlipDAO: LibraryLoanSlipDAO = LibraryLoanSlipDAO(context)
 
-    // Thay đổi ViewHolder để sử dụng View Binding thay vì View trực tiếp
     class BillsViewHolder(private val binding: ItemBillBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
@@ -42,17 +41,18 @@ class BillsAdapter(
         ) {
             //get name of book by id
             val bookDTO: BookDTO = bookDAO.getBookByID(libraryLoanSlipDTO.idBook)
-            binding.txtNameBook.text = "Tên sách: " + bookDTO.name
+            binding.txtNameBook.text = R.string.book_name.toString() + bookDTO.name
 
             val memberDTO: MemberDTO = memberDAO.getMemberDTOById(libraryLoanSlipDTO.idMember)
-            binding.txtNameMember.text = "Người mượn: " + memberDTO.name
+            binding.txtNameMember.text = R.string.member_loan.toString() + memberDTO.name
 
-            binding.txtDate.text = "Ngày mượn: " + libraryLoanSlipDTO.dateLoan
-            binding.txtPrice.text = "Giá thuê: " + bookDTO.rentalFee.toString() + " VND"
+            binding.txtDate.text = R.string.date_loan.toString() + libraryLoanSlipDTO.dateLoan
+            binding.txtPrice.text =
+                R.string.rental_fee.toString() + bookDTO.rentalFee.toString() + R.string.vnd.toString()
             if (libraryLoanSlipDTO.status == 0) {
-                binding.txtStatus.text = "Chưa trả"
+                binding.txtStatus.text = R.string.not_returned.toString()
             } else {
-                binding.txtStatus.text = "Đã trả"
+                binding.txtStatus.text = R.string.returned.toString()
             }
 
             //if đã trả thì đổi background màu xám
@@ -71,18 +71,18 @@ class BillsAdapter(
             }
 
             binding.btnDelete.setOnClickListener() {
-                //aleart
+                //alert
                 val builderConfirm = AlertDialog.Builder(binding.root.context)
-                val bindingCofirm =
+                val bindingConfirm =
                     DialogConfirmBinding.inflate(LayoutInflater.from(binding.root.context))
-                builderConfirm.setView(bindingCofirm.root)
+                builderConfirm.setView(bindingConfirm.root)
                 val dialogConfirm = builderConfirm.create()
-                bindingCofirm.txtLoginSuccess.text =
-                    "Bạn có chắc chắn muốn xóa phiếu \n mượn này không?"
-                bindingCofirm.btnNo.setOnClickListener() {
+                bindingConfirm.txtLoginSuccess.text =
+                    R.string.confirm_delete.toString()
+                bindingConfirm.btnNo.setOnClickListener() {
                     dialogConfirm.dismiss()
                 }
-                bindingCofirm.btnYes.setOnClickListener() {
+                bindingConfirm.btnYes.setOnClickListener() {
                     libraryLoanSlipDAO.deleteLoanSlip(libraryLoanSlipDTO.id)
                     listBills.remove(libraryLoanSlipDTO)
 
@@ -101,7 +101,7 @@ class BillsAdapter(
                     builderSuccess.setView(bindingSuccess.root)
                     val dialogSuccess = builderSuccess.create()
                     bindingSuccess.txtLoginSuccess.text =
-                        "Xóa phiếu mượn thành công"
+                        R.string.delete_success.toString()
                     bindingSuccess.btnLoginSuccess.setOnClickListener {
                         dialogSuccess.dismiss()
                     }
@@ -114,15 +114,17 @@ class BillsAdapter(
 
             binding.btnInfo.setOnClickListener() {
                 //intent id to detail loan activity
-                val intent = android.content.Intent(binding.root.context, DetailLoanActivity::class.java)
+                val intent =
+                    android.content.Intent(binding.root.context, DetailLoanActivity::class.java)
                 intent.putExtra("idLoanSlip", libraryLoanSlipDTO.id.toString())
                 binding.root.context.startActivity(intent)
 
             }
 
-            binding.btnEdit.setOnClickListener(){
+            binding.btnEdit.setOnClickListener() {
                 //intent id to edit loan activity
-                val intent = android.content.Intent(binding.root.context, EditLoanActivity::class.java)
+                val intent =
+                    android.content.Intent(binding.root.context, EditLoanActivity::class.java)
                 intent.putExtra("idLoanSlip", libraryLoanSlipDTO.id.toString())
                 binding.root.context.startActivity(intent)
             }
@@ -146,7 +148,6 @@ class BillsAdapter(
     override fun onBindViewHolder(holder: BillsViewHolder, position: Int) {
         // Sử dụng hàm bind đã được định nghĩa ở trên
         holder.bind(listBills[position], bookDAO, memberDAO, libraryLoanSlipDAO, listBills)
-        //notifyDataSetChanged() when data change
 
     }
 

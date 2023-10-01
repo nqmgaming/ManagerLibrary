@@ -14,10 +14,6 @@ import com.example.managerlibrary.databinding.FragmentProfileBinding
 import com.example.managerlibrary.ui.account.EditAccountActivity
 
 
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-
 class ProfileFragment : Fragment() {
     var param1: String? = null
     private var param2: String? = null
@@ -25,14 +21,6 @@ class ProfileFragment : Fragment() {
     private var _binding: FragmentProfileBinding? = null
     lateinit var libraryLoanSlipDAO: LibraryLoanSlipDAO
     private val binding get() = _binding!!
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -80,17 +68,6 @@ class ProfileFragment : Fragment() {
         }
     }
 
-    companion object {
-
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            ProfileFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
-    }
 
     fun updateData() {
         userSharePreference = LoginSharePreference(requireContext())
@@ -108,7 +85,7 @@ class ProfileFragment : Fragment() {
                 it
             ).toString()
         }
-        }
+    }
 
 
     //on resume update data

@@ -11,26 +11,33 @@ import com.example.managerlibrary.sharepre.LoginSharePreference
 import com.example.managerlibrary.databinding.ActivityEditUserBinding
 
 class EditAccountActivity : AppCompatActivity() {
+
+    //shared preference
     lateinit var userSharePreference: LoginSharePreference
+
+    //database
     lateinit var librarianDTO: LibrarianDTO
     lateinit var librarianDAO: LibrarianDAO
+
+    //binding
     private lateinit var binding: ActivityEditUserBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        //set binding
         binding = ActivityEditUserBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
 
+        //set toolbar
         setSupportActionBar(binding.toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowHomeEnabled(true)
 
-        userSharePreference = LoginSharePreference(this)
-
         //get information of user by id
+        userSharePreference = LoginSharePreference(this)
         val id = userSharePreference.getID()
 
-
+        //set information of user
         librarianDAO = LibrarianDAO(this)
         librarianDTO = id?.let { librarianDAO.getLibrarianByID(it) }!!
 
@@ -70,6 +77,8 @@ class EditAccountActivity : AppCompatActivity() {
             }
         }
     }
+
+    //set event for toolbar
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == android.R.id.home) {
             finish()
@@ -77,4 +86,5 @@ class EditAccountActivity : AppCompatActivity() {
         }
         return super.onOptionsItemSelected(item)
     }
+
 }

@@ -17,11 +17,6 @@ import com.example.managerlibrary.databinding.DialogLoginSuccessBinding
 import com.example.managerlibrary.databinding.DialogProccessingBinding
 import com.example.managerlibrary.databinding.FragmentAddNewUserBinding
 
-
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-
 class AddNewUserFragment : Fragment() {
 
     private var param1: String? = null
@@ -32,14 +27,6 @@ class AddNewUserFragment : Fragment() {
     private var librarianDAO: LibrarianDAO? = null
     private var librarianDTO: LibrarianDTO? = null
     lateinit var role: String
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -217,15 +204,8 @@ class AddNewUserFragment : Fragment() {
     }
 
 
-    companion object {
-
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            AddNewUserFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 }

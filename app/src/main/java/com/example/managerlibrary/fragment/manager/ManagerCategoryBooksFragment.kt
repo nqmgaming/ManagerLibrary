@@ -18,10 +18,6 @@ import com.example.managerlibrary.dto.CategoryBookDTO
 import com.example.managerlibrary.ui.manager.AddCategoryBooksActivity
 import com.example.managerlibrary.viewmodel.SharedViewModel
 
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-
 class ManagerCategoryBooksFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
@@ -33,14 +29,6 @@ class ManagerCategoryBooksFragment : Fragment() {
     lateinit var listCategoryBooks: ArrayList<CategoryBookDTO>
     lateinit var categoryBookDAO: CategoryBookDAO
     private lateinit var sharedViewModel: SharedViewModel
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -95,16 +83,12 @@ class ManagerCategoryBooksFragment : Fragment() {
 
     }
 
-    companion object {
-
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            ManagerCategoryBooksFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    fun refreshList() {
+        listCategoryBooks.clear()
+        listCategoryBooks = categoryBookDAO.getAllCategoryBooks()
+        binding.managerCategoryRecyclerView.adapter =
+            CategoryBooksAdapter(requireContext(), listCategoryBooks)
+        adapter.notifyDataSetChanged()
     }
 
     override fun onDestroyView() {
@@ -112,10 +96,4 @@ class ManagerCategoryBooksFragment : Fragment() {
         _binding = null
     }
 
-    fun refreshList() {
-        listCategoryBooks.clear()
-        listCategoryBooks = categoryBookDAO.getAllCategoryBooks()
-        binding.managerCategoryRecyclerView.adapter = CategoryBooksAdapter(requireContext(), listCategoryBooks)
-        adapter.notifyDataSetChanged()
-    }
 }

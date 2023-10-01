@@ -20,4 +20,15 @@
     <string name="top_10_book">"Top 10 sách được mượn "</string>
     <string name="revenue">Doanh thu</string>
     <string name="ok">OK</string>
+    <string name="book_name">Tên sách: </string>
+    <string name="member_loan">Người mượn: </string>
+    <string name="date_loan">Ngày mượn: </string>
+    <string name="vnd">VNĐ</string>
+    <string name="rental_fee">Giá thuê: </string>
+    <string name="not_returned">Chưa trả</string>
+    <string name="returned">Đã trả</string>
+    <string name="confirm_delete">Bạn có chắc chắn muốn xóa phiếu \\n mượn này không?</string>
+    <string name="delete_success">Xóa phiếu mượn thành công\n</string>
+    <string name="id_book">Mã sách: </string>
+    <string name="category">"Thể loại: "</string>
 </resources>

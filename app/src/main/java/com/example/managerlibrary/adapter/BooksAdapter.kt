@@ -50,13 +50,13 @@ class BooksAdapter(
                 }
             }
 
-            binding.txtBookIdManager.text = "Mã sách: " + bookDTO.idBook.toString()
-            binding.txtBookNameManager.text = "Tên sách: " + bookDTO.name
-            binding.txtCategoryNameManager.text = "Thể loại: " +
+            binding.txtBookIdManager.text = R.string.id_book.toString() + bookDTO.idBook.toString()
+            binding.txtBookNameManager.text = R.string.book_name.toString() + bookDTO.name
+            binding.txtCategoryNameManager.text = R.string.category.toString() +
                     categoryBookDAO.getNameCategoryBookById(bookDTO.category)
-            binding.txtRentPriceManager.text = "Giá thuê: " + bookDTO.rentalFee.toString() + " VND"
+            binding.txtRentPriceManager.text = "Giá thuê: " + bookDTO.rentalFee.toString() + R.string.vnd.toString()
 
-            binding.btnDeleteBook.setOnClickListener(){
+            binding.btnDeleteBook.setOnClickListener() {
                 val builderConfirm = AlertDialog.Builder(binding.root.context)
                 val bindingCofirm =
                     DialogConfirmBinding.inflate(LayoutInflater.from(binding.root.context))
@@ -113,7 +113,7 @@ class BooksAdapter(
                 dialogConfirm.show()
             }
 
-            binding.btnEditBook.setOnClickListener(){
+            binding.btnEditBook.setOnClickListener() {
                 val intent = android.content.Intent(
                     binding.root.context,
                     EditBookActivity::class.java

@@ -18,10 +18,6 @@ import com.example.managerlibrary.ui.manager.AddBookActivity
 import com.example.managerlibrary.ui.manager.AddCategoryBooksActivity
 import com.example.managerlibrary.viewmodel.SharedViewModel
 
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-
 class ManagerBooksFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
@@ -34,13 +30,6 @@ class ManagerBooksFragment : Fragment() {
 
     private var _binding: FragmentManagerBooksBinding? = null
     private val binding get() = _binding!!
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -96,22 +85,17 @@ class ManagerBooksFragment : Fragment() {
     }
 
 
-    companion object {
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            ManagerBooksFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
-    }
 
     private fun refreshList() {
         listBook.clear()
         listBook = bookDAO.getAllBook()
         binding.managerBooksRecyclerView.adapter = BooksAdapter(requireContext(), listBook)
         adapter.notifyDataSetChanged()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 
 }
