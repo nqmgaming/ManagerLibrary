@@ -1,16 +1,16 @@
 package com.example.managerlibrary.ui.account
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import androidx.appcompat.app.AlertDialog
-import com.example.managerlibrary.sharepre.LoginSharePreference
-import com.example.managerlibrary.ui.MainActivity
+import androidx.appcompat.app.AppCompatActivity
 import com.example.managerlibrary.R
 import com.example.managerlibrary.dao.LibrarianDAO
 import com.example.managerlibrary.databinding.ActivityLoginBinding
 import com.example.managerlibrary.databinding.DialogLoginSuccessBinding
+import com.example.managerlibrary.sharepre.LoginSharePreference
+import com.example.managerlibrary.ui.MainActivity
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
@@ -34,7 +34,7 @@ class LoginActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
-        binding.btnLoginClick.setOnClickListener() {
+        binding.btnLoginClick.setOnClickListener {
             if (binding.constraintLayout.visibility == android.view.View.VISIBLE) {
                 binding.constraintLayout.visibility = android.view.View.GONE
             } else {
@@ -43,7 +43,7 @@ class LoginActivity : AppCompatActivity() {
             }
         }
 
-        binding.btnLogin.setOnClickListener() {
+        binding.btnLogin.setOnClickListener {
             username = binding.edtUsername.text.toString().trim()
             password = binding.edtPassword.text.toString().trim()
             if (username.isEmpty()) {

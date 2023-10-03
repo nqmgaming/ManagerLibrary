@@ -2,30 +2,28 @@ package com.example.managerlibrary.fragment.account
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.managerlibrary.dao.LibraryLoanSlipDAO
-import com.example.managerlibrary.sharepre.LoginSharePreference
+import androidx.fragment.app.Fragment
 import com.example.managerlibrary.R
+import com.example.managerlibrary.dao.LibraryLoanSlipDAO
 import com.example.managerlibrary.databinding.FragmentProfileBinding
+import com.example.managerlibrary.sharepre.LoginSharePreference
 import com.example.managerlibrary.ui.account.EditAccountActivity
 
 
 class ProfileFragment : Fragment() {
-    var param1: String? = null
-    private var param2: String? = null
-    lateinit var userSharePreference: LoginSharePreference
+
+    private lateinit var userSharePreference: LoginSharePreference
     private var _binding: FragmentProfileBinding? = null
-    lateinit var libraryLoanSlipDAO: LibraryLoanSlipDAO
+    private lateinit var libraryLoanSlipDAO: LibraryLoanSlipDAO
     private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         _binding = FragmentProfileBinding.inflate(inflater, container, false)
         return binding.root
@@ -33,7 +31,7 @@ class ProfileFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.cardEditProfile.setOnClickListener() {
+        binding.cardEditProfile.setOnClickListener {
             Intent(requireContext(), EditAccountActivity::class.java).also {
                 startActivity(it)
             }
@@ -47,16 +45,16 @@ class ProfileFragment : Fragment() {
 
         libraryLoanSlipDAO = LibraryLoanSlipDAO(requireContext())
 
-        binding.tvUsernameProfile.text = "@" + username
+        binding.tvUsernameProfile.text = "@$username"
         binding.tvNameProfile.text = fullname
-        binding.tvRoleProfile.text = "Người dùng: " + role
+        binding.tvRoleProfile.text = "Người dùng: $role"
         binding.tvTotalBorrowedProfile.text = "Phiếu mượn đã tạo: " + username?.let {
             libraryLoanSlipDAO.getNumberOfLoanSlipByID(
                 it
             ).toString()
         }
 
-        binding.cardFeature.setOnClickListener() {
+        binding.cardFeature.setOnClickListener {
             //intent to fragment change password
             val changePasswordFragment = ChangePasswordFragment()
             val fragmentManager = requireActivity().supportFragmentManager
@@ -69,7 +67,7 @@ class ProfileFragment : Fragment() {
     }
 
 
-    fun updateData() {
+    private fun updateData() {
         userSharePreference = LoginSharePreference(requireContext())
         val username = userSharePreference.getID()
         val role = userSharePreference.getRole()
@@ -77,9 +75,9 @@ class ProfileFragment : Fragment() {
 
         libraryLoanSlipDAO = LibraryLoanSlipDAO(requireContext())
 
-        binding.tvUsernameProfile.text = "@" + username
+        binding.tvUsernameProfile.text = "@$username"
         binding.tvNameProfile.text = fullname
-        binding.tvRoleProfile.text = "Người dùng: " + role
+        binding.tvRoleProfile.text = "Người dùng: $role"
         binding.tvTotalBorrowedProfile.text = "Phiếu mượn đã tạo: " + username?.let {
             libraryLoanSlipDAO.getNumberOfLoanSlipByID(
                 it

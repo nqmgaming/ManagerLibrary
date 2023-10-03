@@ -50,11 +50,16 @@ class BooksAdapter(
                 }
             }
 
-            binding.txtBookIdManager.text = R.string.id_book.toString() + bookDTO.idBook.toString()
-            binding.txtBookNameManager.text = R.string.book_name.toString() + bookDTO.name
-            binding.txtCategoryNameManager.text = R.string.category.toString() +
-                    categoryBookDAO.getNameCategoryBookById(bookDTO.category)
-            binding.txtRentPriceManager.text = "Giá thuê: " + bookDTO.rentalFee.toString() + R.string.vnd.toString()
+            binding.txtBookIdManager.text =
+                binding.root.context.getString(R.string.id_book) + bookDTO.idBook
+            binding.txtBookNameManager.text =
+                binding.root.context.getString(R.string.book_name) + bookDTO.name
+            binding.txtCategoryNameManager.text =
+                binding.root.context.getString(R.string.category) + categoryBookDAO.getCategoryBookById(
+                    bookDTO.category
+                )
+            binding.txtRentPriceManager.text =
+                binding.root.context.getString(R.string.rental_fee) + bookDTO.rentalFee.toString() + " VND"
 
             binding.btnDeleteBook.setOnClickListener() {
                 val builderConfirm = AlertDialog.Builder(binding.root.context)

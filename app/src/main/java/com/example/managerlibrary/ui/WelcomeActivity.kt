@@ -1,10 +1,10 @@
 package com.example.managerlibrary.ui
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.managerlibrary.ui.account.LoginActivity
+import androidx.appcompat.app.AppCompatActivity
 import com.example.managerlibrary.databinding.ActivityWelcomeBinding
+import com.example.managerlibrary.ui.account.LoginActivity
 
 class WelcomeActivity : AppCompatActivity() {
     private lateinit var binding: ActivityWelcomeBinding
@@ -20,7 +20,7 @@ class WelcomeActivity : AppCompatActivity() {
         val background = object: Thread(){
             override fun run() {
                 try {
-                    Thread.sleep(1500)
+                    sleep(1500)
                     val intent = Intent(baseContext, LoginActivity::class.java)
                     startActivity(intent)
                     finish()

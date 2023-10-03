@@ -2,31 +2,31 @@ package com.example.managerlibrary.fragment.account
 
 import android.os.Bundle
 import android.os.Handler
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
-import com.example.managerlibrary.dao.LibrarianDAO
-import com.example.managerlibrary.dto.LibrarianDTO
-import com.example.managerlibrary.sharepre.LoginSharePreference
+import androidx.fragment.app.Fragment
 import com.example.managerlibrary.R
+import com.example.managerlibrary.dao.LibrarianDAO
 import com.example.managerlibrary.databinding.DialogLoginSuccessBinding
 import com.example.managerlibrary.databinding.DialogProccessingBinding
 import com.example.managerlibrary.databinding.FragmentChangePasswordBinding
+import com.example.managerlibrary.dto.LibrarianDTO
+import com.example.managerlibrary.sharepre.LoginSharePreference
 
 class ChangePasswordFragment : Fragment() {
 
-    lateinit var userSharePreference: LoginSharePreference
-    lateinit var librarianDTO: LibrarianDTO
-    lateinit var librarianDAO: LibrarianDAO
+    private lateinit var userSharePreference: LoginSharePreference
+    private lateinit var librarianDTO: LibrarianDTO
+    private lateinit var librarianDAO: LibrarianDAO
 
     private var _binding: FragmentChangePasswordBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentChangePasswordBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -38,7 +38,7 @@ class ChangePasswordFragment : Fragment() {
         val password = userSharePreference.getPassword()
         val username = userSharePreference.getID()
 
-        binding.btnConfirmChangePassword.setOnClickListener() {
+        binding.btnConfirmChangePassword.setOnClickListener {
             val oldPassword = binding.edtOldPassword.text.toString().trim()
             if (oldPassword.isEmpty()) {
                 binding.edtOldPassword.error = "Old password is empty"
@@ -62,7 +62,7 @@ class ChangePasswordFragment : Fragment() {
 
         librarianDAO = LibrarianDAO(requireContext())
         librarianDTO = username?.let { librarianDAO.getLibrarianByID(it) }!!
-        binding.btnConfirm.setOnClickListener() {
+        binding.btnConfirm.setOnClickListener {
             val newPassword = binding.edtNewPassword.text.toString().trim()
             val confirmPassword = binding.edtConfirmNewPassword.text.toString().trim()
             if (newPassword.isEmpty()) {
@@ -136,7 +136,7 @@ class ChangePasswordFragment : Fragment() {
             }
         }
 
-        binding.btnConfirmCancel.setOnClickListener() {
+        binding.btnConfirmCancel.setOnClickListener {
             if (binding.linearlayoutOldPassword.visibility == View.GONE) {
                 binding.linearlayoutOldPassword.visibility = View.VISIBLE
                 binding.linearlayoutChangePassword.visibility = View.GONE

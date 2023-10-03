@@ -2,36 +2,33 @@ package com.example.managerlibrary.fragment.account
 
 import android.os.Bundle
 import android.os.Handler
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
-import com.example.managerlibrary.dao.LibrarianDAO
-import com.example.managerlibrary.dto.LibrarianDTO
-import com.example.managerlibrary.sharepre.LoginSharePreference
+import androidx.fragment.app.Fragment
 import com.example.managerlibrary.R
+import com.example.managerlibrary.dao.LibrarianDAO
 import com.example.managerlibrary.databinding.DialogLoginSuccessBinding
 import com.example.managerlibrary.databinding.DialogProccessingBinding
 import com.example.managerlibrary.databinding.FragmentAddNewUserBinding
+import com.example.managerlibrary.dto.LibrarianDTO
+import com.example.managerlibrary.sharepre.LoginSharePreference
 
 class AddNewUserFragment : Fragment() {
 
-    private var param1: String? = null
-    private var param2: String? = null
     private var _binding: FragmentAddNewUserBinding? = null
     private val binding get() = _binding!!
     private var userSharePreference: LoginSharePreference? = null
     private var librarianDAO: LibrarianDAO? = null
     private var librarianDTO: LibrarianDTO? = null
-    lateinit var role: String
+    private lateinit var role: String
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentAddNewUserBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -41,7 +38,7 @@ class AddNewUserFragment : Fragment() {
 
         userSharePreference = LoginSharePreference(requireContext())
         val password = userSharePreference!!.getPassword()
-        val username = userSharePreference!!.getID()
+        userSharePreference!!.getID()
         val roleUser = userSharePreference!!.getRole()
         if (roleUser == "librarian") {
             Toast.makeText(
@@ -53,7 +50,7 @@ class AddNewUserFragment : Fragment() {
         } else {
             binding.imgAddUser.setImageResource(R.drawable.changepasswordlock)
             binding.txtAddUser.text = "Nhập mật khẩu để xác thực"
-            binding.btnVerify.setOnClickListener() {
+            binding.btnVerify.setOnClickListener {
                 if (binding.edtPasswordVerify.text.toString().trim() == password) {
                     binding.linearlayoutAddUser.visibility = View.VISIBLE
                     binding.linearVerify.visibility = View.GONE
@@ -63,10 +60,9 @@ class AddNewUserFragment : Fragment() {
                 } else {
                     binding.edtPasswordVerify.error = "Mật khẩu không đúng"
                     return@setOnClickListener
-                    Log.d("AAA", "onViewCreated: " + binding.edtPassword.text.toString().trim())
                 }
             }
-            binding.radioGroup.setOnCheckedChangeListener() { group, checkedId ->
+            binding.radioGroup.setOnCheckedChangeListener { _, checkedId ->
                 when (checkedId) {
                     R.id.radio_admin -> {
                         role = "admin"
@@ -78,16 +74,16 @@ class AddNewUserFragment : Fragment() {
                 }
             }
 
-            binding.btnCancelAddUser.setOnClickListener() {
+            binding.btnCancelAddUser.setOnClickListener {
                 binding.linearlayoutAddUser.visibility = View.GONE
                 binding.linearVerify.visibility = View.VISIBLE
                 binding.imgAddUser.setImageResource(R.drawable.changepasswordlock)
                 binding.txtAddUser.text = "Nhập mật khẩu để xác thực"
             }
 
-            binding.btnSaveAddUser.setOnClickListener() {
-                var usernameNew: String = binding.edtAddUser.text.toString().trim()
-                var passwordNew: String = binding.edtPassword.text.toString().trim()
+            binding.btnSaveAddUser.setOnClickListener {
+                val usernameNew: String = binding.edtAddUser.text.toString().trim()
+                val passwordNew: String = binding.edtPassword.text.toString().trim()
                 val nameNew: String = binding.edtAddFullname.text.toString().trim()
                 var passwordConfirm: String = binding.edtPasswordConfirm.text.toString().trim()
 

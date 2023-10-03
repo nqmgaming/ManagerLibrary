@@ -1,10 +1,10 @@
 package com.example.managerlibrary.ui.manager
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import com.example.managerlibrary.R
 import com.example.managerlibrary.dao.MemberDAO
 import com.example.managerlibrary.databinding.ActivityEditMemberBinding
@@ -13,8 +13,8 @@ import com.example.managerlibrary.ui.MainActivity
 
 class EditMemberActivity : AppCompatActivity() {
     private lateinit var binding: ActivityEditMemberBinding
-    lateinit var memberDAO: MemberDAO
-    lateinit var memberDTO: MemberDTO
+    private lateinit var memberDAO: MemberDAO
+    private lateinit var memberDTO: MemberDTO
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityEditMemberBinding.inflate(layoutInflater)
@@ -38,18 +38,18 @@ class EditMemberActivity : AppCompatActivity() {
 
         }
 
-        binding.edtIdMember.setOnClickListener() {
+        binding.edtIdMember.setOnClickListener {
             binding.edtIdMember.error = "Không thể thay đổi mã thành viên"
         }
 
-        binding.btnCancelEditMember.setOnClickListener() {
+        binding.btnCancelEditMember.setOnClickListener {
             finish()
         }
 
-        binding.btnSaveEditMember.setOnClickListener() {
-            var idMember = binding.edtIdMember.text.toString()
-            var nameMember = binding.edtNameMember.text.toString()
-            var birthMember = binding.edtBirthMemberEdit.text.toString()
+        binding.btnSaveEditMember.setOnClickListener {
+            val idMember = binding.edtIdMember.text.toString()
+            val nameMember = binding.edtNameMember.text.toString()
+            val birthMember = binding.edtBirthMemberEdit.text.toString()
 
             if (nameMember.isEmpty()) {
                 binding.edtNameMember.error = "Tên thành viên không được để trống"
@@ -79,7 +79,7 @@ class EditMemberActivity : AppCompatActivity() {
                 val dialogSuccess = builderSuccess.create()
                 dialogSuccess.show()
                 bindingSuccess.txtLoginSuccess.text = "Sửa thành viên thành công"
-                bindingSuccess.btnLoginSuccess.setOnClickListener() {
+                bindingSuccess.btnLoginSuccess.setOnClickListener {
                     dialogSuccess.dismiss()
                     val intent = Intent(this, MainActivity::class.java)
                     intent.putExtra("ok", "member")

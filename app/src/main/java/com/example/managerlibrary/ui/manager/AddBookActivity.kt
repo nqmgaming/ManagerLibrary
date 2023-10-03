@@ -1,15 +1,14 @@
 package com.example.managerlibrary.ui.manager
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
 import android.widget.AdapterView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.example.managerlibrary.R
 import com.example.managerlibrary.adapter.CategoryAddBookAdapter
-import com.example.managerlibrary.adapter.CategoryBooksAdapter
 import com.example.managerlibrary.dao.BookDAO
 import com.example.managerlibrary.dao.CategoryBookDAO
 import com.example.managerlibrary.databinding.ActivityAddBookBinding
@@ -19,12 +18,12 @@ import com.example.managerlibrary.ui.MainActivity
 
 class AddBookActivity : AppCompatActivity() {
     private lateinit var binding: ActivityAddBookBinding
-    lateinit var categoryBookDAO: CategoryBookDAO
+    private lateinit var categoryBookDAO: CategoryBookDAO
     lateinit var categoryBookDTO: CategoryBookDTO
     lateinit var bookDAO: BookDAO
-    lateinit var bookDTO: BookDTO
+    private lateinit var bookDTO: BookDTO
     lateinit var listCategoryBook: ArrayList<CategoryBookDTO>
-    lateinit var categoryLoanAdapter: CategoryAddBookAdapter
+    private lateinit var categoryLoanAdapter: CategoryAddBookAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityAddBookBinding.inflate(layoutInflater)
@@ -61,11 +60,11 @@ class AddBookActivity : AppCompatActivity() {
                 }
             }
 
-        binding.btnCancelAddBook.setOnClickListener() {
+        binding.btnCancelAddBook.setOnClickListener {
             finish()
         }
 
-        binding.btnAddBook.setOnClickListener() {
+        binding.btnAddBook.setOnClickListener {
             val name = binding.edtNameBook.text.toString()
             val rentalPrice = binding.edtRentPrice.text.toString()
 
@@ -75,7 +74,7 @@ class AddBookActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
             if (binding.spinnerAddBookCategory.selectedItem == null) {
-                binding.spinnerAddBookCategory.setErrorText("Please choose category book")
+                binding.spinnerAddBookCategory.errorText = "Please choose category book"
                 Toast.makeText(this, "Please choose book", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }else{
@@ -108,7 +107,7 @@ class AddBookActivity : AppCompatActivity() {
                 dialogSuccess.setCancelable(false)
                 dialogSuccess.show()
                 bindingSuccess.txtLoginSuccess.text = "Thêm thành công sách!"
-                bindingSuccess.btnLoginSuccess.setOnClickListener() {
+                bindingSuccess.btnLoginSuccess.setOnClickListener {
                     dialogSuccess.dismiss()
                     val intent = Intent(this, MainActivity::class.java)
                     intent.putExtra("ok", "bookOK")

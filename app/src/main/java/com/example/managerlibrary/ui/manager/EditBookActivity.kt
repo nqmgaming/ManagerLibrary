@@ -1,11 +1,11 @@
 package com.example.managerlibrary.ui.manager
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
 import android.widget.AdapterView
+import androidx.appcompat.app.AppCompatActivity
 import com.example.managerlibrary.R
 import com.example.managerlibrary.adapter.CategoryAddBookAdapter
 import com.example.managerlibrary.dao.BookDAO
@@ -17,9 +17,9 @@ import com.example.managerlibrary.ui.MainActivity
 
 class EditBookActivity : AppCompatActivity() {
     private lateinit var binding: ActivityEditBookBinding
-    lateinit var categoryBookDAO: CategoryBookDAO
+    private lateinit var categoryBookDAO: CategoryBookDAO
     lateinit var categoryBookDTO: CategoryBookDTO
-    lateinit var bookDTO: BookDTO
+    private lateinit var bookDTO: BookDTO
     lateinit var bookDAO: BookDAO
     lateinit var listCategoryBook: ArrayList<CategoryBookDTO>
     lateinit var adapter: CategoryAddBookAdapter
@@ -79,13 +79,13 @@ class EditBookActivity : AppCompatActivity() {
             val selectedBookPosition = listCategoryBook.indexOf(categoryBookDTO)
             binding.spinnerEditBookCategory.setSelection(selectedBookPosition)
         }
-        binding.edtIdBookEdit.setOnClickListener() {
+        binding.edtIdBookEdit.setOnClickListener {
             binding.edtIdBookEdit.error = "Không thể thay đổi mã sách"
         }
-        binding.btnCancelEditBook.setOnClickListener() {
+        binding.btnCancelEditBook.setOnClickListener {
             finish()
         }
-        binding.btnEditBook.setOnClickListener() {
+        binding.btnEditBook.setOnClickListener {
             val idBook = binding.edtIdBookEdit.text.toString()
             val nameBook = binding.edtNameBookEdit.text.toString()
             val rentalFee = binding.edtRentPriceEdit.text.toString()
@@ -124,7 +124,7 @@ class EditBookActivity : AppCompatActivity() {
                 val dialogSuccess = builderSuccess.create()
                 dialogSuccess.show()
                 bindingSuccess.txtLoginSuccess.text = "Sửa sách thành công"
-                bindingSuccess.btnLoginSuccess.setOnClickListener() {
+                bindingSuccess.btnLoginSuccess.setOnClickListener {
                     val intent = Intent(this, MainActivity::class.java)
                     intent.putExtra("ok", "bookOK")
                     startActivity(intent)

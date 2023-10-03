@@ -33,7 +33,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="Thêm sách"
+        android:text="@string/add_book"
         android:textColor="@color/black"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -103,6 +103,7 @@
             android:drawableStart="@drawable/rebt"
             android:drawablePadding="15dp"
             android:hint="Giá mượn"
+            android:autofillHints="none"
             android:inputType="number"
             android:textSize="18sp" />
     </androidx.cardview.widget.CardView>
@@ -125,7 +126,7 @@
             android:layout_marginEnd="20dp"
             android:background="@drawable/button"
             android:text="Hủy"
-            android:textSize="20dp"
+            android:textSize="20sp"
             android:textStyle="bold" />
 
         <Button
@@ -135,7 +136,7 @@
             android:layout_marginStart="20dp"
             android:background="@drawable/button"
             android:text="Thêm"
-            android:textSize="20dp"
+            android:textSize="20sp"
             android:textStyle="bold" />
 
     </LinearLayout>

@@ -60,7 +60,7 @@ class MemberDAO(context: Context) {
         try {
             result = dbWritable.insert("Member", null, values)
         } catch (e: Exception) {
-            return result.toLong()
+            return result
         }
         dbWritable.close()
         return result
@@ -69,7 +69,6 @@ class MemberDAO(context: Context) {
     //delete member
     fun deleteMember(id: Int): Boolean {
         val dbWritable = db.writableDatabase
-        val sql = "DELETE FROM Member WHERE memberID = ?"
         val result = dbWritable.delete("Member", "memberID = ?", arrayOf(id.toString()))
         dbWritable.close()
         return result > 0

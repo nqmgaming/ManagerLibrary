@@ -1,10 +1,10 @@
 package com.example.managerlibrary.ui.manager
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.example.managerlibrary.R
 import com.example.managerlibrary.dao.MemberDAO
 import com.example.managerlibrary.databinding.ActivityAddMemberBinding
@@ -13,8 +13,8 @@ import com.example.managerlibrary.ui.MainActivity
 
 class AddMemberActivity : AppCompatActivity() {
     private lateinit var binding: ActivityAddMemberBinding
-    lateinit var memberDAO: MemberDAO
-    lateinit var memberDTO: MemberDTO
+    private lateinit var memberDAO: MemberDAO
+    private lateinit var memberDTO: MemberDTO
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityAddMemberBinding.inflate(layoutInflater)
@@ -25,13 +25,13 @@ class AddMemberActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowHomeEnabled(true)
 
-        binding.btnCancelAddMember.setOnClickListener() {
+        binding.btnCancelAddMember.setOnClickListener {
             finish()
         }
 
-        binding.btnSaveAddMember.setOnClickListener() {
-            var name = binding.edtNameMember.text.toString()
-            var birthYear = binding.edtBirthMember.text.toString()
+        binding.btnSaveAddMember.setOnClickListener {
+            val name = binding.edtNameMember.text.toString()
+            val birthYear = binding.edtBirthMember.text.toString()
 
             if (name.isEmpty()) {
                 binding.edtNameMember.error = "Tên không được để trống"
@@ -64,7 +64,7 @@ class AddMemberActivity : AppCompatActivity() {
                 dialogSuccess.show()
                 dialogSuccess.setCancelable(false)
                 bindingSuccess.txtLoginSuccess.text = "Thêm thành công thành viên!"
-                bindingSuccess.btnLoginSuccess.setOnClickListener() {
+                bindingSuccess.btnLoginSuccess.setOnClickListener {
                     dialogSuccess.dismiss()
                     val intent = Intent(this, MainActivity::class.java)
                     intent.putExtra("ok", "member")

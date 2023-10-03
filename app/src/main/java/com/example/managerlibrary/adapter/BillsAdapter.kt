@@ -41,18 +41,24 @@ class BillsAdapter(
         ) {
             //get name of book by id
             val bookDTO: BookDTO = bookDAO.getBookByID(libraryLoanSlipDTO.idBook)
-            binding.txtNameBook.text = R.string.book_name.toString() + bookDTO.name
+            binding.txtNameBook.text =
+                binding.root.context.getString(R.string.book_name) + bookDTO.name
+            val memberDTO: MemberDTO = binding.root.context.let {
+                memberDAO.getMemberDTOById(
+                    libraryLoanSlipDTO.idMember
+                )
+            }
+            binding.txtNameMember.text =
+                binding.root.context.getString(R.string.username) + memberDTO.name
 
-            val memberDTO: MemberDTO = memberDAO.getMemberDTOById(libraryLoanSlipDTO.idMember)
-            binding.txtNameMember.text = R.string.member_loan.toString() + memberDTO.name
-
-            binding.txtDate.text = R.string.date_loan.toString() + libraryLoanSlipDTO.dateLoan
+            binding.txtDate.text =
+                binding.root.context.getString(R.string.date_loan) + libraryLoanSlipDTO.dateLoan
             binding.txtPrice.text =
-                R.string.rental_fee.toString() + bookDTO.rentalFee.toString() + R.string.vnd.toString()
+                binding.root.context.getString(R.string.rental_fee) + bookDTO.rentalFee.toString()
             if (libraryLoanSlipDTO.status == 0) {
-                binding.txtStatus.text = R.string.not_returned.toString()
+                binding.txtStatus.text = binding.root.context.getString(R.string.not_returned)
             } else {
-                binding.txtStatus.text = R.string.returned.toString()
+                binding.txtStatus.text = binding.root.context.getString(R.string.returned)
             }
 
             //if đã trả thì đổi background màu xám
@@ -62,7 +68,7 @@ class BillsAdapter(
             }
 
             //when click on item bill set visible for layout detail if it is invisible and vice versa
-            binding.cardBaseInfor.setOnClickListener() {
+            binding.cardBaseInfor.setOnClickListener {
                 if (binding.cardImageButton.visibility == android.view.View.GONE) {
                     binding.cardImageButton.visibility = android.view.View.VISIBLE
                 } else {
@@ -70,7 +76,7 @@ class BillsAdapter(
                 }
             }
 
-            binding.btnDelete.setOnClickListener() {
+            binding.btnDelete.setOnClickListener {
                 //alert
                 val builderConfirm = AlertDialog.Builder(binding.root.context)
                 val bindingConfirm =
@@ -78,11 +84,11 @@ class BillsAdapter(
                 builderConfirm.setView(bindingConfirm.root)
                 val dialogConfirm = builderConfirm.create()
                 bindingConfirm.txtLoginSuccess.text =
-                    R.string.confirm_delete.toString()
-                bindingConfirm.btnNo.setOnClickListener() {
+                    binding.root.context.getString(R.string.confirm_delete)
+                bindingConfirm.btnNo.setOnClickListener {
                     dialogConfirm.dismiss()
                 }
-                bindingConfirm.btnYes.setOnClickListener() {
+                bindingConfirm.btnYes.setOnClickListener {
                     libraryLoanSlipDAO.deleteLoanSlip(libraryLoanSlipDTO.id)
                     listBills.remove(libraryLoanSlipDTO)
 
@@ -101,7 +107,7 @@ class BillsAdapter(
                     builderSuccess.setView(bindingSuccess.root)
                     val dialogSuccess = builderSuccess.create()
                     bindingSuccess.txtLoginSuccess.text =
-                        R.string.delete_success.toString()
+                        binding.root.context.getString(R.string.delete_success)
                     bindingSuccess.btnLoginSuccess.setOnClickListener {
                         dialogSuccess.dismiss()
                     }
@@ -112,7 +118,7 @@ class BillsAdapter(
 
             }
 
-            binding.btnInfo.setOnClickListener() {
+            binding.btnInfo.setOnClickListener {
                 //intent id to detail loan activity
                 val intent =
                     android.content.Intent(binding.root.context, DetailLoanActivity::class.java)
@@ -121,7 +127,7 @@ class BillsAdapter(
 
             }
 
-            binding.btnEdit.setOnClickListener() {
+            binding.btnEdit.setOnClickListener {
                 //intent id to edit loan activity
                 val intent =
                     android.content.Intent(binding.root.context, EditLoanActivity::class.java)
@@ -152,3 +158,4 @@ class BillsAdapter(
     }
 
 }
+

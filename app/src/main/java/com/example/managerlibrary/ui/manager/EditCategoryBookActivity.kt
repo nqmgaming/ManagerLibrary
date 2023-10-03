@@ -1,11 +1,11 @@
 package com.example.managerlibrary.ui.manager
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import com.example.managerlibrary.R
 import com.example.managerlibrary.dao.CategoryBookDAO
 import com.example.managerlibrary.databinding.ActivityEditCategoryBookBinding
@@ -14,8 +14,8 @@ import com.example.managerlibrary.ui.MainActivity
 
 class EditCategoryBookActivity : AppCompatActivity() {
     private lateinit var binding: ActivityEditCategoryBookBinding
-    lateinit var categoryBookDAO: CategoryBookDAO
-    lateinit var categoryBookDTO: CategoryBookDTO
+    private lateinit var categoryBookDAO: CategoryBookDAO
+    private lateinit var categoryBookDTO: CategoryBookDTO
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityEditCategoryBookBinding.inflate(layoutInflater)
@@ -37,15 +37,15 @@ class EditCategoryBookActivity : AppCompatActivity() {
             binding.edtIdCategory.setText(categoryBookDTO.id.toString())
             binding.edtNameCategory.setText(categoryBookDTO.name)
         }
-        binding.edtIdCategory.setOnClickListener() {
+        binding.edtIdCategory.setOnClickListener {
             Toast.makeText(this, "Không thể thay đổi mã loại sách", Toast.LENGTH_SHORT).show()
         }
 
-        binding.btnCancelEditCategoryBook.setOnClickListener() {
+        binding.btnCancelEditCategoryBook.setOnClickListener {
             finish()
         }
 
-        binding.btnSaveEditCategoryBook.setOnClickListener() {
+        binding.btnSaveEditCategoryBook.setOnClickListener {
             val idCategory = binding.edtIdCategory.text.toString()
             val nameCategory = binding.edtNameCategory.text.toString()
             if (nameCategory.isEmpty()) {
@@ -63,7 +63,7 @@ class EditCategoryBookActivity : AppCompatActivity() {
                     val dialogSuccess = builderSuccess.create()
                     dialogSuccess.show()
                     bindingSuccess.txtLoginSuccess.text = "Sửa loại sách thành công"
-                    bindingSuccess.btnLoginSuccess.setOnClickListener() {
+                    bindingSuccess.btnLoginSuccess.setOnClickListener {
                         dialogSuccess.dismiss()
                         val intent = Intent(this, MainActivity::class.java)
                         intent.putExtra("ok", "category")

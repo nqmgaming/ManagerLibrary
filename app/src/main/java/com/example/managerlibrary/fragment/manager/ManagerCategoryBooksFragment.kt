@@ -1,33 +1,28 @@
 package com.example.managerlibrary.fragment.manager
 
 import android.content.Intent
-import com.example.managerlibrary.adapter.CategoryBooksAdapter
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.Observer
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.managerlibrary.adapter.Top10Adapter
+import com.example.managerlibrary.adapter.CategoryBooksAdapter
 import com.example.managerlibrary.dao.CategoryBookDAO
 import com.example.managerlibrary.databinding.FragmentManagerCategoryBooksBinding
-import com.example.managerlibrary.dto.BookDTO
 import com.example.managerlibrary.dto.CategoryBookDTO
 import com.example.managerlibrary.ui.manager.AddCategoryBooksActivity
 import com.example.managerlibrary.viewmodel.SharedViewModel
 
 class ManagerCategoryBooksFragment : Fragment() {
-    private var param1: String? = null
-    private var param2: String? = null
 
     private var _binding: FragmentManagerCategoryBooksBinding? = null
     private val binding get() = _binding!!
 
     lateinit var adapter: CategoryBooksAdapter
-    lateinit var listCategoryBooks: ArrayList<CategoryBookDTO>
-    lateinit var categoryBookDAO: CategoryBookDAO
+    private lateinit var listCategoryBooks: ArrayList<CategoryBookDTO>
+    private lateinit var categoryBookDAO: CategoryBookDAO
     private lateinit var sharedViewModel: SharedViewModel
 
     override fun onCreateView(
@@ -46,7 +41,7 @@ class ManagerCategoryBooksFragment : Fragment() {
         categoryBookDAO = CategoryBookDAO(requireContext())
         listCategoryBooks = categoryBookDAO.getAllCategoryBooks()
 
-        if (!listCategoryBooks.isEmpty()) {
+        if (listCategoryBooks.isNotEmpty()) {
             adapter = CategoryBooksAdapter(requireContext(), listCategoryBooks)
             binding.managerCategoryRecyclerView.adapter = adapter
             binding.managerCategoryRecyclerView.visibility = View.VISIBLE
@@ -57,11 +52,11 @@ class ManagerCategoryBooksFragment : Fragment() {
         if (data.equals("category")) {
             refreshList()
         }
-        sharedViewModel = ViewModelProvider(requireActivity()).get(SharedViewModel::class.java)
+        sharedViewModel = ViewModelProvider(requireActivity())[SharedViewModel::class.java]
 
-        sharedViewModel.searchText.observe(viewLifecycleOwner, Observer { newText ->
+        sharedViewModel.searchText.observe(viewLifecycleOwner) { newText ->
             // Cập nhật giao diện hoặc thực hiện tìm kiếm với `newText`
-            var filterList = ArrayList<CategoryBookDTO>()
+            val filterList = ArrayList<CategoryBookDTO>()
             for (category in listCategoryBooks) {
                 if (category.name.contains(newText, ignoreCase = true)) {
                     filterList.add(category)
@@ -73,9 +68,9 @@ class ManagerCategoryBooksFragment : Fragment() {
                 CategoryBooksAdapter(requireContext(), filterList)
             adapter.notifyDataSetChanged()
 
-        })
+        }
 
-        binding.fabAddCategory.setOnClickListener() {
+        binding.fabAddCategory.setOnClickListener {
             Intent(requireContext(), AddCategoryBooksActivity::class.java).also {
                 startActivity(it)
             }
@@ -83,7 +78,7 @@ class ManagerCategoryBooksFragment : Fragment() {
 
     }
 
-    fun refreshList() {
+    private fun refreshList() {
         listCategoryBooks.clear()
         listCategoryBooks = categoryBookDAO.getAllCategoryBooks()
         binding.managerCategoryRecyclerView.adapter =

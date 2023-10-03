@@ -31,10 +31,10 @@ class ManagerBookDataBase(context: Context) : SQLiteOpenHelper(
                 ")"
         db?.execSQL(librarianTable)
 
-/*        //create 3 data for librarian
+        //create 3 data for librarian
         db?.execSQL("INSERT INTO Librarian VALUES('admin','admin','admin','admin')")
         db?.execSQL("INSERT INTO Librarian VALUES('librarian','librarian','librarian','librarian')")
-        db?.execSQL("INSERT INTO Librarian VALUES('librarian1','librarian1','librarian1','librarian')")*/
+        db?.execSQL("INSERT INTO Librarian VALUES('librarian1','librarian1','librarian1','librarian')")
 
 
         val categoryBook = "CREATE TABLE CategoryBook( " +
@@ -43,10 +43,10 @@ class ManagerBookDataBase(context: Context) : SQLiteOpenHelper(
                 ")"
         db?.execSQL(categoryBook)
 
-/*        //create 3 data for category book
+     //create 3 data for category book
         db?.execSQL("INSERT INTO CategoryBook VALUES(1,'Sách văn học')")
         db?.execSQL("INSERT INTO CategoryBook VALUES(2,'Sách khoa học')")
-        db?.execSQL("INSERT INTO CategoryBook VALUES(3,'Sách kinh tế')")*/
+        db?.execSQL("INSERT INTO CategoryBook VALUES(3,'Sách kinh tế')")
 
         val bookTable = "CREATE TABLE Book( " +
                 "bookID INTEGER PRIMARY KEY," +
@@ -57,10 +57,10 @@ class ManagerBookDataBase(context: Context) : SQLiteOpenHelper(
                 ")"
         db?.execSQL(bookTable)
 
-/*        //create 3 data for book
+       //create 3 data for book
         db?.execSQL("INSERT INTO Book VALUES(1,'Sách văn học 1',10000,1)")
         db?.execSQL("INSERT INTO Book VALUES(2,'Sách khoa học 1',20000,2)")
-        db?.execSQL("INSERT INTO Book VALUES(3,'Sách kinh tế 1',30000,3)")*/
+        db?.execSQL("INSERT INTO Book VALUES(3,'Sách kinh tế 1',30000,3)")
 
         val memberTable = "CREATE TABLE Member( " +
                 "memberID INTEGER PRIMARY KEY," +
@@ -69,10 +69,10 @@ class ManagerBookDataBase(context: Context) : SQLiteOpenHelper(
                 ")"
         db?.execSQL(memberTable)
 
-/*        //create 3 data for member
+       //create 3 data for member
         db?.execSQL("INSERT INTO Member VALUES(1,'Nguyễn Văn A','1999')")
         db?.execSQL("INSERT INTO Member VALUES(2,'Nguyễn Văn B','1998')")
-        db?.execSQL("INSERT INTO Member VALUES(3,'Nguyễn Văn C','1997')")*/
+        db?.execSQL("INSERT INTO Member VALUES(3,'Nguyễn Văn C','1997')")
 
         val libraryLoanSlip = "CREATE TABLE LibraryLoanSlip( " +
                 "loanSlipID INTEGER PRIMARY KEY AUTOINCREMENT," +
@@ -87,16 +87,16 @@ class ManagerBookDataBase(context: Context) : SQLiteOpenHelper(
                 ")"
         db?.execSQL(libraryLoanSlip)
 
-        /*        //create 3 data for loan slip
+              //create 3 data for loan slip
                 db?.execSQL("INSERT INTO LibraryLoanSlip VALUES(1,'admin',1,1,'2020-12-12', 1)")
                 db?.execSQL("INSERT INTO LibraryLoanSlip VALUES(2,'admin',2,2,'2020-12-12', 0)")
-                db?.execSQL("INSERT INTO LibraryLoanSlip VALUES(3,'admin',3,3,'2020-12-12', 1)")*/
+                db?.execSQL("INSERT INTO LibraryLoanSlip VALUES(3,'admin',3,3,'2020-12-12', 1)")
 
 
     }
 
     override fun onUpgrade(
-        db: android.database.sqlite.SQLiteDatabase?,
+        db: SQLiteDatabase?,
         oldVersion: Int,
         newVersion: Int
     ) {

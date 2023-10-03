@@ -1,11 +1,10 @@
 package com.example.managerlibrary.ui.manager
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import android.widget.Toast
-import com.example.managerlibrary.R
+import androidx.appcompat.app.AppCompatActivity
 import com.example.managerlibrary.dao.CategoryBookDAO
 import com.example.managerlibrary.databinding.ActivityAddCategoryBooksBinding
 import com.example.managerlibrary.dto.CategoryBookDTO
@@ -13,8 +12,8 @@ import com.example.managerlibrary.ui.MainActivity
 
 class AddCategoryBooksActivity : AppCompatActivity() {
     lateinit var binding: ActivityAddCategoryBooksBinding
-    lateinit var categoryDAO: CategoryBookDAO
-    lateinit var categoryDTO: CategoryBookDTO
+    private lateinit var categoryDAO: CategoryBookDAO
+    private lateinit var categoryDTO: CategoryBookDTO
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityAddCategoryBooksBinding.inflate(layoutInflater)
@@ -29,8 +28,8 @@ class AddCategoryBooksActivity : AppCompatActivity() {
             finish()
         }
 
-        binding.btnSaveAddCategoryBooks.setOnClickListener() {
-            var name = binding.edtAddCategoryBooksName.text.toString()
+        binding.btnSaveAddCategoryBooks.setOnClickListener {
+            val name = binding.edtAddCategoryBooksName.text.toString()
             if (name.isEmpty()) {
                 binding.edtAddCategoryBooksName.error = "Nhập tên"
                 return@setOnClickListener

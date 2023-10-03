@@ -53,7 +53,7 @@ class CategoryBookDAO(context: Context) {
         val dbReadable = db.readableDatabase
         val sql = "SELECT * FROM CategoryBook WHERE categoryID = $id"
         val cursor = dbReadable.rawQuery(sql, null)
-        var category: CategoryBookDTO
+        val category: CategoryBookDTO
         if (cursor.count > 0) {
             cursor.moveToFirst()
             val idCategory = cursor.getInt(0)

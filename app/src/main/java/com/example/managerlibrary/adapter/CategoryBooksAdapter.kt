@@ -17,6 +17,7 @@ import com.example.managerlibrary.dto.CategoryBookDTO
 import com.example.managerlibrary.fragment.manager.ManagerCategoryBooksFragment
 import com.example.managerlibrary.ui.MainActivity
 
+@Suppress("NAME_SHADOWING")
 class CategoryBooksAdapter(
     context: Context,
     private val listCategoryBooks: ArrayList<CategoryBookDTO>
@@ -33,7 +34,7 @@ class CategoryBooksAdapter(
             listCategoryBooks: ArrayList<CategoryBookDTO>,
             bookDAO: BookDAO
         ) {
-            binding.cardBaseCategory.setOnClickListener() {
+            binding.cardBaseCategory.setOnClickListener {
                 if (binding.cardImageButtonCategory.visibility == android.view.View.GONE) {
                     binding.cardImageButtonCategory.visibility = android.view.View.VISIBLE
                 } else {
@@ -43,17 +44,17 @@ class CategoryBooksAdapter(
             binding.txtCategoryID.text = "Mã loại sách: " + categoryBook.id.toString()
             binding.txtCategoryName.text = "Tên loại sách: " + categoryBook.name
 
-            binding.btnDeleteCategory.setOnClickListener() {
+            binding.btnDeleteCategory.setOnClickListener {
                 val builderConfirm = AlertDialog.Builder(binding.root.context)
                 val bindingConfirm =
                     DialogConfirmBinding.inflate(LayoutInflater.from(binding.root.context))
                 builderConfirm.setView(bindingConfirm.root)
                 val dialogConfirm = builderConfirm.create()
 
-                bindingConfirm.btnNo.setOnClickListener() {
+                bindingConfirm.btnNo.setOnClickListener {
                     dialogConfirm.dismiss()
                 }
-                bindingConfirm.btnYes.setOnClickListener() {
+                bindingConfirm.btnYes.setOnClickListener {
                     //check if id category book is used in book
                     val result = bookDAO.checkBookExistByIdCategory(categoryBook.id)
                     if (result) {
@@ -63,7 +64,7 @@ class CategoryBooksAdapter(
                             DialogDeleteCategoryBinding.inflate(LayoutInflater.from(binding.root.context))
                         builderError.setView(bindingError.root)
                         val dialogError = builderError.create()
-                        bindingError.btnDeleteError.setOnClickListener() {
+                        bindingError.btnDeleteError.setOnClickListener {
                             dialogError.dismiss()
 
                         }
@@ -73,7 +74,7 @@ class CategoryBooksAdapter(
                         val inflaterLoading = LayoutInflater.from(binding.root.context)
                         builderLoading.setView(
                             inflaterLoading.inflate(
-                                com.example.managerlibrary.R.layout.dialog_proccessing,
+                                R.layout.dialog_proccessing,
                                 null
                             )
                         )
@@ -81,7 +82,7 @@ class CategoryBooksAdapter(
                         val dialogLoading = builderLoading.create()
                         dialogLoading.show()
 
-                        var result = categoryBookDAO.deleteCategoryBook(categoryBook.id)
+                        val result = categoryBookDAO.deleteCategoryBook(categoryBook.id)
                         if (result > 0) {
                             listCategoryBooks.remove(categoryBook)
                             //load lại danh sách phiếu mượn bằng cách refresh lại fragment
@@ -115,7 +116,7 @@ class CategoryBooksAdapter(
 
             }
 
-            binding.btnEditCategory.setOnClickListener(){
+            binding.btnEditCategory.setOnClickListener{
                 //intent id category book to edit
                 val intent = android.content.Intent(binding.root.context, EditCategoryBookActivity::class.java)
                 intent.putExtra("idCategory", categoryBook.id.toString())

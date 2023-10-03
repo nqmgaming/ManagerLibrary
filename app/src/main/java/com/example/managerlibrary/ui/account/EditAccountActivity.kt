@@ -1,23 +1,22 @@
 package com.example.managerlibrary.ui.account
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.MenuItem
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.example.managerlibrary.dao.LibrarianDAO
+import com.example.managerlibrary.databinding.ActivityEditUserBinding
 import com.example.managerlibrary.dto.LibrarianDTO
 import com.example.managerlibrary.sharepre.LoginSharePreference
-import com.example.managerlibrary.databinding.ActivityEditUserBinding
 
 class EditAccountActivity : AppCompatActivity() {
 
     //shared preference
-    lateinit var userSharePreference: LoginSharePreference
+    private lateinit var userSharePreference: LoginSharePreference
 
     //database
-    lateinit var librarianDTO: LibrarianDTO
-    lateinit var librarianDAO: LibrarianDAO
+    private lateinit var librarianDTO: LibrarianDTO
+    private lateinit var librarianDAO: LibrarianDAO
 
     //binding
     private lateinit var binding: ActivityEditUserBinding
@@ -44,15 +43,15 @@ class EditAccountActivity : AppCompatActivity() {
         binding.edtUsernameProfile.setText(librarianDTO.id)
         binding.edtFullnameProfile.setText(librarianDTO.name)
 
-        binding.edtUsernameProfile.setOnClickListener() {
+        binding.edtUsernameProfile.setOnClickListener {
             Toast.makeText(this, "Không thể sửa", Toast.LENGTH_SHORT).show()
         }
 
-        binding.btnCancelEditUser.setOnClickListener() {
+        binding.btnCancelEditUser.setOnClickListener {
             finish()
         }
 
-        binding.btnSaveEditUser.setOnClickListener() {
+        binding.btnSaveEditUser.setOnClickListener {
             val username = binding.edtUsernameProfile.text.toString().trim()
             val fullname = binding.edtFullnameProfile.text.toString().trim()
 
@@ -73,7 +72,7 @@ class EditAccountActivity : AppCompatActivity() {
                 finish()
 
             } else {
-                Toast.makeText(this, "Edit failed" + result, Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Edit failed$result", Toast.LENGTH_SHORT).show()
             }
         }
     }

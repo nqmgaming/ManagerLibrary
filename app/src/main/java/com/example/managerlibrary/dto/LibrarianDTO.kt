@@ -9,6 +9,6 @@ data class LibrarianDTO(
 ){
     override fun toString(): String {
         //return id + name
-        return name + " - " + id
+        return "$name - $id"
     }
 }

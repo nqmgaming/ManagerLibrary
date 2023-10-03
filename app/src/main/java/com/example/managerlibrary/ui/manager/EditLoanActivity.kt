@@ -2,47 +2,40 @@ package com.example.managerlibrary.ui.manager
 
 import android.app.DatePickerDialog
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
 import android.widget.AdapterView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.example.managerlibrary.R
-import com.example.managerlibrary.adapter.BillsAdapter
 import com.example.managerlibrary.adapter.BookLoanAdapter
-import com.example.managerlibrary.adapter.BooksAdapter
 import com.example.managerlibrary.adapter.LibrarianLoanAdapter
-import com.example.managerlibrary.adapter.MemberAdapter
 import com.example.managerlibrary.adapter.MemberLoanAdapter
 import com.example.managerlibrary.dao.BookDAO
-import com.example.managerlibrary.dao.CategoryBookDAO
 import com.example.managerlibrary.dao.LibrarianDAO
 import com.example.managerlibrary.dao.LibraryLoanSlipDAO
 import com.example.managerlibrary.dao.MemberDAO
 import com.example.managerlibrary.databinding.ActivityEditLoanBinding
 import com.example.managerlibrary.dto.BookDTO
-import com.example.managerlibrary.dto.CategoryBookDTO
 import com.example.managerlibrary.dto.LibrarianDTO
 import com.example.managerlibrary.dto.LibraryLoanSlipDTO
 import com.example.managerlibrary.dto.MemberDTO
 import com.example.managerlibrary.ui.MainActivity
 
 class EditLoanActivity : AppCompatActivity() {
-    lateinit var loanSlipDAO: LibraryLoanSlipDAO
-    lateinit var loanSlipDTO: LibraryLoanSlipDTO
+    private lateinit var loanSlipDAO: LibraryLoanSlipDAO
+    private lateinit var loanSlipDTO: LibraryLoanSlipDTO
     lateinit var bookDAO: BookDAO
     lateinit var bookDTO: BookDTO
-    lateinit var categoryBookDAO: CategoryBookDAO
-    lateinit var categoryBookDTO: CategoryBookDTO
-    lateinit var memberDAO: MemberDAO
+    private lateinit var memberDAO: MemberDAO
     lateinit var memberDTO: MemberDTO
     lateinit var librarianDTO: LibrarianDTO
-    lateinit var librarianDAO: LibrarianDAO
+    private lateinit var librarianDAO: LibrarianDAO
 
-    lateinit var bookLoanAdapter: BookLoanAdapter
-    lateinit var memberLoanAdapter: MemberLoanAdapter
-    lateinit var librarianLoanAdapter: LibrarianLoanAdapter
+    private lateinit var bookLoanAdapter: BookLoanAdapter
+    private lateinit var memberLoanAdapter: MemberLoanAdapter
+    private lateinit var librarianLoanAdapter: LibrarianLoanAdapter
 
     lateinit var listBook: ArrayList<BookDTO>
     lateinit var listMember: ArrayList<MemberDTO>
@@ -132,11 +125,11 @@ class EditLoanActivity : AppCompatActivity() {
                 override fun onNothingSelected(adapterView: AdapterView<*>?) {}
             }
 
-        binding.edtFromDateLoan.setOnClickListener() {
+        binding.edtFromDateLoan.setOnClickListener {
             // Show the date picker dialog
             val datePickerDialog = DatePickerDialog(this)
-            datePickerDialog.setOnDateSetListener { view, year, month, dayOfMonth ->
-                var endDate = String.format("%04d-%02d-%02d", year, month + 1, dayOfMonth)
+            datePickerDialog.setOnDateSetListener { _, year, month, dayOfMonth ->
+                val endDate = String.format("%04d-%02d-%02d", year, month + 1, dayOfMonth)
                 if (endDate == "") {
                     Toast.makeText(this, "Chưa chọn ngày", Toast.LENGTH_SHORT).show()
                 } else {
@@ -191,7 +184,7 @@ class EditLoanActivity : AppCompatActivity() {
             finish()
         }
 
-        binding.btnSaveEditLoan.setOnClickListener() {
+        binding.btnSaveEditLoan.setOnClickListener {
 
             //get status
             var status = 0
@@ -235,7 +228,7 @@ class EditLoanActivity : AppCompatActivity() {
                 dialogSuccess.show()
                 dialogSuccess.setCancelable(false)
                 bindingSuccess.txtLoginSuccess.text = "Sửa thành công phiếu mượn!"
-                bindingSuccess.btnLoginSuccess.setOnClickListener() {
+                bindingSuccess.btnLoginSuccess.setOnClickListener {
                     //inent data to main activity
                     val intent = Intent(this, MainActivity::class.java)
                     intent.putExtra("ok", "ok")

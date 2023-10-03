@@ -1,18 +1,17 @@
 package com.example.managerlibrary.ui
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.TextView
 import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.managerlibrary.R
-import com.example.managerlibrary.dao.LibrarianDAO
 import com.example.managerlibrary.databinding.ActivityMainBinding
 import com.example.managerlibrary.fragment.account.AddNewUserFragment
 import com.example.managerlibrary.fragment.account.ChangePasswordFragment
@@ -63,48 +62,52 @@ class MainActivity : AppCompatActivity() {
         }
 
         //get intent from add loan activity
-        val data = intent.getStringExtra("ok")
-      
-        if (data == "ok") {
-            var fragment = ManagerBillsFragment()
-            val bundle = Bundle()
-            bundle.putString("ok", "ok")
-            fragment.arguments = bundle
 
-            supportFragmentManager
-                .beginTransaction()
-                .replace(R.id.nav_host_fragment, fragment)
-                .commit()
-        } else if (data == "category") {
-            var fragment = ManagerCategoryBooksFragment()
-            val bundle = Bundle()
-            bundle.putString("ok", data)
-            fragment.arguments = bundle
+        when (val data = intent.getStringExtra("ok")) {
+            "ok" -> {
+                val fragment = ManagerBillsFragment()
+                val bundle = Bundle()
+                bundle.putString("ok", "ok")
+                fragment.arguments = bundle
 
-            supportFragmentManager
-                .beginTransaction()
-                .replace(R.id.nav_host_fragment, fragment)
-                .commit()
-        } else if (data == "member") {
-            var fragment = ManagerMembersFragment()
-            val bundle = Bundle()
-            bundle.putString("ok", data)
-            fragment.arguments = bundle
+                supportFragmentManager
+                    .beginTransaction()
+                    .replace(R.id.nav_host_fragment, fragment)
+                    .commit()
+            }
+            "category" -> {
+                val fragment = ManagerCategoryBooksFragment()
+                val bundle = Bundle()
+                bundle.putString("ok", data)
+                fragment.arguments = bundle
 
-            supportFragmentManager
-                .beginTransaction()
-                .replace(R.id.nav_host_fragment, fragment)
-                .commit()
-        } else if (data == "bookOK") {
-            var fragment = ManagerBooksFragment()
-            val bundle = Bundle()
-            bundle.putString("ok", data)
-            fragment.arguments = bundle
+                supportFragmentManager
+                    .beginTransaction()
+                    .replace(R.id.nav_host_fragment, fragment)
+                    .commit()
+            }
+            "member" -> {
+                val fragment = ManagerMembersFragment()
+                val bundle = Bundle()
+                bundle.putString("ok", data)
+                fragment.arguments = bundle
 
-            supportFragmentManager
-                .beginTransaction()
-                .replace(R.id.nav_host_fragment, fragment)
-                .commit()
+                supportFragmentManager
+                    .beginTransaction()
+                    .replace(R.id.nav_host_fragment, fragment)
+                    .commit()
+            }
+            "bookOK" -> {
+                val fragment = ManagerBooksFragment()
+                val bundle = Bundle()
+                bundle.putString("ok", data)
+                fragment.arguments = bundle
+
+                supportFragmentManager
+                    .beginTransaction()
+                    .replace(R.id.nav_host_fragment, fragment)
+                    .commit()
+            }
         }
 
 
@@ -121,7 +124,7 @@ class MainActivity : AppCompatActivity() {
         val userRole = headerView.findViewById<TextView>(R.id.txt_role)
 
         // Update the views with your data
-        userNameTextView.text = "@" + username
+        userNameTextView.text = "@$username"
         userFullNameTextView.text = fullname
         userRole.text = role
 
@@ -255,7 +258,7 @@ class MainActivity : AppCompatActivity() {
         return true
     }
 
-    fun updateUserInformation() {
+    private fun updateUserInformation() {
         val username = loginSharePreference.getID()
         val fullname = loginSharePreference.getName()
         val role = loginSharePreference.getRole()
@@ -265,7 +268,7 @@ class MainActivity : AppCompatActivity() {
         val userFullNameTextView = headerView.findViewById<TextView>(R.id.user_full_name)
         val userRole = headerView.findViewById<TextView>(R.id.txt_role)
 
-        userNameTextView.text = "@" + username
+        userNameTextView.text = "@$username"
         userFullNameTextView.text = fullname
         userRole.text = role
     }
@@ -281,7 +284,7 @@ class MainActivity : AppCompatActivity() {
         val searchItem = menu.findItem(R.id.action_search)
         val searchView = searchItem.actionView as SearchView
         searchView.queryHint = "Search..."
-        sharedViewModel = ViewModelProvider(this).get(SharedViewModel::class.java)
+        sharedViewModel = ViewModelProvider(this)[SharedViewModel::class.java]
 
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
 
@@ -317,8 +320,9 @@ class MainActivity : AppCompatActivity() {
         return true
     }
 
+    @Deprecated("Deprecated in Java")
     override fun onBackPressed() {
-        if (loginSharePreference.getRemember() == false) {
+        if (!loginSharePreference.getRemember()) {
             loginSharePreference.clearLogin()
         }
     }

@@ -2,30 +2,12 @@ package com.example.managerlibrary.dao
 
 import android.content.ContentValues
 import android.content.Context
-import com.example.managerlibrary.dto.LibrarianDTO
 import com.example.managerlibrary.database.ManagerBookDataBase
+import com.example.managerlibrary.dto.LibrarianDTO
 import java.sql.SQLDataException
 
 class LibrarianDAO(context: Context) {
     private val db: ManagerBookDataBase = ManagerBookDataBase(context)
-
-    fun addLibrarian(librarianDTO: LibrarianDTO): Long {
-        val values = ContentValues()
-        values.put("librarianID", librarianDTO.id)
-        values.put("librarianName", librarianDTO.name)
-        values.put("password", librarianDTO.password)
-        values.put("role", librarianDTO.role)
-        var result: Long = -1L
-        val dbWritable = db.writableDatabase
-        try {
-            result = dbWritable.insert("Librarian", null, values)
-        } catch (e: SQLDataException) {
-            e.printStackTrace()
-        } finally {
-            dbWritable.close()
-        }
-        return result
-    }
 
     //get librarian username(id) by id return long  if not found return -1
     fun getLibrarianUsernameByID(id: String): Int {

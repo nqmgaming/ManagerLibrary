@@ -1,15 +1,13 @@
 package com.example.managerlibrary.ui.manager
 
-import android.app.Activity
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
 import android.widget.AdapterView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.example.managerlibrary.R
-import com.example.managerlibrary.adapter.BillsAdapter
 import com.example.managerlibrary.adapter.BookLoanAdapter
 import com.example.managerlibrary.adapter.MemberLoanAdapter
 import com.example.managerlibrary.dao.BookDAO
@@ -19,10 +17,10 @@ import com.example.managerlibrary.databinding.ActivityAddLoanBinding
 import com.example.managerlibrary.dto.BookDTO
 import com.example.managerlibrary.dto.LibraryLoanSlipDTO
 import com.example.managerlibrary.dto.MemberDTO
-import com.example.managerlibrary.fragment.manager.ManagerBillsFragment
 import com.example.managerlibrary.sharepre.LoginSharePreference
 import com.example.managerlibrary.ui.MainActivity
-import java.util.ArrayList
+import java.text.SimpleDateFormat
+import java.util.Calendar
 
 class AddLoanActivity : AppCompatActivity() {
     lateinit var binding: ActivityAddLoanBinding
@@ -35,9 +33,8 @@ class AddLoanActivity : AppCompatActivity() {
     private lateinit var memberDAO: MemberDAO
     private lateinit var bookDAO: BookDAO
     private lateinit var userSharePreferences: LoginSharePreference
-    lateinit var libraryLoanSlipDTO: LibraryLoanSlipDTO
-    lateinit var libraryLoanSlipDAO: LibraryLoanSlipDAO
-    lateinit var billAdapter: BillsAdapter
+    private lateinit var libraryLoanSlipDTO: LibraryLoanSlipDTO
+    private lateinit var libraryLoanSlipDAO: LibraryLoanSlipDAO
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -102,11 +99,11 @@ class AddLoanActivity : AppCompatActivity() {
             finish()
         }
 
-        binding.btnAddLoan.setOnClickListener() {
+        binding.btnAddLoan.setOnClickListener {
 
             //if user  not choose book return
             if (binding.spinnerAddLoanNameBook.selectedItem == null) {
-                binding.spinnerAddLoanNameBook.setErrorText("Please choose book")
+                binding.spinnerAddLoanNameBook.errorText = "Please choose book"
                 Toast.makeText(this, "Please choose book", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             } else {
@@ -115,7 +112,7 @@ class AddLoanActivity : AppCompatActivity() {
 
             //if user  not choose member return
             if (binding.spinnerAddLoanNameMember.selectedItem == null) {
-                binding.spinnerAddLoanNameMember.setErrorText("Please choose member")
+                binding.spinnerAddLoanNameMember.errorText = "Please choose member"
                 Toast.makeText(this, "Please choose member", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             } else {
@@ -123,8 +120,8 @@ class AddLoanActivity : AppCompatActivity() {
             }
 
             //get current date
-            val currentDateTime = java.util.Calendar.getInstance().time
-            val dateFormat = java.text.SimpleDateFormat("yyyy-MM-dd")
+            val currentDateTime = Calendar.getInstance().time
+            val dateFormat = SimpleDateFormat("yyyy-MM-dd")
             val date = dateFormat.format(currentDateTime)
 
             //get id librarian
@@ -138,9 +135,6 @@ class AddLoanActivity : AppCompatActivity() {
 
             //get id member
             val idMember = member.id
-
-            //get rental fee
-            val rentalFee = book.rentalFee
 
             libraryLoanSlipDTO = LibraryLoanSlipDTO(
                 0,
@@ -165,7 +159,7 @@ class AddLoanActivity : AppCompatActivity() {
                 dialogSuccess.show()
                 dialogSuccess.setCancelable(false)
                 bindingSuccess.txtLoginSuccess.text = "Thêm thành công phiếu mượn!"
-                bindingSuccess.btnLoginSuccess.setOnClickListener() {
+                bindingSuccess.btnLoginSuccess.setOnClickListener {
                     //inent data to main activity
                     val intent = Intent(this, MainActivity::class.java)
                     intent.putExtra("ok", "ok")

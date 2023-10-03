@@ -11,12 +11,10 @@ import com.example.managerlibrary.dao.MemberDAO
 import com.example.managerlibrary.databinding.DialogConfirmBinding
 import com.example.managerlibrary.databinding.DialogDeleteCategoryBinding
 import com.example.managerlibrary.databinding.DialogLoginSuccessBinding
-import com.example.managerlibrary.dto.MemberDTO
 import com.example.managerlibrary.databinding.ItemMemberBinding
-import com.example.managerlibrary.fragment.manager.ManagerCategoryBooksFragment
+import com.example.managerlibrary.dto.MemberDTO
 import com.example.managerlibrary.fragment.manager.ManagerMembersFragment
 import com.example.managerlibrary.ui.MainActivity
-import com.example.managerlibrary.ui.manager.EditCategoryBookActivity
 import com.example.managerlibrary.ui.manager.EditMemberActivity
 
 class MemberAdapter(
@@ -38,7 +36,7 @@ class MemberAdapter(
             listMembers: ArrayList<MemberDTO>,
             libraryLoanSlipDAO: LibraryLoanSlipDAO
         ) {
-            binding.cardBaseMember.setOnClickListener() {
+            binding.cardBaseMember.setOnClickListener {
                 if (binding.cardImageButtonMember.visibility == android.view.View.GONE) {
                     binding.cardImageButtonMember.visibility = android.view.View.VISIBLE
                 } else {
@@ -49,7 +47,7 @@ class MemberAdapter(
             binding.txtNameMember.text = "Tên: " + memberDTO.name
             binding.txtBirthMember.text = "Năm sinh: " + memberDTO.birthYear
 
-            binding.btnDeleteMember.setOnClickListener() {
+            binding.btnDeleteMember.setOnClickListener {
                 val builderConfirm = AlertDialog.Builder(binding.root.context)
                 val bindingCofirm =
                     DialogConfirmBinding.inflate(LayoutInflater.from(binding.root.context))
@@ -57,10 +55,10 @@ class MemberAdapter(
                 val dialogConfirm = builderConfirm.create()
                 bindingCofirm.txtLoginSuccess.text =
                     "Bạn có chắc chắn muốn xóa thành \n viên này không?"
-                bindingCofirm.btnNo.setOnClickListener() {
+                bindingCofirm.btnNo.setOnClickListener {
                     dialogConfirm.dismiss()
                 }
-                bindingCofirm.btnYes.setOnClickListener() {
+                bindingCofirm.btnYes.setOnClickListener {
                     //check if id member is used in library loan slip
                     val result = libraryLoanSlipDAO.checkLoanSlipExitsByIDMember(memberDTO.id)
                     if (result) {
@@ -72,7 +70,7 @@ class MemberAdapter(
                         val dialogError = builderError.create()
                         bindingError.txtDeleteError.text =
                             "Không thể xóa thành viên này \n vì có mượn sách trong thư viện"
-                        bindingError.btnDeleteError.setOnClickListener() {
+                        bindingError.btnDeleteError.setOnClickListener {
                             dialogError.dismiss()
 
                         }
@@ -107,7 +105,7 @@ class MemberAdapter(
 
             }
 
-            binding.btnEditMember.setOnClickListener() {
+            binding.btnEditMember.setOnClickListener {
                 val intent = android.content.Intent(
                     binding.root.context,
                     EditMemberActivity::class.java

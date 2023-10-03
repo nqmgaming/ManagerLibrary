@@ -1,34 +1,33 @@
 package com.example.managerlibrary.ui.manager
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
-import android.widget.Toast
-import com.example.managerlibrary.dao.LibrarianDAO
-import com.example.managerlibrary.dto.LibrarianDTO
-import com.example.managerlibrary.dao.LibraryLoanSlipDAO
-import com.example.managerlibrary.dto.LibraryLoanSlipDTO
-import com.example.managerlibrary.dao.MemberDAO
-import com.example.managerlibrary.dto.MemberDTO
+import androidx.appcompat.app.AppCompatActivity
 import com.example.managerlibrary.dao.BookDAO
 import com.example.managerlibrary.dao.CategoryBookDAO
+import com.example.managerlibrary.dao.LibrarianDAO
+import com.example.managerlibrary.dao.LibraryLoanSlipDAO
+import com.example.managerlibrary.dao.MemberDAO
 import com.example.managerlibrary.databinding.ActivityDetailLoanBinding
 import com.example.managerlibrary.dto.BookDTO
 import com.example.managerlibrary.dto.CategoryBookDTO
+import com.example.managerlibrary.dto.LibrarianDTO
+import com.example.managerlibrary.dto.LibraryLoanSlipDTO
+import com.example.managerlibrary.dto.MemberDTO
 
 class DetailLoanActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDetailLoanBinding
 
-    lateinit var loanSlipDAO: LibraryLoanSlipDAO
+    private lateinit var loanSlipDAO: LibraryLoanSlipDAO
     lateinit var bookDAO: BookDAO
-    lateinit var bookDTO: BookDTO
-    lateinit var categoryBookDAO: CategoryBookDAO
-    lateinit var categoryBookDTO: CategoryBookDTO
-    lateinit var memberDAO: MemberDAO
-    lateinit var memberDTO: MemberDTO
-    lateinit var librarianDAO: LibrarianDAO
-    lateinit var librarianDTO: LibrarianDTO
-    lateinit var loanSlipDTO: LibraryLoanSlipDTO
+    private lateinit var bookDTO: BookDTO
+    private lateinit var categoryBookDAO: CategoryBookDAO
+    private lateinit var categoryBookDTO: CategoryBookDTO
+    private lateinit var memberDAO: MemberDAO
+    private lateinit var memberDTO: MemberDTO
+    private lateinit var librarianDAO: LibrarianDAO
+    private lateinit var librarianDTO: LibrarianDTO
+    private lateinit var loanSlipDTO: LibraryLoanSlipDTO
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailLoanBinding.inflate(layoutInflater)
@@ -69,7 +68,7 @@ class DetailLoanActivity : AppCompatActivity() {
         binding.tvStatusDetail.text =
             if (loanSlipDTO.status == 0) "Trạng thái:  Chưa trả" else "Trạng thái: Đã trả"
 
-        binding.btnOkDetail.setOnClickListener() {
+        binding.btnOkDetail.setOnClickListener {
             finish()
         }
     }

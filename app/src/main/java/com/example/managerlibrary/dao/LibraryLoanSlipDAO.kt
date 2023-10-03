@@ -2,10 +2,9 @@ package com.example.managerlibrary.dao
 
 import android.content.Context
 import android.util.Log
-import com.example.managerlibrary.dto.LibraryLoanSlipDTO
 import com.example.managerlibrary.database.ManagerBookDataBase
 import com.example.managerlibrary.dto.BookDTO
-import com.example.managerlibrary.dto.LibrarianDTO
+import com.example.managerlibrary.dto.LibraryLoanSlipDTO
 
 class LibraryLoanSlipDAO(context: Context) {
     private val db: ManagerBookDataBase = ManagerBookDataBase(context)
@@ -130,7 +129,7 @@ class LibraryLoanSlipDAO(context: Context) {
     fun getNumberOfLoanSlipByID(id: String): Int {
         val dbReadable = db.readableDatabase
         val sql = "SELECT COUNT(loanSlipID) FROM LibraryLoanSlip WHERE librarianID = ?"
-        val cursor = dbReadable.rawQuery(sql, arrayOf(id.toString()))
+        val cursor = dbReadable.rawQuery(sql, arrayOf(id))
         var count = 0
         if (cursor.count > 0) {
             cursor.moveToFirst()

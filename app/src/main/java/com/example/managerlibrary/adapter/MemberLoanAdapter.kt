@@ -10,21 +10,21 @@ import com.example.managerlibrary.dto.MemberDTO
 
 class MemberLoanAdapter(
     context: Context,
-    private val listMembers: ArrayList<MemberDTO>
+    listMembers: ArrayList<MemberDTO>
 ) : ArrayAdapter<MemberDTO>(context, 0, listMembers) {
 
     private var _binding: ItemMembersLoanBinding? = null
     private val binding get() = _binding!!
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
-        return initView(position, convertView, parent)
+        return initView(position, parent)
     }
 
     override fun getDropDownView(position: Int, convertView: View?, parent: ViewGroup): View {
-        return initView(position, convertView, parent)
+        return initView(position, parent)
     }
 
-    private fun initView(position: Int, convertView: View?, parent: ViewGroup): View {
+    private fun initView(position: Int, parent: ViewGroup): View {
         _binding =
             ItemMembersLoanBinding.inflate(LayoutInflater.from(parent.context), parent, false)
 

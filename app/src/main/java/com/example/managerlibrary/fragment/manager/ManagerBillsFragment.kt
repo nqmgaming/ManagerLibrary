@@ -1,22 +1,20 @@
 package com.example.managerlibrary.fragment.manager
 
-import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.Observer
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.managerlibrary.ui.manager.AddLoanActivity
 import com.example.managerlibrary.adapter.BillsAdapter
 import com.example.managerlibrary.dao.BookDAO
 import com.example.managerlibrary.dao.LibraryLoanSlipDAO
-import com.example.managerlibrary.databinding.FragmentManagerBillsBinding // Import the correct binding class
+import com.example.managerlibrary.databinding.FragmentManagerBillsBinding
 import com.example.managerlibrary.dto.BookDTO
 import com.example.managerlibrary.dto.LibraryLoanSlipDTO
+import com.example.managerlibrary.ui.manager.AddLoanActivity
 import com.example.managerlibrary.viewmodel.SharedViewModel
 
 class ManagerBillsFragment : Fragment() {
@@ -29,14 +27,14 @@ class ManagerBillsFragment : Fragment() {
     private lateinit var sharedViewModel: SharedViewModel
 
     private val binding get() = _binding!!
-    lateinit var bookDTO: BookDTO
+    private lateinit var bookDTO: BookDTO
     lateinit var bookDAO: BookDAO
-    lateinit var listBook: ArrayList<BookDTO>
+    private lateinit var listBook: ArrayList<BookDTO>
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentManagerBillsBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -50,7 +48,7 @@ class ManagerBillsFragment : Fragment() {
 
         listLoanSlip = libraryLoanSlipDAO.getAllLoanSlip()
 
-        if (!listLoanSlip.isEmpty()){
+        if (listLoanSlip.isNotEmpty()){
             adapter = BillsAdapter(requireContext(), listLoanSlip)
             binding.managerBillsRecyclerView.adapter = adapter
             adapter.notifyDataSetChanged()
@@ -69,16 +67,16 @@ class ManagerBillsFragment : Fragment() {
 
         //get all book from database by id
         bookDAO = BookDAO(requireContext())
-        listBook = ArrayList<BookDTO>()
+        listBook = ArrayList()
         for (i in 0 until listBookName.size) {
             bookDTO = bookDAO.getBookByID(listBookName[i])
             listBook.add(bookDTO)
         }
-        var filterList = ArrayList<LibraryLoanSlipDTO>()
+        val filterList = ArrayList<LibraryLoanSlipDTO>()
 
-        sharedViewModel = ViewModelProvider(requireActivity()).get(SharedViewModel::class.java)
+        sharedViewModel = ViewModelProvider(requireActivity())[SharedViewModel::class.java]
 
-        sharedViewModel.searchText.observe(viewLifecycleOwner, Observer { newText ->
+        sharedViewModel.searchText.observe(viewLifecycleOwner) { newText ->
 
             listBookName.clear()
             filterList.clear()
@@ -98,9 +96,9 @@ class ManagerBillsFragment : Fragment() {
             updateData(filterList)
             adapter.notifyDataSetChanged()
 
-        })
+        }
 
-        binding.fabAddBill.setOnClickListener() {
+        binding.fabAddBill.setOnClickListener {
             //intent to add bill
             Intent(requireContext(), AddLoanActivity::class.java).also {
                 startActivity(it)
@@ -115,12 +113,12 @@ class ManagerBillsFragment : Fragment() {
         _binding = null
     }
 
-    fun updateData(newList: ArrayList<LibraryLoanSlipDTO>) {
+    private fun updateData(newList: ArrayList<LibraryLoanSlipDTO>) {
         // Assuming your data list in the adapter is named `dataList`
         listLoanSlip.clear()
         listLoanSlip.addAll(newList)
     }
-    fun refreshList() {
+    private fun refreshList() {
         listLoanSlip.clear()
         listLoanSlip.addAll(libraryLoanSlipDAO.getAllLoanSlip())
         adapter.notifyDataSetChanged()

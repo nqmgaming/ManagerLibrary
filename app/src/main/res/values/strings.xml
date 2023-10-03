@@ -31,4 +31,6 @@
     <string name="delete_success">Xóa phiếu mượn thành công\n</string>
     <string name="id_book">Mã sách: </string>
     <string name="category">"Thể loại: "</string>
+    <string name="log_in">Đăng nhập</string>
+    <string name="add_book">Thêm sách</string>
 </resources>
