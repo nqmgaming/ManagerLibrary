@@ -5,7 +5,6 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.managerlibrary.ui.manager.EditCategoryBookActivity
 import com.example.managerlibrary.R
 import com.example.managerlibrary.dao.BookDAO
 import com.example.managerlibrary.dao.CategoryBookDAO
@@ -16,6 +15,7 @@ import com.example.managerlibrary.databinding.ItemCategoryBinding
 import com.example.managerlibrary.dto.CategoryBookDTO
 import com.example.managerlibrary.fragment.manager.ManagerCategoryBooksFragment
 import com.example.managerlibrary.ui.MainActivity
+import com.example.managerlibrary.ui.manager.EditCategoryBookActivity
 
 @Suppress("NAME_SHADOWING")
 class CategoryBooksAdapter(
@@ -119,7 +119,7 @@ class CategoryBooksAdapter(
             binding.btnEditCategory.setOnClickListener{
                 //intent id category book to edit
                 val intent = android.content.Intent(binding.root.context, EditCategoryBookActivity::class.java)
-                intent.putExtra("idCategory", categoryBook.id.toString())
+                intent.putExtra("idCategory", categoryBook.id)
                 binding.root.context.startActivity(intent)
             }
         }

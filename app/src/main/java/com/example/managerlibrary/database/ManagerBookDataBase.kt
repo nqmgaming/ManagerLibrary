@@ -43,10 +43,10 @@ class ManagerBookDataBase(context: Context) : SQLiteOpenHelper(
                 ")"
         db?.execSQL(categoryBook)
 
-     //create 3 data for category book
-        db?.execSQL("INSERT INTO CategoryBook VALUES(1,'Sách văn học')")
-        db?.execSQL("INSERT INTO CategoryBook VALUES(2,'Sách khoa học')")
-        db?.execSQL("INSERT INTO CategoryBook VALUES(3,'Sách kinh tế')")
+//     //create 3 data for category book
+//        db?.execSQL("INSERT INTO CategoryBook VALUES(1,'Sách văn học')")
+//        db?.execSQL("INSERT INTO CategoryBook VALUES(2,'Sách khoa học')")
+//        db?.execSQL("INSERT INTO CategoryBook VALUES(3,'Sách kinh tế')")
 
         val bookTable = "CREATE TABLE Book( " +
                 "bookID INTEGER PRIMARY KEY," +
@@ -57,10 +57,10 @@ class ManagerBookDataBase(context: Context) : SQLiteOpenHelper(
                 ")"
         db?.execSQL(bookTable)
 
-       //create 3 data for book
-        db?.execSQL("INSERT INTO Book VALUES(1,'Sách văn học 1',10000,1)")
-        db?.execSQL("INSERT INTO Book VALUES(2,'Sách khoa học 1',20000,2)")
-        db?.execSQL("INSERT INTO Book VALUES(3,'Sách kinh tế 1',30000,3)")
+//       //create 3 data for book
+//        db?.execSQL("INSERT INTO Book VALUES(1,'Sách văn học 1',10000,1)")
+//        db?.execSQL("INSERT INTO Book VALUES(2,'Sách khoa học 1',20000,2)")
+//        db?.execSQL("INSERT INTO Book VALUES(3,'Sách kinh tế 1',30000,3)")
 
         val memberTable = "CREATE TABLE Member( " +
                 "memberID INTEGER PRIMARY KEY," +
@@ -87,10 +87,10 @@ class ManagerBookDataBase(context: Context) : SQLiteOpenHelper(
                 ")"
         db?.execSQL(libraryLoanSlip)
 
-              //create 3 data for loan slip
-                db?.execSQL("INSERT INTO LibraryLoanSlip VALUES(1,'admin',1,1,'2020-12-12', 1)")
-                db?.execSQL("INSERT INTO LibraryLoanSlip VALUES(2,'admin',2,2,'2020-12-12', 0)")
-                db?.execSQL("INSERT INTO LibraryLoanSlip VALUES(3,'admin',3,3,'2020-12-12', 1)")
+//              //create 3 data for loan slip
+//                db?.execSQL("INSERT INTO LibraryLoanSlip VALUES(1,'admin',1,1,'2020-12-12', 1)")
+//                db?.execSQL("INSERT INTO LibraryLoanSlip VALUES(2,'admin',2,2,'2020-12-12', 0)")
+//                db?.execSQL("INSERT INTO LibraryLoanSlip VALUES(3,'admin',3,3,'2020-12-12', 1)")
 
 
     }

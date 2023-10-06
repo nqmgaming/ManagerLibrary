@@ -16,6 +16,8 @@ import com.example.managerlibrary.dto.BookDTO
 import com.example.managerlibrary.dto.LibraryLoanSlipDTO
 import com.example.managerlibrary.ui.manager.AddLoanActivity
 import com.example.managerlibrary.viewmodel.SharedViewModel
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 
 class ManagerBillsFragment : Fragment() {
     private lateinit var libraryLoanSlipDAO: LibraryLoanSlipDAO
@@ -30,7 +32,7 @@ class ManagerBillsFragment : Fragment() {
     private lateinit var bookDTO: BookDTO
     lateinit var bookDAO: BookDAO
     private lateinit var listBook: ArrayList<BookDTO>
-
+    val dbLoan = Firebase.firestore
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -46,18 +48,31 @@ class ManagerBillsFragment : Fragment() {
         binding.managerBillsRecyclerView.layoutManager = LinearLayoutManager(context)
         libraryLoanSlipDAO = LibraryLoanSlipDAO(requireContext())
 
-        listLoanSlip = libraryLoanSlipDAO.getAllLoanSlip()
+        listLoanSlip = ArrayList()
+//        dbLoan.collection("loanSlip")
+//            .get()
+//            .addOnSuccessListener { result ->
+//                for (document in result) {
+//                    val loanSlip = LibraryLoanSlipDTO(
+//                        document.data["id"].toString(),
+//                        document.data["idBook"].toString().toInt(),
+//                        document.data["idLibrarian"].toString(),
+//                        document.data["idMember"].toString().toInt(),
+//                        document.data["dateLoan"].toString(),
+//                        document.data["status"].toString().toInt()
+//                    )
+//                    listLoanSlip.add(loanSlip)
+//                }
+//
+//                Log.d("TAGGG", listLoanSlip.toString())
+//                adapter = BillsAdapter(requireActivity(), listLoanSlip)
+//                binding.managerBillsRecyclerView.adapter = adapter
+//                adapter.notifyDataSetChanged()
+//
+//                // Đặt các lệnh khác tương tác với listLoanSlip ở đây
+//            }
 
-        if (listLoanSlip.isNotEmpty()){
-            adapter = BillsAdapter(requireContext(), listLoanSlip)
-            binding.managerBillsRecyclerView.adapter = adapter
-            adapter.notifyDataSetChanged()
-        }
 
-        val data = arguments?.getString("ok")
-        if (data.equals("ok")){
-            refreshList()
-        }
 
         //get all book name from database
         val listBookName = ArrayList<Int>()
@@ -105,6 +120,30 @@ class ManagerBillsFragment : Fragment() {
             }
         }
 
+        //update when data change from firestore
+        dbLoan.collection("loanSlip")
+            .addSnapshotListener { value, error ->
+                if (error != null) {
+                    return@addSnapshotListener
+                }
+                listLoanSlip.clear()
+                for (document in value!!) {
+                    val loanSlip = LibraryLoanSlipDTO(
+                        document.data["id"].toString(),
+                        document.data["idBook"].toString().toInt(),
+                        document.data["idLibrarian"].toString(),
+                        document.data["idMember"].toString().toInt(),
+                        document.data["dateLoan"].toString(),
+                        document.data["status"].toString().toInt()
+                    )
+                    listLoanSlip.add(loanSlip)
+                }
+                // Đặt các lệnh khác tương tác với listLoanSlip ở đây
+                adapter = BillsAdapter(requireActivity(), listLoanSlip)
+                binding.managerBillsRecyclerView.adapter = adapter
+                adapter.notifyDataSetChanged()
+            }
+
 
     }
 
@@ -118,11 +157,8 @@ class ManagerBillsFragment : Fragment() {
         listLoanSlip.clear()
         listLoanSlip.addAll(newList)
     }
-    private fun refreshList() {
-        listLoanSlip.clear()
-        listLoanSlip.addAll(libraryLoanSlipDAO.getAllLoanSlip())
-        adapter.notifyDataSetChanged()
-    }
+
+
 
     override fun onDestroy() {
         super.onDestroy()

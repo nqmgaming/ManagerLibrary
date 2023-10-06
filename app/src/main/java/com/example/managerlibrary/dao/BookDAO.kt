@@ -2,8 +2,8 @@ package com.example.managerlibrary.dao
 
 import android.content.ContentValues
 import android.content.Context
-import com.example.managerlibrary.dto.BookDTO
 import com.example.managerlibrary.database.ManagerBookDataBase
+import com.example.managerlibrary.dto.BookDTO
 
 class BookDAO(context: Context) {
     private val db: ManagerBookDataBase = ManagerBookDataBase(context)
@@ -18,7 +18,7 @@ class BookDAO(context: Context) {
             val idBook = cursor.getInt(0)
             val name = cursor.getString(1)
             val rentalFee = cursor.getInt(2)
-            val category = cursor.getInt(3)
+            val category = cursor.getString(3)
             val bookDTO = BookDTO(idBook, name, rentalFee, category, 0)
             cursor.close()
             dbReadable.close()
@@ -26,7 +26,7 @@ class BookDAO(context: Context) {
         }
         cursor.close()
         dbReadable.close()
-        return BookDTO(-1, "", -1, -1, 0)
+        return BookDTO(-1, "", -1, "", 0)
     }
 
     //get all book
@@ -41,7 +41,7 @@ class BookDAO(context: Context) {
                 val idBook = cursor.getInt(0)
                 val name = cursor.getString(1)
                 val rentalFee = cursor.getInt(2)
-                val category = cursor.getInt(3)
+                val category = cursor.getString(3)
                 val bookDTO = BookDTO(idBook, name, rentalFee, category)
                 listBook.add(bookDTO)
                 cursor.moveToNext()
@@ -53,7 +53,7 @@ class BookDAO(context: Context) {
     }
 
     //check book exist by id category
-    fun checkBookExistByIdCategory(idCategory: Int): Boolean {
+    fun checkBookExistByIdCategory(idCategory: String): Boolean {
         val dbReadable = db.readableDatabase
         val sql = "SELECT * FROM Book WHERE categoryID = ?"
         val cursor = dbReadable.rawQuery(sql, arrayOf(idCategory.toString()))

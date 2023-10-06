@@ -15,10 +15,8 @@ import com.example.managerlibrary.databinding.DialogLoginSuccessBinding
 import com.example.managerlibrary.databinding.ItemBooksBinding
 import com.example.managerlibrary.dto.BookDTO
 import com.example.managerlibrary.fragment.manager.ManagerBooksFragment
-import com.example.managerlibrary.fragment.manager.ManagerMembersFragment
 import com.example.managerlibrary.ui.MainActivity
 import com.example.managerlibrary.ui.manager.EditBookActivity
-import com.example.managerlibrary.ui.manager.EditMemberActivity
 
 class BooksAdapter(
     context: Context,

@@ -18,7 +18,7 @@ class CategoryBookDAO(context: Context) {
             cursor.moveToFirst()
             while (!cursor.isAfterLast) {
                 val category: CategoryBookDTO
-                val idCategory = cursor.getInt(0)
+                val idCategory = cursor.getString(0)
                 val nameCategory = cursor.getString(1)
                 category = CategoryBookDTO(idCategory, nameCategory)
                 list.add(category)
@@ -31,7 +31,7 @@ class CategoryBookDAO(context: Context) {
     }
 
     //get name category book by id
-    fun getNameCategoryBookById(id: Int): String {
+    fun getNameCategoryBookById(id: String): String {
         val dbReadable = db.readableDatabase
         val sql = "SELECT * FROM CategoryBook WHERE categoryID = $id"
         val cursor = dbReadable.rawQuery(sql, null)
@@ -49,14 +49,14 @@ class CategoryBookDAO(context: Context) {
     }
 
     //get category by id
-    fun getCategoryBookById(id: Int): CategoryBookDTO {
+    fun getCategoryBookById(id: String): CategoryBookDTO {
         val dbReadable = db.readableDatabase
         val sql = "SELECT * FROM CategoryBook WHERE categoryID = $id"
         val cursor = dbReadable.rawQuery(sql, null)
         val category: CategoryBookDTO
         if (cursor.count > 0) {
             cursor.moveToFirst()
-            val idCategory = cursor.getInt(0)
+            val idCategory = cursor.getString(0)
             val nameCategory = cursor.getString(1)
             category = CategoryBookDTO(idCategory, nameCategory)
             cursor.close()
@@ -65,7 +65,7 @@ class CategoryBookDAO(context: Context) {
         }
         cursor.close()
         dbReadable.close()
-        return CategoryBookDTO(-1, "")
+        return CategoryBookDTO("", "")
     }
 
     //insert category book
@@ -83,7 +83,7 @@ class CategoryBookDAO(context: Context) {
     }
 
     //delete category book
-    fun deleteCategoryBook(id: Int): Int {
+    fun deleteCategoryBook(id: String): Int {
         var result = -1
         val dbWritable = db.writableDatabase
         try {

@@ -14,6 +14,8 @@ import com.example.managerlibrary.databinding.FragmentManagerCategoryBooksBindin
 import com.example.managerlibrary.dto.CategoryBookDTO
 import com.example.managerlibrary.ui.manager.AddCategoryBooksActivity
 import com.example.managerlibrary.viewmodel.SharedViewModel
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 
 class ManagerCategoryBooksFragment : Fragment() {
 
@@ -24,6 +26,8 @@ class ManagerCategoryBooksFragment : Fragment() {
     private lateinit var listCategoryBooks: ArrayList<CategoryBookDTO>
     private lateinit var categoryBookDAO: CategoryBookDAO
     private lateinit var sharedViewModel: SharedViewModel
+
+    val dbCategory = Firebase.firestore
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,19 +43,27 @@ class ManagerCategoryBooksFragment : Fragment() {
         binding.managerCategoryRecyclerView.setHasFixedSize(true)
         binding.managerCategoryRecyclerView.layoutManager = LinearLayoutManager(context)
         categoryBookDAO = CategoryBookDAO(requireContext())
-        listCategoryBooks = categoryBookDAO.getAllCategoryBooks()
 
-        if (listCategoryBooks.isNotEmpty()) {
-            adapter = CategoryBooksAdapter(requireContext(), listCategoryBooks)
-            binding.managerCategoryRecyclerView.adapter = adapter
-            binding.managerCategoryRecyclerView.visibility = View.VISIBLE
-            adapter.notifyDataSetChanged()
-        }
+        listCategoryBooks = ArrayList()
+//        dbCategory.collection("category books")
+//            .get()
+//            .addOnSuccessListener { result ->
+//                for (document in result) {
+//                    val category = CategoryBookDTO(
+//                        document.data["id"].toString(),
+//                        document.data["name"].toString()
+//                    )
+//                    listCategoryBooks.add(category)
+//                }
+//                adapter = CategoryBooksAdapter(requireContext(), listCategoryBooks)
+//                binding.managerCategoryRecyclerView.adapter = adapter
+//                adapter.notifyDataSetChanged()
+//            }
+//            .addOnFailureListener { exception ->
+//                println("Error getting documents: $exception")
+//            }
 
-        val data = arguments?.getString("ok")
-        if (data.equals("category")) {
-            refreshList()
-        }
+
         sharedViewModel = ViewModelProvider(requireActivity())[SharedViewModel::class.java]
 
         sharedViewModel.searchText.observe(viewLifecycleOwner) { newText ->
@@ -76,14 +88,26 @@ class ManagerCategoryBooksFragment : Fragment() {
             }
         }
 
-    }
+        // update when data change from firestore
+        dbCategory.collection("category books")
+            .addSnapshotListener { value, error ->
+                if (error != null) {
+                    return@addSnapshotListener
+                }
+                listCategoryBooks.clear()
+                for (document in value!!) {
+                    val category = CategoryBookDTO(
+                        document.data["id"].toString(),
+                        document.data["name"].toString()
+                    )
+                    listCategoryBooks.add(category)
+                }
 
-    private fun refreshList() {
-        listCategoryBooks.clear()
-        listCategoryBooks = categoryBookDAO.getAllCategoryBooks()
-        binding.managerCategoryRecyclerView.adapter =
-            CategoryBooksAdapter(requireContext(), listCategoryBooks)
-        adapter.notifyDataSetChanged()
+                adapter = CategoryBooksAdapter(requireContext(), listCategoryBooks)
+                binding.managerCategoryRecyclerView.adapter = adapter
+                adapter.notifyDataSetChanged()
+            }
+
     }
 
     override fun onDestroyView() {

@@ -1,7 +1,7 @@
 package com.example.managerlibrary.dto
 
 data class CategoryBookDTO(
-    val id: Int,
+    val id: String,
     val name: String
 ) {
     override fun toString(): String {

@@ -55,6 +55,8 @@ class EditLoanActivity : AppCompatActivity() {
         setSupportActionBar(binding.toolbarEditLoan)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowHomeEnabled(true)
+
+        //get all librarian
         listLibrarian = ArrayList()
         firebase.collection("users")
             .get()
@@ -81,9 +83,6 @@ class EditLoanActivity : AppCompatActivity() {
         bookDAO = BookDAO(this)
         listBook = bookDAO.getAllBook()
 
-        //get all librarian
-        librarianDAO = LibrarianDAO(this)
-//        listLibrarian = librarianDAO.getAllLibrarian()
 
         //set adapter for spinner
         bookLoanAdapter = BookLoanAdapter(this, listBook)
@@ -114,7 +113,9 @@ class EditLoanActivity : AppCompatActivity() {
                     binding.spinnerEditLibrarianNameMember.hint = "Tên thủ thư"
                 }
 
-                override fun onNothingSelected(adapterView: AdapterView<*>?) {}
+                override fun onNothingSelected(adapterView: AdapterView<*>?) {
+                    binding.spinnerEditLibrarianNameMember.hint = "Tên thủ thư"
+                }
             }
 
         //set event for spinner
@@ -171,40 +172,55 @@ class EditLoanActivity : AppCompatActivity() {
         val idLoanSlip = intent.getStringExtra("idLoanSlip")
 
         if (idLoanSlip != null) {
-            loanSlipDAO = LibraryLoanSlipDAO(this)
-            loanSlipDTO = loanSlipDAO.getLoanSlipByID(idLoanSlip.toInt())
+            firebase.collection("loanSlip")
+                .get()
+                .addOnSuccessListener {
+                    for (document in it) {
+                        if (document.data["id"].toString() == idLoanSlip) {
+                            loanSlipDTO = LibraryLoanSlipDTO(
+                                document.data["id"].toString(),
+                                document.data["idBook"].toString().toInt(),
+                                document.data["idLibrarian"].toString(),
+                                document.data["idMember"].toString().toInt(),
+                                document.data["dateLoan"].toString(),
+                                document.data["status"].toString().toInt()
+                            )
+                            //get book by id
+                            bookDAO = BookDAO(this)
+                            bookDTO = bookDAO.getBookByID(loanSlipDTO.idBook)
 
-            //get book by id
-            bookDAO = BookDAO(this)
-            bookDTO = bookDAO.getBookByID(loanSlipDTO.idBook)
+                            //get member by id
+                            memberDAO = MemberDAO(this)
+                            memberDTO = memberDAO.getMemberDTOById(loanSlipDTO.idMember)
 
-            //get member by id
-            memberDAO = MemberDAO(this)
-            memberDTO = memberDAO.getMemberDTOById(loanSlipDTO.idMember)
+                            //get  librarian by id
+                            librarianDAO = LibrarianDAO(this)
+                            librarianDTO = librarianDAO.getLibrarianByID(loanSlipDTO.idLibrarian)
 
-            //get  librarian by id
-            librarianDAO = LibrarianDAO(this)
-            librarianDTO = librarianDAO.getLibrarianByID(loanSlipDTO.idLibrarian)
+                            //set value to spinner
+                            val selectedLibrarianPosition = listLibrarian.indexOf(librarianDTO)
+                            binding.spinnerEditLibrarianNameMember.setSelection(selectedLibrarianPosition)
 
-            //set value to spinner
-            val selectedLibrarianPosition = listLibrarian.indexOf(librarianDTO)
-            binding.spinnerEditLibrarianNameMember.setSelection(selectedLibrarianPosition)
+                            val selectedMemberPosition = listMember.indexOf(memberDTO)
+                            binding.spinnerEditMemberBookMember.setSelection(selectedMemberPosition)
 
-            val selectedMemberPosition = listMember.indexOf(memberDTO)
-            binding.spinnerEditMemberBookMember.setSelection(selectedMemberPosition)
+                            val selectedBookPosition = listBook.indexOf(bookDTO)
+                            binding.spinnerEditLoanNameBook.setSelection(selectedBookPosition)
 
-            val selectedBookPosition = listBook.indexOf(bookDTO)
-            binding.spinnerEditLoanNameBook.setSelection(selectedBookPosition)
+                            //set value to edit text
+                            binding.edtFromDateLoan.setText(loanSlipDTO.dateLoan)
 
-            //set value to edit text
-            binding.edtFromDateLoan.setText(loanSlipDTO.dateLoan)
+                            //set check to radio group
+                            if (loanSlipDTO.status == 1) {
+                                binding.radioGroupLoan.check(R.id.radio_return_loan)
+                            } else {
+                                binding.radioGroupLoan.check(R.id.radio_not_return_loan)
+                            }
+                        }
+                    }
+                }
 
-            //set check to radio group
-            if (loanSlipDTO.status == 1) {
-                binding.radioGroupLoan.check(R.id.radio_return_loan)
-            } else {
-                binding.radioGroupLoan.check(R.id.radio_not_return_loan)
-            }
+
         }
         binding.btnCancelEditLoan.setOnClickListener {
             finish()
@@ -232,7 +248,7 @@ class EditLoanActivity : AppCompatActivity() {
 
             loanSlipDAO = LibraryLoanSlipDAO(this)
             loanSlipDTO = LibraryLoanSlipDTO(
-                idLoanSlip!!.toInt(),
+                idLoanSlip!!.toString(),
                 idBook,
                 idLibrarian,
                 idMember,

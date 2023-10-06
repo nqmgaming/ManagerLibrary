@@ -1,6 +1,5 @@
 package com.example.managerlibrary.ui.manager
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
@@ -18,7 +17,6 @@ import com.example.managerlibrary.dto.BookDTO
 import com.example.managerlibrary.dto.LibraryLoanSlipDTO
 import com.example.managerlibrary.dto.MemberDTO
 import com.example.managerlibrary.sharepre.LoginSharePreference
-import com.example.managerlibrary.ui.MainActivity
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import java.text.SimpleDateFormat
@@ -38,7 +36,7 @@ class AddLoanActivity : AppCompatActivity() {
     private lateinit var libraryLoanSlipDTO: LibraryLoanSlipDTO
     private lateinit var libraryLoanSlipDAO: LibraryLoanSlipDAO
 
-    val dbCreateUser = Firebase.firestore
+    val dbLoan = Firebase.firestore
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityAddLoanBinding.inflate(layoutInflater)
@@ -139,8 +137,29 @@ class AddLoanActivity : AppCompatActivity() {
             //get id member
             val idMember = member.id
 
+            //create random idloan for document id
+            val idLoan = dbLoan.collection("loanSlip").document().id
+            val loan = hashMapOf(
+                "id" to idLoan,
+                "idBook" to idBook,
+                "idLibrarian" to idLibrarian,
+                "idMember" to idMember,
+                "dateLoan" to date,
+                "status" to 0
+            )
+
+            dbLoan.collection("loanSlip")
+                .add(loan)
+                .addOnSuccessListener {
+                    Toast.makeText(this, "Thêm thành công phiếu mượn!", Toast.LENGTH_SHORT)
+                        .show()
+                }
+                .addOnFailureListener {
+                    Toast.makeText(this, "Thêm phiếu mượn lỗi", Toast.LENGTH_SHORT).show()
+                }
+
             libraryLoanSlipDTO = LibraryLoanSlipDTO(
-                0,
+                "",
                 idBook,
                 idLibrarian,
                 idMember,
@@ -164,12 +183,11 @@ class AddLoanActivity : AppCompatActivity() {
                 bindingSuccess.txtLoginSuccess.text = "Thêm thành công phiếu mượn!"
                 bindingSuccess.btnLoginSuccess.setOnClickListener {
                     //inent data to main activity
-                    val intent = Intent(this, MainActivity::class.java)
-                    intent.putExtra("ok", "ok")
-                    startActivity(intent)
-
                     finish()
+                    dialogSuccess.dismiss()
+
                 }
+                dialogSuccess.show()
             } else {
                 Toast.makeText(this, "Thêm phiếu mượn lỗi", Toast.LENGTH_SHORT).show()
             }

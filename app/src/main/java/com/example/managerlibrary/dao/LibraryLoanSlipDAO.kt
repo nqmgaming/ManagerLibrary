@@ -18,7 +18,7 @@ class LibraryLoanSlipDAO(context: Context) {
         if (cursor.count > 0) {
             cursor.moveToFirst()
             while (!cursor.isAfterLast) {
-                val idLoanSlip = cursor.getInt(0)
+                val idLoanSlip = cursor.getString(0)
                 val idLibrarian = cursor.getString(1)
                 val idMember = cursor.getInt(2)
                 val idBook = cursor.getInt(3)
@@ -42,7 +42,7 @@ class LibraryLoanSlipDAO(context: Context) {
     }
 
     //delete loan slip by id
-    fun deleteLoanSlip(id: Int): Boolean {
+    fun deleteLoanSlip(id: String): Boolean {
         val dbWritable = db.writableDatabase
         val sql = "DELETE FROM LibraryLoanSlip WHERE loanSlipID = ?"
         val cursor = dbWritable.rawQuery(sql, arrayOf(id.toString()))
@@ -78,7 +78,7 @@ class LibraryLoanSlipDAO(context: Context) {
                 val count = cursor.getInt(1)
                 val name = cursor.getString(2)
                 val rentalFee = cursor.getInt(3)
-                val category = cursor.getInt(4)
+                val category = cursor.getString(4)
                 val bookDTO = BookDTO(idBook, name, rentalFee, category, count )
                 list.add(bookDTO)
                 cursor.moveToNext()
@@ -145,10 +145,10 @@ class LibraryLoanSlipDAO(context: Context) {
         val dbReadable = db.readableDatabase
         val sql = "SELECT * FROM LibraryLoanSlip WHERE loanSlipID = ?"
         val cursor = dbReadable.rawQuery(sql, arrayOf(id.toString()))
-        var libraryLoanSlipDTO = LibraryLoanSlipDTO(-1, -1, "", -1, "", -1)
+        var libraryLoanSlipDTO = LibraryLoanSlipDTO("", -1, "", -1, "", -1)
         if (cursor.count > 0) {
             cursor.moveToFirst()
-            val idLoanSlip = cursor.getInt(0)
+            val idLoanSlip = cursor.getString(0)
             val idLibrarian = cursor.getString(1)
             val idMember = cursor.getInt(2)
             val idBook = cursor.getInt(3)
@@ -173,10 +173,10 @@ class LibraryLoanSlipDAO(context: Context) {
         val dbReadable = db.readableDatabase
         val sql = "SELECT * FROM LibraryLoanSlip WHERE bookID = ?"
         val cursor = dbReadable.rawQuery(sql, arrayOf(id.toString()))
-        var librarianDTO = LibraryLoanSlipDTO(-1, -1, "", -1, "", -1)
+        var librarianDTO = LibraryLoanSlipDTO("", -1, "", -1, "", -1)
         if (cursor.count > 0) {
             cursor.moveToFirst()
-            val idLoanSlip = cursor.getInt(0)
+            val idLoanSlip = cursor.getString(0)
             val idLibrarian = cursor.getString(1)
             val idMember = cursor.getInt(2)
             val idBook = cursor.getInt(3)

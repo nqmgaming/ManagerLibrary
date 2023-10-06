@@ -116,12 +116,14 @@ class LoginActivity : AppCompatActivity() {
                                 }, 1500)
                             } else {
                                 binding.edtPassword.error = "Mật khẩu không đúng"
+                                Toast.makeText(this,document.data["password"].toString() + document.data["id"].toString(),Toast.LENGTH_SHORT).show()
                                 return@addOnSuccessListener
                             }
                         }
                     }
                     if (!foundUser) {
                         binding.edtUsername.error = "Username không đúng"
+                        return@addOnSuccessListener
                     }
                 }
                 .addOnFailureListener {

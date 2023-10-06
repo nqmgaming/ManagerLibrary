@@ -4,20 +4,21 @@ import android.app.AlertDialog
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
-import com.example.managerlibrary.dao.BookDAO
-import com.example.managerlibrary.dto.BookDTO
-import com.example.managerlibrary.ui.manager.DetailLoanActivity
-import com.example.managerlibrary.dao.LibraryLoanSlipDAO
-import com.example.managerlibrary.dto.LibraryLoanSlipDTO
-import com.example.managerlibrary.ui.MainActivity
-import com.example.managerlibrary.dao.MemberDAO
-import com.example.managerlibrary.dto.MemberDTO
 import com.example.managerlibrary.R
+import com.example.managerlibrary.dao.BookDAO
+import com.example.managerlibrary.dao.LibraryLoanSlipDAO
+import com.example.managerlibrary.dao.MemberDAO
 import com.example.managerlibrary.databinding.DialogConfirmBinding
 import com.example.managerlibrary.databinding.DialogLoginSuccessBinding
 import com.example.managerlibrary.databinding.ItemBillBinding
+import com.example.managerlibrary.dto.BookDTO
+import com.example.managerlibrary.dto.LibraryLoanSlipDTO
+import com.example.managerlibrary.dto.MemberDTO
 import com.example.managerlibrary.fragment.manager.ManagerBillsFragment
+import com.example.managerlibrary.ui.MainActivity
+import com.example.managerlibrary.ui.manager.DetailLoanActivity
 import com.example.managerlibrary.ui.manager.EditLoanActivity
 
 class BillsAdapter(
@@ -47,6 +48,9 @@ class BillsAdapter(
                 memberDAO.getMemberDTOById(
                     libraryLoanSlipDTO.idMember
                 )
+            }
+            binding.imgBooks.setOnClickListener(){
+                Toast.makeText(binding.root.context, libraryLoanSlipDTO.id, Toast.LENGTH_SHORT).show()
             }
             binding.txtNameMember.text =
                 binding.root.context.getString(R.string.username) + memberDTO.name
