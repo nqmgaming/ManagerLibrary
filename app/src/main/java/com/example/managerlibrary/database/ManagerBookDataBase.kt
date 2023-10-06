@@ -31,10 +31,10 @@ class ManagerBookDataBase(context: Context) : SQLiteOpenHelper(
                 ")"
         db?.execSQL(librarianTable)
 
-        //create 3 data for librarian
-        db?.execSQL("INSERT INTO Librarian VALUES('admin','admin','admin','admin')")
-        db?.execSQL("INSERT INTO Librarian VALUES('librarian','librarian','librarian','librarian')")
-        db?.execSQL("INSERT INTO Librarian VALUES('librarian1','librarian1','librarian1','librarian')")
+//        //create 3 data for librarian
+//        db?.execSQL("INSERT INTO Librarian VALUES('admin','admin','admin','admin')")
+//        db?.execSQL("INSERT INTO Librarian VALUES('librarian','librarian','librarian','librarian')")
+//        db?.execSQL("INSERT INTO Librarian VALUES('librarian1','librarian1','librarian1','librarian')")
 
 
         val categoryBook = "CREATE TABLE CategoryBook( " +

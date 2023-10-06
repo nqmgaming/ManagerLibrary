@@ -15,6 +15,8 @@ import com.example.managerlibrary.databinding.DialogProccessingBinding
 import com.example.managerlibrary.databinding.FragmentAddNewUserBinding
 import com.example.managerlibrary.dto.LibrarianDTO
 import com.example.managerlibrary.sharepre.LoginSharePreference
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 
 class AddNewUserFragment : Fragment() {
 
@@ -24,6 +26,9 @@ class AddNewUserFragment : Fragment() {
     private var librarianDAO: LibrarianDAO? = null
     private var librarianDTO: LibrarianDTO? = null
     private lateinit var role: String
+
+    //firebase storage
+    val dbCreateUser = Firebase.firestore
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -130,7 +135,7 @@ class AddNewUserFragment : Fragment() {
                 librarianDTO!!.name = nameNew
                 librarianDTO!!.password = passwordNew
                 librarianDTO!!.role = role
-                if (roleUser.equals("librarian")) {
+                if (roleUser == "librarian") {
                     Toast.makeText(
                         requireContext(),
                         "Bạn không có quyền thêm người dùng",
@@ -138,6 +143,31 @@ class AddNewUserFragment : Fragment() {
                     ).show()
 
                 } else {
+
+                    val user = hashMapOf(
+                        "id" to usernameNew,
+                        "name" to nameNew,
+                        "password" to passwordNew,
+                        "role" to role
+                    )
+
+                    dbCreateUser.collection("users")
+                        .document(usernameNew)
+                        .set(user)
+                        .addOnSuccessListener {
+                            Toast.makeText(
+                                requireContext(),
+                                "Thêm người dùng thành công",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                        .addOnFailureListener {
+                            Toast.makeText(
+                                requireContext(),
+                                "Thêm người dùng thất bại",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
 
                     val result = librarianDAO!!.insertLibrarian(librarianDTO!!)
 

@@ -11,4 +11,8 @@ data class LibrarianDTO(
         //return id + name
         return "$name - $id"
     }
+
+    override fun hashCode(): Int {
+        return id.hashCode() + name.hashCode() + password.hashCode() + role.hashCode()
+    }
 }

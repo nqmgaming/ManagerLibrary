@@ -3,6 +3,7 @@ package com.example.managerlibrary.ui.manager
 import android.app.DatePickerDialog
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import android.widget.AdapterView
@@ -22,6 +23,8 @@ import com.example.managerlibrary.dto.LibrarianDTO
 import com.example.managerlibrary.dto.LibraryLoanSlipDTO
 import com.example.managerlibrary.dto.MemberDTO
 import com.example.managerlibrary.ui.MainActivity
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 
 class EditLoanActivity : AppCompatActivity() {
     private lateinit var loanSlipDAO: LibraryLoanSlipDAO
@@ -41,6 +44,8 @@ class EditLoanActivity : AppCompatActivity() {
     lateinit var listMember: ArrayList<MemberDTO>
     lateinit var listLibrarian: ArrayList<LibrarianDTO>
 
+    val firebase = Firebase.firestore
+
     private lateinit var binding: ActivityEditLoanBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,6 +55,22 @@ class EditLoanActivity : AppCompatActivity() {
         setSupportActionBar(binding.toolbarEditLoan)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowHomeEnabled(true)
+        listLibrarian = ArrayList()
+        firebase.collection("users")
+            .get()
+            .addOnSuccessListener { result ->
+                for (document in result) {
+                    val id = document.id
+                    val name = document.data["name"].toString()
+                    val password = document.data["password"].toString()
+                    val role = document.data["role"].toString()
+                    val librarianDTO = LibrarianDTO(id, name, password, role)
+                    listLibrarian.add(librarianDTO)
+                    Log.d("TAG", listLibrarian.toString() + "")
+                }
+                librarianLoanAdapter = LibrarianLoanAdapter(this, listLibrarian)
+                binding.spinnerEditLibrarianNameMember.adapter = librarianLoanAdapter
+            }
 
 
         //get all member
@@ -62,7 +83,7 @@ class EditLoanActivity : AppCompatActivity() {
 
         //get all librarian
         librarianDAO = LibrarianDAO(this)
-        listLibrarian = librarianDAO.getAllLibrarian()
+//        listLibrarian = librarianDAO.getAllLibrarian()
 
         //set adapter for spinner
         bookLoanAdapter = BookLoanAdapter(this, listBook)
@@ -84,6 +105,11 @@ class EditLoanActivity : AppCompatActivity() {
                     l: Long
                 ) {
                     librarianDTO = listLibrarian[position]
+                    Toast.makeText(
+                        this@EditLoanActivity,
+                        librarianDTO.name,
+                        Toast.LENGTH_SHORT
+                    ).show()
                     //set value for text view
                     binding.spinnerEditLibrarianNameMember.hint = "Tên thủ thư"
                 }

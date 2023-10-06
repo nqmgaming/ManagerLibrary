@@ -19,6 +19,8 @@ import com.example.managerlibrary.dto.LibraryLoanSlipDTO
 import com.example.managerlibrary.dto.MemberDTO
 import com.example.managerlibrary.sharepre.LoginSharePreference
 import com.example.managerlibrary.ui.MainActivity
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import java.text.SimpleDateFormat
 import java.util.Calendar
 
@@ -36,6 +38,7 @@ class AddLoanActivity : AppCompatActivity() {
     private lateinit var libraryLoanSlipDTO: LibraryLoanSlipDTO
     private lateinit var libraryLoanSlipDAO: LibraryLoanSlipDAO
 
+    val dbCreateUser = Firebase.firestore
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityAddLoanBinding.inflate(layoutInflater)
