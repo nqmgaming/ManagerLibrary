@@ -76,6 +76,7 @@ class ManagerCategoryBooksFragment : Fragment() {
             }
 
             //update to adapter
+            adapter = CategoryBooksAdapter(requireContext(), filterList)
             binding.managerCategoryRecyclerView.adapter =
                 CategoryBooksAdapter(requireContext(), filterList)
             adapter.notifyDataSetChanged()
