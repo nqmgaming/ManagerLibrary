@@ -9,4 +9,6 @@ Video demo: <a href = "https://www.dropbox.com/scl/fi/9s2zhr94imsztkhcnysmt/band
 # Tuần 3
 Link tải tài liệu: <a href ="https://acrobat.adobe.com/id/urn:aaid:sc:ap:45c160ff-c81a-44b1-9650-21aa46a514cf">Xem</a> <br>
 Link video: <a href="https://www.dropbox.com/scl/fi/z73f8ehxm80r5blkdys8e/Screen-Recording-2023-10-04-at-14.57.12.mov?rlkey=s7khpjfddko10pfs2llsh1wvy&dl=0">xem</a>
-
+# Tuần 4
+Link tải tài liệu: <a href ="https://acrobat.adobe.com/id/urn:aaid:sc:ap:45c160ff-c81a-44b1-9650-21aa46a514cf">Xem</a> <br>
+Link video: <a href="https://www.dropbox.com/scl/fi/z73f8ehxm80r5blkdys8e/Screen-Recording-2023-10-04-at-14.57.12.mov?rlkey=s7khpjfddko10pfs2llsh1wvy&dl=0">xem</a>
