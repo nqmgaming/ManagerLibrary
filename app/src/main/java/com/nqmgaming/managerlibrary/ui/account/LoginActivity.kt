@@ -1,3 +1,5 @@
+package com.nqmgaming.managerlibrary.ui.account
+
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AlertDialog

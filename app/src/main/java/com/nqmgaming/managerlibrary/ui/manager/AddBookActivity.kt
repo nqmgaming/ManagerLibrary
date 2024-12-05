@@ -70,22 +70,24 @@ class AddBookActivity : AppCompatActivity() {
 
 
             if (name.isEmpty()) {
-                binding.edtNameBook.error = "Tên sách không được để trống"
+                binding.edtNameBook.error = getString(R.string.txt_book_name_can_not_be_empty)
                 return@setOnClickListener
             }
             if (binding.spinnerAddBookCategory.selectedItem == null) {
-                binding.spinnerAddBookCategory.errorText = "Please choose category book"
-                Toast.makeText(this, "Please choose book", Toast.LENGTH_SHORT).show()
+                binding.spinnerAddBookCategory.errorText =
+                    getString(R.string.txt_please_choose_category_book)
+                Toast.makeText(this, getString(R.string.txt_please_choose_book), Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }else{
                 binding.spinnerAddBookCategory.setErrorText("")
             }
             if (rentalPrice.isEmpty()) {
-                binding.edtRentPrice.error = "Giá thuê không được để trống"
+                binding.edtRentPrice.error = getString(R.string.txt_loan_price_can_not_be_empty)
                 return@setOnClickListener
             }
             if (rentalPrice.toInt() < 0) {
-                binding.edtRentPrice.error = "Giá thuê không được nhỏ hơn 0"
+                binding.edtRentPrice.error =
+                    getString(R.string.txt_loan_price_can_not_small_than_zero)
                 return@setOnClickListener
             }
 
@@ -106,7 +108,7 @@ class AddBookActivity : AppCompatActivity() {
                 val dialogSuccess = builderSuccess.create()
                 dialogSuccess.setCancelable(false)
                 dialogSuccess.show()
-                bindingSuccess.txtLoginSuccess.text = "Thêm thành công sách!"
+                bindingSuccess.txtLoginSuccess.text = getString(R.string.txt_add_book_successfully)
                 bindingSuccess.btnLoginSuccess.setOnClickListener {
                     dialogSuccess.dismiss()
                     val intent = Intent(this, MainActivity::class.java)
@@ -116,7 +118,7 @@ class AddBookActivity : AppCompatActivity() {
                 }
 
             }else{
-                Toast.makeText(this, "Thêm thất bại", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.txt_add_book_fail), Toast.LENGTH_SHORT).show()
             }
         }
 

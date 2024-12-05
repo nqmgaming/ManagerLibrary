@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.nqmgaming.managerlibrary.R
 import com.nqmgaming.managerlibrary.dao.LibrarianDAO
 import com.nqmgaming.managerlibrary.databinding.ActivityEditUserBinding
 import com.nqmgaming.managerlibrary.dto.LibrarianDTO
@@ -44,7 +45,7 @@ class EditAccountActivity : AppCompatActivity() {
         binding.edtFullnameProfile.setText(librarianDTO.name)
 
         binding.edtUsernameProfile.setOnClickListener {
-            Toast.makeText(this, "Không thể sửa", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, getString(R.string.txt_can_not_edit), Toast.LENGTH_SHORT).show()
         }
 
         binding.btnCancelEditUser.setOnClickListener {
@@ -56,11 +57,11 @@ class EditAccountActivity : AppCompatActivity() {
             val fullname = binding.edtFullnameProfile.text.toString().trim()
 
             if (username.isEmpty()) {
-                binding.edtUsernameProfile.error = "Tên người dùng trống"
+                binding.edtUsernameProfile.error = getString(R.string.txt_username_is_empty)
                 return@setOnClickListener
             }
             if (fullname.isEmpty()) {
-                binding.edtFullnameProfile.error = "Tên đầy đủ trống"
+                binding.edtFullnameProfile.error = getString(R.string.txt_fullname_is_empty)
                 return@setOnClickListener
             }
             librarianDAO = LibrarianDAO(this)
@@ -72,7 +73,8 @@ class EditAccountActivity : AppCompatActivity() {
                 finish()
 
             } else {
-                Toast.makeText(this, "Edit failed$result", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.txt_edit_failed), Toast.LENGTH_SHORT)
+                    .show()
             }
         }
     }

@@ -1,6 +1,5 @@
 package com.nqmgaming.managerlibrary.ui
 
-import LoginActivity
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
@@ -24,6 +23,7 @@ import com.nqmgaming.managerlibrary.fragment.manager.ManagerMembersFragment
 import com.nqmgaming.managerlibrary.fragment.statistical.RevenueFragment
 import com.nqmgaming.managerlibrary.fragment.statistical.Top10Fragment
 import com.nqmgaming.managerlibrary.sharepre.LoginSharePreference
+import com.nqmgaming.managerlibrary.ui.account.LoginActivity
 import com.nqmgaming.managerlibrary.viewmodel.SharedViewModel
 
 class MainActivity : AppCompatActivity() {
@@ -124,7 +124,7 @@ class MainActivity : AppCompatActivity() {
         val userRole = headerView.findViewById<TextView>(R.id.txt_role)
 
         // Update the views with your data
-        userNameTextView.text = "@$username"
+        userNameTextView.text = getString(R.string.txt_username, username)
         userFullNameTextView.text = fullname
         userRole.text = role
 
@@ -268,7 +268,7 @@ class MainActivity : AppCompatActivity() {
         val userFullNameTextView = headerView.findViewById<TextView>(R.id.user_full_name)
         val userRole = headerView.findViewById<TextView>(R.id.txt_role)
 
-        userNameTextView.text = "@$username"
+        userNameTextView.text = getString(R.string.txt_username, username)
         userFullNameTextView.text = fullname
         userRole.text = role
     }
@@ -283,7 +283,7 @@ class MainActivity : AppCompatActivity() {
         menuInflater.inflate(R.menu.search_menu, menu)
         val searchItem = menu.findItem(R.id.action_search)
         val searchView = searchItem.actionView as SearchView
-        searchView.queryHint = "Search..."
+        searchView.queryHint = getString(R.string.txt_search)
         sharedViewModel = ViewModelProvider(this)[SharedViewModel::class.java]
 
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {

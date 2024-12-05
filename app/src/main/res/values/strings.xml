@@ -44,4 +44,17 @@
     <string name="txt_new_password_is_empty">New password is empty</string>
     <string name="txt_old_password_is_incorrect">Old password is incorrect</string>
     <string name="txt_old_password_is_empty">Old password is empty</string>
+    <string name="txt_can_not_edit">Không thể sửa</string>
+    <string name="txt_username_is_empty">Tên người dùng trống</string>
+    <string name="txt_fullname_is_empty">Tên đầy đủ trống</string>
+    <string name="txt_edit_failed">Edit failed%1$s</string>
+    <string name="txt_add_book_successfully">Thêm thành công sách!</string>
+    <string name="txt_add_book_fail">Thêm sách thất bại</string>
+    <string name="txt_book_name_can_not_be_empty">Tên sách không được để trống</string>
+    <string name="txt_please_choose_category_book">Please choose category book</string>
+    <string name="txt_please_choose_book">Please choose book</string>
+    <string name="txt_loan_price_can_not_be_empty">Giá thuê không được để trống</string>
+    <string name="txt_loan_price_can_not_small_than_zero">Giá thuê không được nhỏ hơn 0</string>
+    <string name="txt_username">\@%1$s</string>
+    <string name="txt_search">Search...</string>
 </resources>
