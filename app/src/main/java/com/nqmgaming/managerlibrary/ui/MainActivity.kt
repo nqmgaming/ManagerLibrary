@@ -1,5 +1,6 @@
 package com.nqmgaming.managerlibrary.ui
 
+import LoginActivity
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
@@ -23,7 +24,6 @@ import com.nqmgaming.managerlibrary.fragment.manager.ManagerMembersFragment
 import com.nqmgaming.managerlibrary.fragment.statistical.RevenueFragment
 import com.nqmgaming.managerlibrary.fragment.statistical.Top10Fragment
 import com.nqmgaming.managerlibrary.sharepre.LoginSharePreference
-import com.nqmgaming.managerlibrary.ui.account.LoginActivity
 import com.nqmgaming.managerlibrary.viewmodel.SharedViewModel
 
 class MainActivity : AppCompatActivity() {

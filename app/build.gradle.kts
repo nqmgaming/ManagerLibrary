@@ -5,7 +5,7 @@ plugins {
 
 android {
     namespace = "com.nqmgaming.managerlibrary"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.nqmgaming.managerlibrary"
