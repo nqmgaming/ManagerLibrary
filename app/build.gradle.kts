@@ -1,17 +1,16 @@
-@Suppress("DSL_SCOPE_VIOLATION") // TODO: Remove once KTIJ-19369 is fixed
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.kotlinAndroid)
 }
 
 android {
-    namespace = "com.example.managerlibrary"
+    namespace = "com.nqmgaming.managerlibrary"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.managerlibrary"
+        applicationId = "com.nqmgaming.managerlibrary"
         minSdk = 24
-        targetSdk = 33
+        targetSdk = 34
         versionCode = 1
         versionName = "1.0"
 
@@ -48,9 +47,9 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.espresso.core)
-    implementation("androidx.transition:transition:1.4.1")
-    implementation("de.hdodenhof:circleimageview:3.1.0")
-    implementation("com.github.chivorns:smartmaterialspinner:1.5.0")
-    implementation ("androidx.lifecycle:lifecycle-livedata-ktx:2.3.1")
-    implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0")
+    implementation(libs.androidx.transition)
+    implementation(libs.circleimageview)
+    implementation(libs.smartmaterialspinner)
+    implementation(libs.androidx.lifecycle.livedata.ktx)
+    implementation(libs.lifecycle.viewmodel.ktx)
 }

@@ -33,4 +33,15 @@
     <string name="category">"Thể loại: "</string>
     <string name="log_in">Đăng nhập</string>
     <string name="add_book">Thêm sách</string>
+    <string name="txt_change_password">Đổi mật khẩu</string>
+    <string name="txt_change_password_fail">Đổi mật khẩu thất bại</string>
+    <string name="txt_retry">Thử lại</string>
+    <string name="txt_change_password_success">Đổi mật khẩu thành công</string>
+    <string name="txt_chaning_password">Đang đổi mật khẩu</string>
+    <string name="txt_confirm_password_is_incorrect">Confirm password is incorrect</string>
+    <string name="txt_confirm_password_is_empty">Confirm password is empty</string>
+    <string name="txt_set_new_password">Đặt mật khẩu mới</string>
+    <string name="txt_new_password_is_empty">New password is empty</string>
+    <string name="txt_old_password_is_incorrect">Old password is incorrect</string>
+    <string name="txt_old_password_is_empty">Old password is empty</string>
 </resources>
