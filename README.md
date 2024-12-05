@@ -37,8 +37,7 @@ mượn sách, và thống kê doanh thu.
 
 ### Demo
 
-- **Link video
-  **: [Xem](https://www.dropbox.com/scl/fi/z73f8ehxm80r5blkdys8e/Screen-Recording-2023-10-04-at-14.57.12.mov?rlkey=s7khpjfddko10pfs2llsh1wvy&dl=0)
+- **Link video**: [Xem](https://www.dropbox.com/scl/fi/z73f8ehxm80r5blkdys8e/Screen-Recording-2023-10-04-at-14.57.12.mov?rlkey=s7khpjfddko10pfs2llsh1wvy&dl=0)
 
 ### Đóng góp
 
